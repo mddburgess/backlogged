@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {v4 as uuid} from 'uuid';
+import {connect} from 'react-redux';
 import TodoItem from './TodoItem';
 
 const TodoItems = (props) => (
     <ul>
-        {props.todos.map(todo => <TodoItem key={uuid()} todo={todo}/>)}
+        {props.todos.map(todo => <TodoItem key={todo.key} todo={todo.value}/>)}
     </ul>
 );
 
 TodoItems.propTypes = {
-    todos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+    todos: PropTypes.arrayOf(PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+    }).isRequired).isRequired
 };
 
-export default TodoItems;
+const mapStateToProps = (state) => ({
+    todos: state.todos
+});
+
+export default connect(mapStateToProps)(TodoItems);

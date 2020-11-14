@@ -5,7 +5,7 @@ import AddTodoItem from './AddTodoItem';
 const Todos = () => (
     <>
         <h2>Todos</h2>
-        <TodoItems todos={['todo']}/>
+        <TodoItems/>
         <AddTodoItem/>
     </>
 );
