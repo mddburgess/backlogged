@@ -1,12 +1,14 @@
+import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
+import Home from './routes/Home';
 
 function App() {
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/">
-                    <h1>Home</h1>
+                    <Home/>
                 </Route>
                 <Route path="/hello">
                     <h1>Hello World!</h1>
