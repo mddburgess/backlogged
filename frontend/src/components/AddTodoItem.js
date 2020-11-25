@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import * as todosActions from '../store/todos';
+import {addTodo} from '../store/todos';
 import {connect} from 'react-redux';
 
 const AddTodoItem = (props) => {
@@ -30,7 +30,7 @@ AddTodoItem.propTypes = {
 };
 
 const mapDispatchToProps = {
-    addTodo: todosActions.add
+    addTodo
 };
 
 export default connect(undefined, mapDispatchToProps)(AddTodoItem);
