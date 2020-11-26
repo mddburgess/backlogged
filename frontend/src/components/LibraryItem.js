@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TodoItem = (props) => (
+const LibraryItem = (props) => (
     <li>{props.todo}</li>
 );
 
-TodoItem.propTypes = {
+LibraryItem.propTypes = {
     todo: PropTypes.string.isRequired
 };
 
-export default TodoItem;
+export default LibraryItem;

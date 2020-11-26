@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {addTodo} from '../store/todos';
+import {addTitle} from '../store/library';
 import {connect} from 'react-redux';
 
-const AddTodoItem = (props) => {
+const AddLibraryItem = (props) => {
 
     const [value, setValue] = useState('');
 
     const onSubmit = (event) => {
         event.preventDefault();
-        props.addTodo(value);
+        props.addTitle(value);
     };
 
     return (
@@ -25,12 +25,12 @@ const AddTodoItem = (props) => {
     );
 };
 
-AddTodoItem.propTypes = {
-    addTodo: PropTypes.func.isRequired
+AddLibraryItem.propTypes = {
+    addTitle: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-    addTodo
+    addTitle
 };
 
-export default connect(undefined, mapDispatchToProps)(AddTodoItem);
+export default connect(undefined, mapDispatchToProps)(AddLibraryItem);

@@ -1,10 +1,10 @@
 import React from 'react';
-import Todos from '../components/Todos';
+import Library from '../components/Library';
 
 const Home = () => (
     <>
         <h1>Home</h1>
-        <Todos/>
+        <Library/>
     </>
 );
 

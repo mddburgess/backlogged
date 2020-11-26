@@ -1,10 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {combineReducers} from 'redux';
-import todos from './todos';
+import library from './library';
 
 const store = configureStore({
     reducer: combineReducers({
-        todos
+        library
     })
 });
 
