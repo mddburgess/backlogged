@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Home from './routes/Home';
 import store from './store';
+import AddLibraryItemForm from './components/AddLibraryItemForm';
 
 function App() {
     return (
@@ -13,8 +14,8 @@ function App() {
                     <Route exact path="/">
                         <Home/>
                     </Route>
-                    <Route path="/hello">
-                        <h1>Hello World!</h1>
+                    <Route path="/new">
+                        <AddLibraryItemForm/>
                     </Route>
                 </Switch>
             </BrowserRouter>

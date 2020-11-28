@@ -6,9 +6,7 @@ import java.util.UUID;
 
 import com.metricalsky.backlogged.backend.library.model.Copy;
 import com.metricalsky.backlogged.backend.library.model.Title;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/titles")
@@ -39,5 +37,12 @@ public class TitleController {
     @GetMapping
     public List<Title> list() {
         return titles;
+    }
+
+    @PostMapping
+    public Title create(@RequestBody Title title) {
+        title.setToken(UUID.randomUUID().toString());
+        titles.add(title);
+        return title;
     }
 }
