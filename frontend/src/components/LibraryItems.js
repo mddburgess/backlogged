@@ -12,7 +12,7 @@ const LibraryItems = ({items, listTitles}) => {
 
     return (
         <ul>
-            {items.map(item => <LibraryItem key={item.token} todo={item.title}/>)}
+            {items.map(item => <LibraryItem key={item.token} item={item}/>)}
         </ul>
     );
 };
