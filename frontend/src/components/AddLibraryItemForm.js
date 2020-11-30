@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {addTitle} from '../store/library';
 import {connect} from 'react-redux';
-import {Field, Form, Formik} from 'formik';
+import {Field, FieldArray, Form, Formik} from 'formik';
 
 const AddLibraryItemForm = ({addTitle}) => (
     <>
@@ -21,12 +21,48 @@ const AddLibraryItemForm = ({addTitle}) => (
                 addTitle(values);
             }}
         >
-            <Form>
-                <Field name="title" type="text" placeholder="title"/>
-                <Field name="copies[0].platform" type="text" placeholder="platform"/>
-                <Field name="copies[0].service" type="text" placeholder="service"/>
-                <button type="submit">Submit</button>
-            </Form>
+            {({values}) => (
+                <Form>
+                    <div>
+                        <Field name="title" type="text" placeholder="title"/>
+                    </div>
+                    <FieldArray name="copies">
+                        {({push, remove}) => (
+                            <div>
+                                {values.copies.length > 0 && values.copies.map((copy, index) => (
+                                    <div>
+                                        <Field
+                                            name={`copies[${index}].platform`}
+                                            type="text"
+                                            placeholder="platform"
+                                        />
+                                        <Field
+                                            name={`copies[${index}].service`}
+                                            type="text"
+                                            placeholder="service"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => remove(index)}
+                                        >
+                                            X
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={() => push({platform: '', service: ''})}
+                                >
+                                    Add Copy
+                                </button>
+                            </div>
+                        )}
+                    </FieldArray>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </Form>
+            )}
         </Formik>
     </>
 );
