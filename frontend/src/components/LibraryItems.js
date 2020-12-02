@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LibraryItem from './LibraryItem';
 import {listTitles} from '../store/library';
+import {Link} from 'react-router-dom';
 
 const LibraryItems = ({items, listTitles}) => {
 
@@ -13,6 +14,12 @@ const LibraryItems = ({items, listTitles}) => {
     return (
         <ul>
             {items.map(item => <LibraryItem key={item.token} item={item}/>)}
+            <li>
+                <Link to="/new">
+                    Add item
+                </Link>
+            </li>
+
         </ul>
     );
 };
