@@ -46,6 +46,11 @@ public class TitleController {
         return title;
     }
 
+    @PutMapping("/{token}")
+    public void update(@PathVariable String token, @RequestBody Title title) {
+        titles.replaceAll(t -> token.equals(t.getToken()) ? title : t);
+    }
+
     @DeleteMapping("/{token}")
     public void delete(@PathVariable String token) {
         titles.removeIf(t -> token.equals(t.getToken()));

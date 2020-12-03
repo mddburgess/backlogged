@@ -4,7 +4,8 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Home from './routes/Home';
 import store from './store';
-import AddLibraryItemForm from './components/AddLibraryItemForm';
+import AddLibraryItem from './components/AddLibraryItem';
+import EditLibraryItem from './components/EditLibraryItem';
 
 function App() {
     return (
@@ -15,7 +16,10 @@ function App() {
                         <Home/>
                     </Route>
                     <Route path="/new">
-                        <AddLibraryItemForm/>
+                        <AddLibraryItem/>
+                    </Route>
+                    <Route path="/edit/:token">
+                        <EditLibraryItem/>
                     </Route>
                 </Switch>
             </BrowserRouter>

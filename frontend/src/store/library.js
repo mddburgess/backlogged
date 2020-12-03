@@ -17,6 +17,14 @@ export const addTitle = createAsyncThunk(
     }
 );
 
+export const updateTitle = createAsyncThunk(
+    'library/updateTitle',
+    async (title) => {
+        await Axios.put(`/api/titles/${title.token}`, title);
+        return title;
+    }
+);
+
 export const deleteTitle = createAsyncThunk(
     'library/deleteTitle',
     async (title) => {
@@ -37,6 +45,9 @@ const librarySlice = createSlice({
         },
         [addTitle.fulfilled]: (state, action) => {
             state.data.push(action.payload);
+        },
+        [updateTitle.fulfilled]: (state, action) => {
+            state.data = state.data.map(title => title.token === action.payload.token ? action.payload : title);
         },
         [deleteTitle.fulfilled]: (state, action) => {
             state.data = state.data.filter(title => title.token !== action.payload);
