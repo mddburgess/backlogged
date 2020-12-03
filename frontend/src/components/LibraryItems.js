@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LibraryItem from './LibraryItem';
-import {listTitles} from '../store/library';
+import {deleteTitle, listTitles} from '../store/library';
 import {Link} from 'react-router-dom';
 
-const LibraryItems = ({items, listTitles}) => {
+const LibraryItems = ({items, listTitles, deleteTitle}) => {
 
     useEffect(() => {
         listTitles();
@@ -13,7 +13,7 @@ const LibraryItems = ({items, listTitles}) => {
 
     return (
         <ul>
-            {items.map(item => <LibraryItem key={item.token} item={item}/>)}
+            {items.map(item => <LibraryItem key={item.token} item={item} deleteTitle={deleteTitle}/>)}
             <li>
                 <Link to="/new">
                     Add item
@@ -34,7 +34,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    listTitles
+    listTitles,
+    deleteTitle
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LibraryItems);

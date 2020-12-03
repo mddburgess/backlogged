@@ -45,4 +45,9 @@ public class TitleController {
         titles.add(title);
         return title;
     }
+
+    @DeleteMapping("/{token}")
+    public void delete(@PathVariable String token) {
+        titles.removeIf(t -> token.equals(t.getToken()));
+    }
 }
