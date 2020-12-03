@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import LibraryItem from './LibraryItem';
 import {deleteTitle, listTitles} from '../store/library';
 import {Link} from 'react-router-dom';
+import {ListGroup, ListGroupItem} from 'react-bootstrap';
 
 const LibraryItems = ({items, listTitles, deleteTitle}) => {
 
@@ -12,15 +13,14 @@ const LibraryItems = ({items, listTitles, deleteTitle}) => {
     }, [listTitles]);
 
     return (
-        <ul>
+        <ListGroup>
             {items.map(item => <LibraryItem key={item.token} item={item} deleteTitle={deleteTitle}/>)}
-            <li>
+            <ListGroupItem>
                 <Link to="/new">
                     Add item
                 </Link>
-            </li>
-
-        </ul>
+            </ListGroupItem>
+        </ListGroup>
     );
 };
 

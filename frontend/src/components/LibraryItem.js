@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {ListGroupItem} from 'react-bootstrap';
+import {PencilSquare} from 'react-bootstrap-icons';
 
 const LibraryItem = (props) => (
-    <li>
-        {props.item.title}
-        <Link to={`/edit/${props.item.token}`}>Edit</Link>
-        <button onClick={() => props.deleteTitle(props.item)}>X</button>
-        <ul>
+    <ListGroupItem>
+        <div className="d-flex justify-content-between">
+            <h5 className="mb-0">{props.item.title}</h5>
+            <div>
+                <Link to={`/edit/${props.item.token}`}>
+                    <PencilSquare/>
+                </Link>
+            </div>
+        </div>
+        <ul className="mb-0">
             {props.item.copies.map(copy => <li>{copy.platform} - {copy.service}</li>)}
         </ul>
-    </li>
+    </ListGroupItem>
 );
 
 LibraryItem.propTypes = {
