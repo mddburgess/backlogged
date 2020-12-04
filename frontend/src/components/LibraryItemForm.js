@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Field, FieldArray, Form, Formik} from 'formik';
+import {Field, FieldArray, Form as FormikForm, Formik} from 'formik';
+import {Button, Col, Form} from 'react-bootstrap';
 
 const LibraryItemForm = ({initialValues, onSubmit}) => (
     <Formik
@@ -8,46 +9,58 @@ const LibraryItemForm = ({initialValues, onSubmit}) => (
         onSubmit={onSubmit}
     >
         {({values}) => (
-            <Form>
-                <div>
-                    <Field name="title" type="text" placeholder="title"/>
-                </div>
+            <FormikForm>
+                <Form.Group controlId="title">
+                    <Form.Label>Title</Form.Label>
+                    <Field
+                        name="title"
+                        type="text"
+                        as={Form.Control}
+                    />
+                </Form.Group>
                 <FieldArray name="copies">
                     {({push, remove}) => (
                         <div>
                             {values.copies.length > 0 && values.copies.map((copy, index) => (
-                                <div>
-                                    <Field
-                                        name={`copies[${index}].platform`}
-                                        type="text"
-                                        placeholder="platform"
-                                    />
-                                    <Field
-                                        name={`copies[${index}].service`}
-                                        type="text"
-                                        placeholder="service"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => remove(index)}
-                                    >
-                                        X
-                                    </button>
-                                </div>
+                                <Form.Row>
+                                    <Col>
+                                        <Form.Group controlId={`copies[${index}].platform`}>
+                                            <Form.Label>Platform</Form.Label>
+                                            <Field
+                                                name={`copies[${index}].platform`}
+                                                as={Form.Control}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
+                                        <Form.Group controlId={`copies[${index}].service`}>
+                                            <Form.Label>Service</Form.Label>
+                                            <Field
+                                                name={`copies[${index}].service`}
+                                                as={Form.Control}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs="auto">
+                                        <Button onClick={() => remove(index)}
+                                        >
+                                            X
+                                        </Button>
+                                    </Col>
+                                </Form.Row>
                             ))}
-                            <button
-                                type="button"
+                            <Button
                                 onClick={() => push({platform: '', service: ''})}
                             >
                                 Add Copy
-                            </button>
+                            </Button>
                         </div>
                     )}
                 </FieldArray>
                 <div>
-                    <button type="submit">Submit</button>
+                    <Button type="submit">Submit</Button>
                 </div>
-            </Form>
+            </FormikForm>
         )}
     </Formik>
 );

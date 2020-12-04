@@ -3,7 +3,7 @@ import LibraryItems from './LibraryItems';
 import {Container} from 'react-bootstrap';
 
 const Library = () => (
-    <Container className="container-lg">
+    <Container>
         <h2>Library</h2>
         <LibraryItems/>
     </Container>

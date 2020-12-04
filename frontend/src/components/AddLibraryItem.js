@@ -4,13 +4,14 @@ import {addTitle} from '../store/library';
 import {connect} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import LibraryItemForm from './LibraryItemForm';
+import {Container} from 'react-bootstrap';
 
 const AddLibraryItem = ({addTitle}) => {
 
     const history = useHistory();
 
     return (
-        <>
+        <Container>
             <h1>Add Library Item</h1>
             <LibraryItemForm
                 initialValues={{
@@ -27,7 +28,7 @@ const AddLibraryItem = ({addTitle}) => {
                     history.push('/');
                 }}
             />
-        </>
+        </Container>
     );
 };
 

@@ -4,6 +4,7 @@ import {updateTitle} from '../store/library';
 import {connect} from 'react-redux';
 import {useHistory, useParams} from 'react-router-dom';
 import LibraryItemForm from './LibraryItemForm';
+import {Container} from 'react-bootstrap';
 
 const EditLibraryItem = ({items, updateTitle}) => {
 
@@ -12,7 +13,7 @@ const EditLibraryItem = ({items, updateTitle}) => {
     const title = items.find(t => t.token === params.token);
 
     return (
-        <>
+        <Container>
             <h1>Edit Library Item</h1>
             <LibraryItemForm
                 initialValues={title}
@@ -21,7 +22,7 @@ const EditLibraryItem = ({items, updateTitle}) => {
                     history.push('/');
                 }}
             />
-        </>
+        </Container>
     );
 };
 
