@@ -49,6 +49,8 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.6.8
