@@ -42,10 +42,14 @@ jobs:
         env:
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: postgres
+
   stage:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.6.8
         with:
