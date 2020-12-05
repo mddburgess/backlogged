@@ -1,5 +1,6 @@
 package com.metricalsky.backlogged.backend.library.repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.metricalsky.backlogged.backend.library.entity.Copy;
@@ -29,7 +30,8 @@ public class TitleRepositoryTest {
         var title = new Title();
         title.setToken(UUID.randomUUID());
         title.setName(RandomStringUtils.randomAlphabetic(10));
-        title.addCopy(copy);
+        title.setCopies(List.of(copy));
+        title.linkCopies();
 
         repository.save(title);
 

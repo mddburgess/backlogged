@@ -7,7 +7,7 @@ import {PencilSquare} from 'react-bootstrap-icons';
 const LibraryItem = (props) => (
     <ListGroupItem>
         <div className="d-flex justify-content-between">
-            <h5 className="mb-0">{props.item.title}</h5>
+            <h5 className="mb-0">{props.item.name}</h5>
             <div>
                 <Link to={`/edit/${props.item.token}`}>
                     <PencilSquare/>

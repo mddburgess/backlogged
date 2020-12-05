@@ -10,10 +10,10 @@ const LibraryItemForm = ({initialValues, onSubmit}) => (
     >
         {({values}) => (
             <FormikForm>
-                <Form.Group controlId="title">
-                    <Form.Label>Title</Form.Label>
+                <Form.Group controlId="name">
+                    <Form.Label>Name</Form.Label>
                     <Field
-                        name="title"
+                        name="name"
                         type="text"
                         as={Form.Control}
                     />

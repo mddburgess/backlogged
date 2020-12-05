@@ -2,9 +2,9 @@ package com.metricalsky.backlogged.backend.library.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -16,7 +16,8 @@ public class Copy {
     @GeneratedValue(strategy = IDENTITY)
     private Integer id;
 
-    @ManyToOne(cascade = ALL)
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(nullable = false)
     private Title title;
 

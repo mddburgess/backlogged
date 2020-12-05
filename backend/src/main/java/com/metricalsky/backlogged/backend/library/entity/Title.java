@@ -1,6 +1,5 @@
 package com.metricalsky.backlogged.backend.library.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.*;
@@ -23,14 +22,12 @@ public class Title {
 
     private String name;
 
-    @OneToMany(mappedBy = "title", cascade = ALL)
+    @OneToMany(mappedBy = "title", cascade = ALL, orphanRemoval = true)
     private List<Copy> copies;
 
-    public void addCopy(Copy copy) {
-        if (copies == null) {
-            copies = new ArrayList<>();
+    public void linkCopies() {
+        if (copies != null) {
+            copies.forEach(copy -> copy.setTitle(this));
         }
-        copies.add(copy);
-        copy.setTitle(this);
     }
 }
