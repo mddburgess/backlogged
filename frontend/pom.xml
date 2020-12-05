@@ -10,6 +10,10 @@
 
     <artifactId>frontend</artifactId>
 
+    <properties>
+        <sonar.sources>pom.xml,src</sonar.sources>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
