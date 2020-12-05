@@ -1,0 +1,16 @@
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: trace
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/backlogged_test
+  flyway:
+    clean-disabled: false
+    clean-on-validation-error: true
+    ignore-future-migrations: false
+    validate-migration-naming: true
+  main:
+    banner-mode: "off"
+  test:
+    database:
+      replace: none

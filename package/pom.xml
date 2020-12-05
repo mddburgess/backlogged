@@ -72,6 +72,9 @@
                 <configuration>
                     <skip>false</skip>
                     <mainClass>com.metricalsky.backlogged.backend.BackendApplication</mainClass>
+                    <profiles>
+                        <profile>dev</profile>
+                    </profiles>
                 </configuration>
             </plugin>
         </plugins>
