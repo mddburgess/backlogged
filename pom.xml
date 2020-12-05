@@ -11,7 +11,7 @@
 
     <groupId>com.metricalsky.backlogged</groupId>
     <artifactId>backlogged</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <url>https://github.com/mddburgess/backlogged</url>
@@ -80,6 +80,7 @@
                     <gpgSignTag>true</gpgSignTag>
                     <pushRemote>true</pushRemote>
                     <skipFeatureVersion>true</skipFeatureVersion>
+                    <versionDigitToIncrement>1</versionDigitToIncrement>
                 </configuration>
             </plugin>
         </plugins>
