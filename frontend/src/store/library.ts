@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import Axios from 'axios';
+import {Title} from "../types/Title";
 
 export const listTitles = createAsyncThunk(
     'library/listTitles',
@@ -11,7 +12,7 @@ export const listTitles = createAsyncThunk(
 
 export const addTitle = createAsyncThunk(
     'library/addTitle',
-    async (title) => {
+    async (title: Title) => {
         const response = await Axios.post('/api/titles', title);
         return response.data;
     }
@@ -19,7 +20,7 @@ export const addTitle = createAsyncThunk(
 
 export const updateTitle = createAsyncThunk(
     'library/updateTitle',
-    async (title) => {
+    async (title: Title) => {
         await Axios.put(`/api/titles/${title.token}`, title);
         return title;
     }
@@ -27,31 +28,37 @@ export const updateTitle = createAsyncThunk(
 
 export const deleteTitle = createAsyncThunk(
     'library/deleteTitle',
-    async (title) => {
+    async (title: Title) => {
         await Axios.delete(`/api/titles/${title.token}`);
         return title.token;
     }
 );
 
+interface LibraryState {
+    data: Title[];
+}
+
+const initialState: LibraryState = {
+    data: []
+}
+
 const librarySlice = createSlice({
     name: 'library',
-    initialState: {
-        data: []
-    },
+    initialState,
     reducers: {},
-    extraReducers: {
-        [listTitles.fulfilled]: (state, action) => {
+    extraReducers: builder => {
+        builder.addCase(listTitles.fulfilled, (state, action) => {
             state.data = action.payload;
-        },
-        [addTitle.fulfilled]: (state, action) => {
+        });
+        builder.addCase(addTitle.fulfilled, (state, action) => {
             state.data.push(action.payload);
-        },
-        [updateTitle.fulfilled]: (state, action) => {
+        });
+        builder.addCase(updateTitle.fulfilled, (state, action) => {
             state.data = state.data.map(title => title.token === action.payload.token ? action.payload : title);
-        },
-        [deleteTitle.fulfilled]: (state, action) => {
+        });
+        builder.addCase(deleteTitle.fulfilled, (state, action) => {
             state.data = state.data.filter(title => title.token !== action.payload);
-        }
+        });
     }
 });
 
