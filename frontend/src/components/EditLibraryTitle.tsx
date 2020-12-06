@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {updateTitle} from '../store/library';
 import {connect, ConnectedProps} from 'react-redux';
 import {useHistory, useParams} from 'react-router-dom';
@@ -31,10 +30,6 @@ const EditLibraryItem = ({items, updateTitle}: ReduxProps) => {
             />
         </Container>
     );
-};
-
-EditLibraryItem.propTypes = {
-    updateTitle: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state: StoreState) => ({
