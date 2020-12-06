@@ -1,11 +1,11 @@
 import React from 'react';
-import {addTitle} from '../store/library';
+import {createTitle} from '../store/library';
 import {connect, ConnectedProps} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import LibraryTitleForm from './LibraryTitleForm';
 import {Container} from 'react-bootstrap';
 
-const AddLibraryTitle = ({addTitle}: ReduxProps) => {
+const AddLibraryTitle = ({createTitle}: ReduxProps) => {
 
     const history = useHistory();
 
@@ -23,7 +23,7 @@ const AddLibraryTitle = ({addTitle}: ReduxProps) => {
                     ]
                 }}
                 onSubmit={title => {
-                    addTitle(title);
+                    createTitle(title);
                     history.push('/');
                 }}
             />
@@ -32,7 +32,7 @@ const AddLibraryTitle = ({addTitle}: ReduxProps) => {
 };
 
 const mapDispatchToProps = {
-    addTitle
+    createTitle
 };
 
 const connector = connect(undefined, mapDispatchToProps);

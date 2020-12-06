@@ -4,7 +4,8 @@ import {connect, ConnectedProps} from 'react-redux';
 import {useHistory, useParams} from 'react-router-dom';
 import LibraryTitleForm from './LibraryTitleForm';
 import {Container} from 'react-bootstrap';
-import Axios from "axios";
+import {api} from "../api";
+import {Title} from "../types/Title";
 
 const EditLibraryItem = ({updateTitle}: ReduxProps) => {
 
@@ -13,15 +14,15 @@ const EditLibraryItem = ({updateTitle}: ReduxProps) => {
         token: string
     };
 
-    const [title, setTitle] = useState({
+    const [title, setTitle] = useState<Title>({
         name: '',
         copies: []
     });
 
     useEffect(() => {
         const fetchTitle = async () => {
-            const result = await Axios.get(`/api/titles/${params.token}`);
-            setTitle(result.data);
+            const result = await api.titles.retrieve(params.token);
+            setTitle(result);
         }
         fetchTitle();
     }, [params.token]);

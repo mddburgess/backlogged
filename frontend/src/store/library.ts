@@ -1,37 +1,25 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import Axios from 'axios';
 import {Title} from "../types/Title";
+import {api} from "../api";
 
 export const listTitles = createAsyncThunk(
     'library/listTitles',
-    async () => {
-        const response = await Axios.get('/api/titles');
-        return response.data;
-    }
+    async () => await api.titles.list()
 );
 
-export const addTitle = createAsyncThunk(
-    'library/addTitle',
-    async (title: Title) => {
-        const response = await Axios.post('/api/titles', title);
-        return response.data;
-    }
+export const createTitle = createAsyncThunk(
+    'library/createTitle',
+    async (title: Title) => await api.titles.create(title)
 );
 
 export const updateTitle = createAsyncThunk(
     'library/updateTitle',
-    async (title: Title) => {
-        await Axios.put(`/api/titles/${title.token}`, title);
-        return title;
-    }
+    async (title: Title) => await api.titles.update(title)
 );
 
 export const deleteTitle = createAsyncThunk(
     'library/deleteTitle',
-    async (title: Title) => {
-        await Axios.delete(`/api/titles/${title.token}`);
-        return title.token;
-    }
+    async (title: Title) => await api.titles.delete(title)
 );
 
 interface LibraryState {
@@ -50,7 +38,7 @@ const librarySlice = createSlice({
         builder.addCase(listTitles.fulfilled, (state, action) => {
             state.data = action.payload;
         });
-        builder.addCase(addTitle.fulfilled, (state, action) => {
+        builder.addCase(createTitle.fulfilled, (state, action) => {
             state.data.push(action.payload);
         });
         builder.addCase(updateTitle.fulfilled, (state, action) => {
