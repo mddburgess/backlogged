@@ -8,8 +8,9 @@ interface Props {
     onSubmit: (title: Title) => void;
 }
 
-const LibraryItemForm = ({initialValues, onSubmit}: Props) => (
+const LibraryTitleForm = ({initialValues, onSubmit}: Props) => (
     <Formik
+        enableReinitialize={true}
         initialValues={initialValues}
         onSubmit={onSubmit}
     >
@@ -70,4 +71,4 @@ const LibraryItemForm = ({initialValues, onSubmit}: Props) => (
     </Formik>
 );
 
-export default LibraryItemForm;
+export default LibraryTitleForm;

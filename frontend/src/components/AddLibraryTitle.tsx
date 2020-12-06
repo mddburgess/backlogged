@@ -2,7 +2,7 @@ import React from 'react';
 import {addTitle} from '../store/library';
 import {connect, ConnectedProps} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import LibraryItemForm from './LibraryTitleForm';
+import LibraryTitleForm from './LibraryTitleForm';
 import {Container} from 'react-bootstrap';
 
 const AddLibraryTitle = ({addTitle}: ReduxProps) => {
@@ -12,7 +12,7 @@ const AddLibraryTitle = ({addTitle}: ReduxProps) => {
     return (
         <Container>
             <h1>Add Library Title</h1>
-            <LibraryItemForm
+            <LibraryTitleForm
                 initialValues={{
                     name: '',
                     copies: [

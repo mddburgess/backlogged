@@ -1,27 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {updateTitle} from '../store/library';
 import {connect, ConnectedProps} from 'react-redux';
 import {useHistory, useParams} from 'react-router-dom';
-import LibraryItemForm from './LibraryTitleForm';
+import LibraryTitleForm from './LibraryTitleForm';
 import {Container} from 'react-bootstrap';
-import {StoreState} from "../store";
+import Axios from "axios";
 
-const EditLibraryItem = ({items, updateTitle}: ReduxProps) => {
+const EditLibraryItem = ({updateTitle}: ReduxProps) => {
 
     const history = useHistory();
     const params = useParams() as {
         token: string
     };
 
-    const title = items.find(t => t.token === params.token) || {
+    const [title, setTitle] = useState({
         name: '',
         copies: []
-    };
+    });
+
+    useEffect(() => {
+        const fetchTitle = async () => {
+            const result = await Axios.get(`/api/titles/${params.token}`);
+            setTitle(result.data);
+        }
+        fetchTitle();
+    }, [params.token]);
 
     return (
         <Container>
             <h1>Edit Library Title</h1>
-            <LibraryItemForm
+            <LibraryTitleForm
                 initialValues={title}
                 onSubmit={(values) => {
                     updateTitle(values);
@@ -32,15 +40,11 @@ const EditLibraryItem = ({items, updateTitle}: ReduxProps) => {
     );
 };
 
-const mapStateToProps = (state: StoreState) => ({
-    items: state.library.data
-});
-
 const mapDispatchToProps = {
     updateTitle
 };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(undefined, mapDispatchToProps);
 
 type ReduxProps = ConnectedProps<typeof connector>;
 
