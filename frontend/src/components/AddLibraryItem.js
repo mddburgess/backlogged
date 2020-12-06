@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {addTitle} from '../store/library';
 import {connect} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import LibraryItemForm from './LibraryItemForm';
+import LibraryItemForm from './LibraryTitleForm';
 import {Container} from 'react-bootstrap';
 
 const AddLibraryItem = ({addTitle}) => {

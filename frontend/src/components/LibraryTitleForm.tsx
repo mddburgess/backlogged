@@ -1,9 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Field, FieldArray, Form as FormikForm, Formik} from 'formik';
 import {Button, Col, Form} from 'react-bootstrap';
+import {Title} from "../types/Title";
 
-const LibraryItemForm = ({initialValues, onSubmit}) => (
+interface Props {
+    initialValues: Title;
+    onSubmit: (title: Title) => void;
+}
+
+const LibraryItemForm = ({initialValues, onSubmit}: Props) => (
     <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -64,10 +69,5 @@ const LibraryItemForm = ({initialValues, onSubmit}) => (
         )}
     </Formik>
 );
-
-LibraryItemForm.propTypes = {
-    initialValues: PropTypes.object.isRequired,
-    onSubmit: PropTypes.func.isRequired
-};
 
 export default LibraryItemForm;

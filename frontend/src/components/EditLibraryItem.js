@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {updateTitle} from '../store/library';
 import {connect} from 'react-redux';
 import {useHistory, useParams} from 'react-router-dom';
-import LibraryItemForm from './LibraryItemForm';
+import LibraryItemForm from './LibraryTitleForm';
 import {Container} from 'react-bootstrap';
 
 const EditLibraryItem = ({items, updateTitle}) => {
