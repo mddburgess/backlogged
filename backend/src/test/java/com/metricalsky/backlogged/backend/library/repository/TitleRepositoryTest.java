@@ -1,9 +1,7 @@
 package com.metricalsky.backlogged.backend.library.repository;
 
-import java.util.List;
 import java.util.UUID;
 
-import com.metricalsky.backlogged.backend.library.entity.Copy;
 import com.metricalsky.backlogged.backend.library.entity.Title;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
@@ -16,28 +14,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 public class TitleRepositoryTest {
 
+    private static final UUID NIL_UUID = new UUID(0, 0);
+
     @Autowired
     private TestEntityManager entityManager;
     @Autowired
     private TitleRepository repository;
 
     @Test
-    void givenTitle_whenSave_thenTitleIsSaved() {
-        var copy = new Copy();
-        copy.setPlatform(RandomStringUtils.randomAlphabetic(10));
-        copy.setService(RandomStringUtils.randomAlphabetic(10));
-
+    void givenExists_whenFindByToken_thenReturnTitle() {
         var title = new Title();
         title.setToken(UUID.randomUUID());
         title.setName(RandomStringUtils.randomAlphabetic(10));
-        title.setCopies(List.of(copy));
-        title.linkCopies();
+        title = entityManager.persistFlushFind(title);
 
-        repository.save(title);
+        assertThat(repository.findByToken(title.getToken()))
+                .hasValue(title);
+    }
 
-        assertThat(entityManager.find(Title.class, title.getId()))
-                .isNotNull();
-        assertThat(entityManager.find(Copy.class, copy.getId()))
-                .isNotNull();
+    @Test
+    void givenNotExists_whenFindByToken_thenReturnEmpty() {
+        var title = new Title();
+        title.setToken(UUID.randomUUID());
+        title.setName(RandomStringUtils.randomAlphabetic(10));
+        entityManager.persistFlushFind(title);
+
+        assertThat(repository.findByToken(NIL_UUID))
+                .isEmpty();
     }
 }

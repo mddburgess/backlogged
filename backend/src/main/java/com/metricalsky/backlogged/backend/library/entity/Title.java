@@ -10,7 +10,8 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -26,7 +27,7 @@ public class Title {
 
     private String name;
 
-    @OneToMany(mappedBy = "title", cascade = ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "title", cascade = {PERSIST, MERGE}, orphanRemoval = true)
     private List<Copy> copies;
 
     public void linkCopies() {

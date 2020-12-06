@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -24,6 +25,7 @@ public class Copy {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(nullable = false)
+    @ToString.Exclude
     private Title title;
 
     private String platform;
