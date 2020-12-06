@@ -4,8 +4,8 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Home from './routes/Home';
 import store from './store';
-import AddLibraryItem from './components/AddLibraryItem';
-import EditLibraryItem from './components/EditLibraryItem';
+import AddLibraryItem from './components/AddLibraryTitle';
+import EditLibraryItem from './components/EditLibraryTitle';
 
 function App() {
     return (

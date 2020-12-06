@@ -1,21 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {addTitle} from '../store/library';
-import {connect} from 'react-redux';
+import {connect, ConnectedProps} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import LibraryItemForm from './LibraryTitleForm';
 import {Container} from 'react-bootstrap';
 
-const AddLibraryItem = ({addTitle}) => {
+const AddLibraryTitle = ({addTitle}: ReduxProps) => {
 
     const history = useHistory();
 
     return (
         <Container>
-            <h1>Add Library Item</h1>
+            <h1>Add Library Title</h1>
             <LibraryItemForm
                 initialValues={{
-                    title: '',
+                    name: '',
                     copies: [
                         {
                             platform: '',
@@ -23,8 +22,8 @@ const AddLibraryItem = ({addTitle}) => {
                         }
                     ]
                 }}
-                onSubmit={(values) => {
-                    addTitle(values);
+                onSubmit={title => {
+                    addTitle(title);
                     history.push('/');
                 }}
             />
@@ -32,12 +31,12 @@ const AddLibraryItem = ({addTitle}) => {
     );
 };
 
-AddLibraryItem.propTypes = {
-    addTitle: PropTypes.func.isRequired
-};
-
 const mapDispatchToProps = {
     addTitle
 };
 
-export default connect(undefined, mapDispatchToProps)(AddLibraryItem);
+const connector = connect(undefined, mapDispatchToProps);
+
+type ReduxProps = ConnectedProps<typeof connector>;
+
+export default connector(AddLibraryTitle);

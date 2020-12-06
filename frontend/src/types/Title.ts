@@ -1,6 +1,6 @@
 export interface Title {
     name: string;
-    token: string;
+    token?: string;
     copies: Copy[];
 }
 
