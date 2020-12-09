@@ -25,6 +25,15 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            frontend/node
+            frontend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node
       - name: Compile
         run: mvn test-compile -B
 
@@ -67,6 +76,15 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            frontend/node
+            frontend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node
       - name: Test
         run: mvn verify -B --fail-at-end
         env:
