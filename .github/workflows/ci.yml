@@ -9,37 +9,7 @@ on:
       - development
 
 jobs:
-  compile:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout project
-        uses: actions/checkout@v2
-      - name: Configure Java 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Cache Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven
-      - name: Cache Node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            frontend/node
-            frontend/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node
-      - name: Compile
-        run: mvn test-compile -B
-
-  verify:
-    needs:
-      - compile
+  build:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -85,25 +55,21 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('frontend/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node
+      - name: Compile
+        run: mvn test-compile -B
       - name: Test
         run: mvn verify -B --fail-at-end
         env:
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: postgres
+        continue-on-error: true
       - name: Report Surefire results
         if: ${{ always() }}
         uses: ScaCap/action-surefire-report@v1.0.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          report_paths: '**/surefire-reports/TEST-*.xml'
+          report_paths: '**/surefire-reports/TEST-*.xml,**/failsafe-reports/TEST-*.xml'
           check_name: surefire
-      - name: Report Failsafe results
-        if: ${{ always() }}
-        uses: ScaCap/action-surefire-report@v1.0.5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          report_paths: '**/failsafe-reports/TEST-*.xml'
-          check_name: failsafe
       - name: Analyze
         if: ${{ always() }}
         run: mvn sonar:sonar -Dsonar.projectKey=mddburgess_backlogged -B
