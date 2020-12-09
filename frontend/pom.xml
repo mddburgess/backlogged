@@ -23,6 +23,7 @@
                     <filesets>
                         <fileset>
                             <directory>${basedir}/build</directory>
+                            <directory>${basedir}/coverage</directory>
                         </fileset>
                     </filesets>
                 </configuration>

@@ -68,7 +68,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven
       - name: Test
-        run: mvn verify -B
+        run: mvn verify -B --fail-at-end
         env:
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: postgres
