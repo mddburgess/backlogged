@@ -21,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -87,7 +86,6 @@ class TitlesApiIT {
         var response = restTemplate.getForEntity("/api/titles/{0}", Title.class, title.getToken());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(title);
-        fail("Fail test to check CI workflow");
     }
 
     @Test
