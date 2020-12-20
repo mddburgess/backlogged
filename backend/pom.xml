@@ -127,14 +127,54 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.14.0</version>
+                <executions>
+                    <execution>
+                        <id>pmd-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>pmd</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>cpd-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>cpd</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.1.4</version>
+                <executions>
+                    <execution>
+                        <id>spotbugs-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>spotbugs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.1</version>
                 <executions>
                     <execution>
-                        <id>checkstyle-check</id>
+                        <id>checkstyle-report</id>
                         <phase>verify</phase>
                         <goals>
-                            <goal>check</goal>
+                            <goal>checkstyle</goal>
                         </goals>
                     </execution>
                 </executions>

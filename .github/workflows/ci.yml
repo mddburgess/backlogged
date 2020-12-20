@@ -63,13 +63,9 @@ jobs:
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: postgres
         continue-on-error: true
-      - name: Report Surefire results
+      - name: Report build results
         if: ${{ always() }}
-        uses: ScaCap/action-surefire-report@v1.0.5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          report_paths: '**/surefire-reports/TEST-*.xml,**/failsafe-reports/TEST-*.xml'
-          check_name: surefire
+        uses: mddburgess/java-reporter-action@main
       - name: Analyze
         if: ${{ always() }}
         run: mvn sonar:sonar -Dsonar.projectKey=mddburgess_backlogged -B
