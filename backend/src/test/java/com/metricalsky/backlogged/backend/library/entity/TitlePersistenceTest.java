@@ -53,7 +53,6 @@ public class TitlePersistenceTest {
         assertThat(title.getCopies()).extracting(Copy::getId).doesNotContainNull();
 
         title.getCopies().add(createCopy());
-        title.linkCopies();
         repository.saveAndFlush(title);
 
         assertThat(title.getCopies())
@@ -104,7 +103,6 @@ public class TitlePersistenceTest {
         title.setToken(UUID.randomUUID());
         title.setName(RandomStringUtils.randomAlphabetic(10));
         title.setCopies(Lists.newArrayList(createCopy()));
-        title.linkCopies();
         return title;
     }
 

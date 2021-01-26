@@ -32,7 +32,6 @@ public class TitleController {
     @PostMapping
     public Title create(@RequestBody Title title) {
         title.setToken(UUID.randomUUID());
-        title.linkCopies();
         return repository.save(title);
     }
 
@@ -44,7 +43,6 @@ public class TitleController {
 
     @PutMapping("/{token}")
     public void update(@PathVariable UUID token, @RequestBody Title title) {
-        title.linkCopies();
         repository.save(title);
     }
 

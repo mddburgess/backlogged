@@ -131,7 +131,6 @@ class TitlesApiIT {
         var title = new Title();
         title.setName(RandomStringUtils.randomAlphabetic(10));
         title.setCopies(List.of(copy));
-        title.linkCopies();
         return title;
     }
 }
