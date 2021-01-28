@@ -24,10 +24,11 @@ public class TitleRepositoryTest {
     @Test
     void givenExists_whenFindByToken_thenReturnTitle() {
         var title = new Title();
-        title.setToken(UUID.randomUUID());
         title.setName(RandomStringUtils.randomAlphabetic(10));
         title = entityManager.persistFlushFind(title);
 
+        assertThat(title.getToken())
+                .isNotNull();
         assertThat(repository.findByToken(title.getToken()))
                 .hasValue(title);
     }
@@ -35,7 +36,6 @@ public class TitleRepositoryTest {
     @Test
     void givenNotExists_whenFindByToken_thenReturnEmpty() {
         var title = new Title();
-        title.setToken(UUID.randomUUID());
         title.setName(RandomStringUtils.randomAlphabetic(10));
         entityManager.persistFlushFind(title);
 

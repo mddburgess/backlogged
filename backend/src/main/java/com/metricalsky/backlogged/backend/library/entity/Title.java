@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -31,4 +32,11 @@ public class Title {
     @OneToMany(cascade = {PERSIST, MERGE}, orphanRemoval = true)
     @JoinColumn(name = "title_id", nullable = false)
     private List<Copy> copies;
+
+    @PrePersist
+    private void prePersist() {
+        if (this.token == null) {
+            this.token = UUID.randomUUID();
+        }
+    }
 }

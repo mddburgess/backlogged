@@ -1,7 +1,5 @@
 package com.metricalsky.backlogged.backend.library.entity;
 
-import java.util.UUID;
-
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.assertj.core.util.Lists;
@@ -100,7 +98,6 @@ public class TitlePersistenceTest {
 
     private static Title createTitle() {
         var title = new Title();
-        title.setToken(UUID.randomUUID());
         title.setName(RandomStringUtils.randomAlphabetic(10));
         title.setCopies(Lists.newArrayList(createCopy()));
         return title;

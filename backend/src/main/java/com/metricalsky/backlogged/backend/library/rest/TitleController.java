@@ -35,7 +35,6 @@ public class TitleController {
     @PostMapping
     public TitleData create(@RequestBody TitleData titleData) {
         var title = mapper.toEntity(titleData);
-        title.setToken(UUID.randomUUID());
         title = repository.save(title);
         return mapper.fromEntity(title);
     }
