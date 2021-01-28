@@ -3,8 +3,8 @@ package com.metricalsky.backlogged.backend.it.api;
 import java.net.URI;
 import java.util.List;
 
-import com.metricalsky.backlogged.backend.library.entity.Copy;
-import com.metricalsky.backlogged.backend.library.entity.Title;
+import com.metricalsky.backlogged.backend.library.dto.CopyData;
+import com.metricalsky.backlogged.backend.library.dto.TitleData;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 import com.metricalsky.backlogged.test.extensions.AbortOnTestFailure;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -35,8 +35,8 @@ class TitlesApiIT {
     @Autowired
     private TitleRepository titleRepository;
 
-    private Title title;
-    private Title updatedTitle;
+    private TitleData title;
+    private TitleData updatedTitle;
 
     @BeforeAll
     void beforeAll() {
@@ -46,7 +46,7 @@ class TitlesApiIT {
     @Test
     @Order(1)
     void givenNoTitles_whenListTitles_thenExpectEmptyList() {
-        var response = restTemplate.getForEntity("/api/titles", Title[].class);
+        var response = restTemplate.getForEntity("/api/titles", TitleData[].class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEmpty();
     }
@@ -56,11 +56,10 @@ class TitlesApiIT {
     void givenTitle_whenCreateTitles_thenExpectTitle() {
         var newTitle = buildTitle();
 
-        var response = restTemplate.postForEntity("/api/titles", newTitle, Title.class);
+        var response = restTemplate.postForEntity("/api/titles", newTitle, TitleData.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody()).satisfies(body -> {
-            assertThat(body.getId()).isNotNull();
             assertThat(body.getToken()).isNotNull();
             assertThat(body.getName()).isEqualTo(newTitle.getName());
             assertThat(body.getCopies()).zipSatisfy(newTitle.getCopies(), (bodyCopy, titleCopy) -> {
@@ -75,7 +74,7 @@ class TitlesApiIT {
     @Test
     @Order(3)
     void givenTitle_whenListTitles_thenExpectListWithTitle() {
-        var response = restTemplate.getForEntity("/api/titles", Title[].class);
+        var response = restTemplate.getForEntity("/api/titles", TitleData[].class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).containsExactly(title);
     }
@@ -83,7 +82,7 @@ class TitlesApiIT {
     @Test
     @Order(4)
     void givenTitle_whenRetrieveTitle_thenExpectTitle() {
-        var response = restTemplate.getForEntity("/api/titles/{0}", Title.class, title.getToken());
+        var response = restTemplate.getForEntity("/api/titles/{0}", TitleData.class, title.getToken());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(title);
     }
@@ -92,19 +91,18 @@ class TitlesApiIT {
     @Order(5)
     void givenTitle_whenUpdateTitle_thenExpectUpdatedTitle() {
         updatedTitle = buildTitle();
-        updatedTitle.setId(title.getId());
-        updatedTitle.setToken(title.getToken());
-        updatedTitle.setCopies(title.getCopies());
 
         var request = RequestEntity.put(URI.create("/api/titles/" + title.getToken())).body(updatedTitle);
-        var response = restTemplate.exchange(request, Void.class);
+        var response = restTemplate.exchange(request, TitleData.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        updatedTitle = response.getBody();
     }
 
     @Test
     @Order(6)
     void givenUpdatedTitle_whenRetrieveTitle_thenExpectUpdatedTitle() {
-        var response = restTemplate.getForEntity("/api/titles/{0}", Title.class, title.getToken());
+        var response = restTemplate.getForEntity("/api/titles/{0}", TitleData.class, title.getToken());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(updatedTitle);
     }
@@ -120,15 +118,15 @@ class TitlesApiIT {
     @Test
     @Order(8)
     void givenDeletedTitle_whenRetrieveTitle_thenExpectNotFoundStatus() {
-        var response = restTemplate.getForEntity("/api/titles/{0}", Title.class, title.getToken());
+        var response = restTemplate.getForEntity("/api/titles/{0}", TitleData.class, title.getToken());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 
-    private Title buildTitle() {
-        var copy = new Copy();
+    private TitleData buildTitle() {
+        var copy = new CopyData();
         copy.setPlatform(RandomStringUtils.randomAlphabetic(10));
         copy.setService(RandomStringUtils.randomAlphabetic(10));
-        var title = new Title();
+        var title = new TitleData();
         title.setName(RandomStringUtils.randomAlphabetic(10));
         title.setCopies(List.of(copy));
         return title;
