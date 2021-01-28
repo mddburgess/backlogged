@@ -1,7 +1,5 @@
 package com.metricalsky.backlogged.backend.library.service;
 
-import java.util.List;
-
 import com.metricalsky.backlogged.backend.library.dto.TitleData;
 import com.metricalsky.backlogged.backend.library.entity.Title;
 import org.mapstruct.Mapper;
@@ -10,8 +8,6 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface TitleMapper {
-
-    List<TitleData> fromEntities(List<Title> entities);
 
     TitleData fromEntity(Title entity);
 
