@@ -32,6 +32,6 @@ public class AbortOnTestFailureExtension implements TestWatcher, ExecutionCondit
     }
 
     private static Store getStore(ExtensionContext context) {
-        return context.getRoot().getStore(Namespace.create(context.getClass()));
+        return context.getRoot().getStore(Namespace.create(AbortOnTestFailureExtension.class));
     }
 }
