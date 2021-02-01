@@ -1,7 +1,6 @@
 package com.metricalsky.backlogged.backend.library.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.metricalsky.backlogged.backend.library.dto.TitleData;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
@@ -27,8 +26,8 @@ public class TitleService {
                 .collect(toList());
     }
 
-    public TitleData retrieveTitle(UUID token) {
-        return repository.findByToken(token)
+    public TitleData retrieveTitle(Integer key) {
+        return repository.findById(key)
                 .map(mapper::fromEntity)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
     }
@@ -39,16 +38,16 @@ public class TitleService {
         return mapper.fromEntity(entity);
     }
 
-    public TitleData updateTitle(UUID token, TitleData title) {
-        var entity = repository.findByToken(token)
+    public TitleData updateTitle(Integer key, TitleData title) {
+        var entity = repository.findById(key)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
         mapper.patchEntity(entity, title);
         repository.save(entity);
         return mapper.fromEntity(entity);
     }
 
-    public void deleteTitle(UUID token) {
-        repository.findByToken(token)
+    public void deleteTitle(Integer key) {
+        repository.findById(key)
                 .ifPresent(repository::delete);
     }
 }

@@ -1,7 +1,5 @@
 package com.metricalsky.backlogged.backend.library.repository;
 
-import java.util.UUID;
-
 import com.metricalsky.backlogged.backend.library.entity.Title;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
@@ -14,8 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 public class TitleRepositoryTest {
 
-    private static final UUID NIL_UUID = new UUID(0, 0);
-
     @Autowired
     private TestEntityManager entityManager;
     @Autowired
@@ -27,9 +23,9 @@ public class TitleRepositoryTest {
         title.setName(RandomStringUtils.randomAlphabetic(10));
         title = entityManager.persistFlushFind(title);
 
-        assertThat(title.getToken())
+        assertThat(title.getId())
                 .isNotNull();
-        assertThat(repository.findByToken(title.getToken()))
+        assertThat(repository.findById(title.getId()))
                 .hasValue(title);
     }
 
@@ -39,7 +35,7 @@ public class TitleRepositoryTest {
         title.setName(RandomStringUtils.randomAlphabetic(10));
         entityManager.persistFlushFind(title);
 
-        assertThat(repository.findByToken(NIL_UUID))
+        assertThat(repository.findById(0))
                 .isEmpty();
     }
 }

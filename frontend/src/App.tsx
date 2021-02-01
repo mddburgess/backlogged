@@ -18,7 +18,7 @@ function App() {
                     <Route path="/new">
                         <AddLibraryItem/>
                     </Route>
-                    <Route path="/edit/:token">
+                    <Route path="/edit/:key">
                         <EditLibraryItem/>
                     </Route>
                 </Switch>

@@ -14,7 +14,7 @@ const LibraryTitles = ({titles, listTitles}: ReduxProps) => {
 
     return (
         <ListGroup>
-            {titles.map(title => <LibraryTitle key={title.token} title={title}/>)}
+            {titles.map(title => <LibraryTitle key={title.key} title={title}/>)}
             <ListGroupItem>
                 <Link to="/new">
                     Add item

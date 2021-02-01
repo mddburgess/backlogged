@@ -11,7 +11,7 @@ const EditLibraryItem = ({updateTitle}: ReduxProps) => {
 
     const history = useHistory();
     const params = useParams() as {
-        token: string
+        key: string
     };
 
     const [title, setTitle] = useState<Title>({
@@ -21,11 +21,11 @@ const EditLibraryItem = ({updateTitle}: ReduxProps) => {
 
     useEffect(() => {
         const fetchTitle = async () => {
-            const result = await api.titles.retrieve(params.token);
+            const result = await api.titles.retrieve(params.key);
             setTitle(result);
         }
         fetchTitle();
-    }, [params.token]);
+    }, [params.key]);
 
     return (
         <Container>

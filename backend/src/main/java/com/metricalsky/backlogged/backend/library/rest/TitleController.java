@@ -1,7 +1,6 @@
 package com.metricalsky.backlogged.backend.library.rest;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.metricalsky.backlogged.backend.library.dto.TitleData;
 import com.metricalsky.backlogged.backend.library.service.TitleService;
@@ -32,18 +31,18 @@ public class TitleController {
         return titleService.createTitle(title);
     }
 
-    @GetMapping("/{token}")
-    public TitleData retrieve(@PathVariable UUID token) {
-        return titleService.retrieveTitle(token);
+    @GetMapping("/{key}")
+    public TitleData retrieve(@PathVariable Integer key) {
+        return titleService.retrieveTitle(key);
     }
 
-    @PutMapping("/{token}")
-    public TitleData update(@PathVariable UUID token, @RequestBody TitleData title) {
-        return titleService.updateTitle(token, title);
+    @PutMapping("/{key}")
+    public TitleData update(@PathVariable Integer key, @RequestBody TitleData title) {
+        return titleService.updateTitle(key, title);
     }
 
-    @DeleteMapping("/{token}")
-    public void delete(@PathVariable UUID token) {
-        titleService.deleteTitle(token);
+    @DeleteMapping("/{key}")
+    public void delete(@PathVariable Integer key) {
+        titleService.deleteTitle(key);
     }
 }

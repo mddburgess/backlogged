@@ -42,10 +42,10 @@ const librarySlice = createSlice({
             state.data.push(action.payload);
         });
         builder.addCase(updateTitle.fulfilled, (state, action) => {
-            state.data = state.data.map(title => title.token === action.payload.token ? action.payload : title);
+            state.data = state.data.map(title => title.key === action.payload.key ? action.payload : title);
         });
         builder.addCase(deleteTitle.fulfilled, (state, action) => {
-            state.data = state.data.filter(title => title.token !== action.payload);
+            state.data = state.data.filter(title => title.key !== action.payload);
         });
     }
 });

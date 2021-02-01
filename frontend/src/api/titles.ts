@@ -11,19 +11,19 @@ const createTitle = async (title: Title) => {
     return response.data;
 }
 
-const retrieveTitle: (token: string) => Promise<Title> = async (token: string) => {
-    const response = await Axios.get<Title>(`/api/titles/${token}`);
+const retrieveTitle: (key: string) => Promise<Title> = async (key: string) => {
+    const response = await Axios.get<Title>(`/api/titles/${key}`);
     return response.data;
 }
 
 const updateTitle = async (title: Title) => {
-    await Axios.put(`/api/titles/${title.token}`, title);
+    await Axios.put(`/api/titles/${title.key}`, title);
     return title;
 }
 
 const deleteTitle = async (title: Title) => {
-    await Axios.delete(`/api/titles/${title.token}`);
-    return title.token;
+    await Axios.delete(`/api/titles/${title.key}`);
+    return title.key;
 }
 
 export const titles = {

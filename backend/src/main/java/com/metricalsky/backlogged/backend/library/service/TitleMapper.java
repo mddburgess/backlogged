@@ -9,10 +9,10 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface TitleMapper {
 
+    @Mapping(source = "id", target = "key")
     TitleData fromEntity(Title entity);
 
     Title toEntity(TitleData data);
 
-    @Mapping(target = "token", ignore = true)
     void patchEntity(@MappingTarget Title entity, TitleData data);
 }

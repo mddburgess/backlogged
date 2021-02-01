@@ -13,7 +13,7 @@ const LibraryTitle = ({title}: Props) => (
         <div className="d-flex justify-content-between">
             <h5 className="mb-0">{title.name}</h5>
             <div>
-                <Link to={`/edit/${title.token}`}>
+                <Link to={`/edit/${title.key}`}>
                     <PencilSquare/>
                 </Link>
             </div>
