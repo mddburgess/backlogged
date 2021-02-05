@@ -6,6 +6,7 @@ import Home from './routes/Home';
 import store from './store';
 import AddLibraryItem from './components/AddLibraryTitle';
 import EditLibraryItem from './components/EditLibraryTitle';
+import Backlog from "./components/backlog/Backlog";
 
 function App() {
     return (
@@ -20,6 +21,9 @@ function App() {
                     </Route>
                     <Route path="/edit/:key">
                         <EditLibraryItem/>
+                    </Route>
+                    <Route path="/backlog">
+                        <Backlog/>
                     </Route>
                 </Switch>
             </BrowserRouter>
