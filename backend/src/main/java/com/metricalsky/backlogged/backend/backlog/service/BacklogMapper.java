@@ -11,7 +11,4 @@ public interface BacklogMapper {
 
     @Mapping(source = "id", target = "key")
     BacklogData fromEntity(Backlog entity);
-
-    @Mapping(source = "title.key", target = "title.id")
-    Backlog toEntity(BacklogData data);
 }
