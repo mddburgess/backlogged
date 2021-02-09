@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {ListGroupItem} from 'react-bootstrap';
-import {PencilSquare} from 'react-bootstrap-icons';
+import {JournalPlus} from 'react-bootstrap-icons';
 import {Title} from "../types/Title";
 
 interface Props {
@@ -9,17 +9,19 @@ interface Props {
 }
 
 const LibraryTitle = ({title}: Props) => (
-    <ListGroupItem>
+    <ListGroupItem className="px-2 py-1">
         <div className="d-flex justify-content-between">
-            <h5 className="mb-0">{title.name}</h5>
+            <Link to={`/edit/${title.key}`}>
+                {title.name}
+            </Link>
             <div>
-                <Link to={`/edit/${title.key}`}>
-                    <PencilSquare/>
-                </Link>
+                <JournalPlus/>
             </div>
         </div>
         <ul className="mb-0">
-            {title.copies.map(copy => <li>{copy.platform} - {copy.service}</li>)}
+            {title.copies.map(copy => <small>
+                <li>{copy.platform} - {copy.service}</li>
+            </small>)}
         </ul>
     </ListGroupItem>
 );
