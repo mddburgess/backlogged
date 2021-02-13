@@ -17,14 +17,14 @@ const BacklogToggle = ({title, backlog, createBacklog}: Props & ReduxProps) => {
     }
 
     return backlog.map(b => b.title.key).includes(title.key)
-        ? <Button variant="link" className="p-0">
-            <JournalBookmarkFill/>
+        ? <Button variant="link" className="align-top border-0 p-0">
+            <JournalBookmarkFill className="align-top mt-1"/>
         </Button>
         : <Button variant="link" className="p-0" onClick={addToBacklog}>
-            <OverlayTrigger placement="auto" overlay={
+            <OverlayTrigger placement="left" overlay={
                 <Tooltip id="">Add to backlog</Tooltip>
             }>
-                <JournalBookmark/>
+                <JournalBookmark className="align-top mt-1"/>
             </OverlayTrigger>
         </Button>;
 

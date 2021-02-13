@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
-import LibraryTitle from '../LibraryTitle';
 import {ListGroup} from 'react-bootstrap';
 import {StoreState} from "../../store";
 import {listBacklog} from "../../store/backlog";
+import BacklogItem from "./BacklogItem";
 
 const BacklogItemList = ({backlogItems, listBacklog}: ReduxProps) => {
 
@@ -13,7 +13,7 @@ const BacklogItemList = ({backlogItems, listBacklog}: ReduxProps) => {
 
     return (
         <ListGroup>
-            {backlogItems.map(item => <LibraryTitle key={item.key} title={item.title}/>)}
+            {backlogItems.map(item => <BacklogItem key={item.key} backlog={item}/>)}
         </ListGroup>
     );
 };
@@ -21,13 +21,9 @@ const BacklogItemList = ({backlogItems, listBacklog}: ReduxProps) => {
 const mapStateToProps = (state: StoreState) => ({
     backlogItems: state.backlog.data
 });
-
 const mapDispatchToProps = {
     listBacklog
 };
-
 const connector = connect(mapStateToProps, mapDispatchToProps);
-
 type ReduxProps = ConnectedProps<typeof connector>;
-
 export default connector(BacklogItemList);
