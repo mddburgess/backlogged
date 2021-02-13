@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {ListGroupItem} from 'react-bootstrap';
-import {JournalPlus} from 'react-bootstrap-icons';
 import {Title} from "../types/Title";
+import BacklogToggle from "./backlog/BacklogToggle";
 
 interface Props {
     title: Title;
@@ -15,7 +15,7 @@ const LibraryTitle = ({title}: Props) => (
                 {title.name}
             </Link>
             <div>
-                <JournalPlus/>
+                <BacklogToggle title={title}/>
             </div>
         </div>
         <ul className="mb-0">
