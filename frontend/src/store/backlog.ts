@@ -11,7 +11,12 @@ export const listBacklog = createAsyncThunk(
 export const createBacklog = createAsyncThunk(
     'backlog/createEntry',
     async (title: Title) => await api.backlogs.create(title)
-)
+);
+
+export const deleteBacklog = createAsyncThunk(
+    'backlog/deleteEntry',
+    async (backlog: Backlog) => await api.backlogs.delete(backlog)
+);
 
 interface BacklogState {
     data: Backlog[];
@@ -32,6 +37,9 @@ const backlogSlice = createSlice({
         builder.addCase(createBacklog.fulfilled, (state, action) => {
             state.data.push(action.payload);
         });
+        builder.addCase(deleteBacklog.fulfilled, (state, action) => {
+            state.data = state.data.filter(backlog => backlog.key !== action.payload);
+        })
     }
 });
 

@@ -17,7 +17,13 @@ const createBacklog = async (title: Title) => {
     return response.data;
 }
 
+const deleteBacklog = async (backlog: Backlog) => {
+    await Axios.delete(`/api/backlogs/${backlog.key}`);
+    return backlog.key;
+}
+
 export const backlogs = {
     list: listBacklogs,
-    create: createBacklog
+    create: createBacklog,
+    delete: deleteBacklog
 };
