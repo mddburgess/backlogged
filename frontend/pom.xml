@@ -5,10 +5,14 @@
     <parent>
         <groupId>com.metricalsky.backlogged</groupId>
         <artifactId>backlogged</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
     </parent>
 
     <artifactId>frontend</artifactId>
+
+    <properties>
+        <sonar.skip>true</sonar.skip>
+    </properties>
 
     <build>
         <plugins>
@@ -19,6 +23,7 @@
                     <filesets>
                         <fileset>
                             <directory>${basedir}/build</directory>
+                            <directory>${basedir}/coverage</directory>
                         </fileset>
                     </filesets>
                 </configuration>
@@ -55,7 +60,7 @@
                             <goal>yarn</goal>
                         </goals>
                         <configuration>
-                            <arguments>test</arguments>
+                            <arguments>test --coverage --coverage-reporters=lcov --testResultsProcessor jest-sonar-reporter</arguments>
                             <environmentVariables>
                                 <CI>true</CI>
                             </environmentVariables>

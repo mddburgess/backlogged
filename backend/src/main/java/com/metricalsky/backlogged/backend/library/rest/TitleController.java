@@ -1,40 +1,48 @@
 package com.metricalsky.backlogged.backend.library.rest;
 
 import java.util.List;
-import java.util.UUID;
 
-import com.metricalsky.backlogged.backend.library.entity.Title;
-import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
+import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.service.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/titles")
 public class TitleController {
 
     @Autowired
-    private TitleRepository repository;
+    private TitleService titleService;
 
     @GetMapping
-    public List<Title> list() {
-        return repository.findAll();
+    public List<TitleData> list() {
+        return titleService.listTitles();
     }
 
     @PostMapping
-    public Title create(@RequestBody Title title) {
-        title.setToken(UUID.randomUUID());
-        title.linkCopies();
-        return repository.save(title);
+    public TitleData create(@RequestBody TitleData title) {
+        return titleService.createTitle(title);
     }
 
-    @PutMapping("/{token}")
-    public void update(@PathVariable UUID token, @RequestBody Title title) {
-        title.linkCopies();
-        repository.save(title);
+    @GetMapping("/{key}")
+    public TitleData retrieve(@PathVariable Integer key) {
+        return titleService.retrieveTitle(key);
     }
 
-    @DeleteMapping("/{token}")
-    public void delete(@PathVariable UUID token) {
-        repository.findByToken(token).ifPresent(repository::delete);
+    @PutMapping("/{key}")
+    public TitleData update(@PathVariable Integer key, @RequestBody TitleData title) {
+        return titleService.updateTitle(key, title);
+    }
+
+    @DeleteMapping("/{key}")
+    public void delete(@PathVariable Integer key) {
+        titleService.deleteTitle(key);
     }
 }

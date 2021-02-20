@@ -1,5 +1,5 @@
 import React from 'react';
-import LibraryItems from './LibraryItems';
+import LibraryItems from './LibraryTitles';
 import {Container} from 'react-bootstrap';
 
 const Library = () => (
