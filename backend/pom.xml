@@ -183,7 +183,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.1.4</version>
+                <version>4.2.0</version>
                 <executions>
                     <execution>
                         <id>spotbugs-report</id>
@@ -193,6 +193,11 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <effort>Max</effort>
+                    <includeTests>true</includeTests>
+                    <threshold>Low</threshold>
+                </configuration>
             </plugin>
 
             <plugin>
