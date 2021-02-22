@@ -177,6 +177,9 @@
                 </executions>
                 <configuration>
                     <linkXRef>false</linkXRef>
+                    <rulesets>
+                        <ruleset>pmd.xml</ruleset>
+                    </rulesets>
                 </configuration>
             </plugin>
 
