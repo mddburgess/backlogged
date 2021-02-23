@@ -156,15 +156,15 @@
                 <version>4.2.0</version>
                 <executions>
                     <execution>
-                        <id>spotbugs-report</id>
-                        <phase>verify</phase>
+                        <id>spotbugs-check</id>
                         <goals>
-                            <goal>spotbugs</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
                     <effort>Max</effort>
+                    <failOnError>false</failOnError>
                     <includeTests>true</includeTests>
                     <threshold>Low</threshold>
                 </configuration>
@@ -176,25 +176,28 @@
                 <version>3.14.0</version>
                 <executions>
                     <execution>
-                        <id>pmd-report</id>
-                        <phase>verify</phase>
+                        <id>pmd-check</id>
                         <goals>
-                            <goal>pmd</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>cpd-report</id>
-                        <phase>verify</phase>
+                        <id>cpd-check</id>
                         <goals>
-                            <goal>cpd</goal>
+                            <goal>cpd-check</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
+                    <compileSourceRoots>
+                        <directory>${project.build.sourceDirectory}</directory>
+                    </compileSourceRoots>
+                    <failOnViolation>false</failOnViolation>
                     <linkXRef>false</linkXRef>
                     <rulesets>
                         <ruleset>pmd.xml</ruleset>
                     </rulesets>
+                    <verbose>true</verbose>
                 </configuration>
             </plugin>
 
@@ -204,10 +207,9 @@
                 <version>3.1.2</version>
                 <executions>
                     <execution>
-                        <id>checkstyle-report</id>
-                        <phase>verify</phase>
+                        <id>checkstyle-check</id>
                         <goals>
-                            <goal>checkstyle</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -220,11 +222,13 @@
                 </dependencies>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
+                    <failOnViolation>false</failOnViolation>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <linkXRef>false</linkXRef>
                     <sourceDirectories>
                         <directory>${project.build.sourceDirectory}</directory>
                     </sourceDirectories>
+                    <violationSeverity>warning</violationSeverity>
                 </configuration>
             </plugin>
         </plugins>
