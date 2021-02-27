@@ -71,7 +71,7 @@ class BacklogsApiIT {
         var backlog = buildBacklog();
 
         var response = restTemplate.postForEntity("/api/backlogs", backlog, BacklogData.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody()).satisfies(body -> {
             assertThat(body.getKey()).isNotNull();
@@ -90,9 +90,9 @@ class BacklogsApiIT {
         var response = restTemplate.postForEntity("/api/backlogs", backlog, BacklogData.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getKey()).isNotEqualTo(backlogData.getKey());
+        assertThat(response.getBody().getKey()).isEqualTo(backlogData.getKey());
 
-        assertThat(backlogRepository.count()).isEqualTo(2);
+        assertThat(backlogRepository.count()).isEqualTo(1);
     }
 
     @Test
@@ -100,7 +100,7 @@ class BacklogsApiIT {
     void givenBacklog_whenListBacklogs_thenExpectListWithBacklog() {
         var response = restTemplate.getForEntity("/api/backlogs", BacklogData[].class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).contains(backlogData);
+        assertThat(response.getBody()).containsExactly(backlogData);
     }
 
     @Test
@@ -118,7 +118,7 @@ class BacklogsApiIT {
     void givenDeletedTitle_whenDeleteBacklog_thenExpectNotFoundStatus() {
         var request = RequestEntity.delete(URI.create("/api/backlogs/" + backlogData.getKey())).build();
         var response = restTemplate.exchange(request, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 
     private BacklogData buildBacklog() {

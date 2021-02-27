@@ -9,6 +9,8 @@ spring:
     clean-on-validation-error: true
     ignore-future-migrations: false
     validate-migration-naming: true
+  jpa:
+    show-sql: true
   main:
     banner-mode: "off"
   test:
