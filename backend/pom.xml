@@ -11,7 +11,7 @@
     <artifactId>backend</artifactId>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>14</java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
 
         <sonar.junit.reportPaths>target/surefire-reports,target/failsafe-reports</sonar.junit.reportPaths>
