@@ -42,16 +42,16 @@ jobs:
       - name: Cache Maven repository
         uses: actions/cache@v2
         with:
-          path: ~/.m2/repository
+          path: |
+            ~/.m2/repository
+            frontend/node
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven
       - name: Cache Node modules
         uses: actions/cache@v2
         with:
-          path: |
-            frontend/node
-            frontend/node_modules
+          path: frontend/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('frontend/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node
