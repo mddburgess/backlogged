@@ -7,11 +7,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.metricalsky.backlogged.backend.library.entity.Title;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import com.metricalsky.backlogged.backend.library.entity.Title;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

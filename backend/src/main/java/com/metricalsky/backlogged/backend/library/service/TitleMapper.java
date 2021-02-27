@@ -1,10 +1,11 @@
 package com.metricalsky.backlogged.backend.library.service;
 
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
-import com.metricalsky.backlogged.backend.library.entity.Title;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+
+import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.entity.Title;
 
 @Mapper(componentModel = "spring")
 public interface TitleMapper {

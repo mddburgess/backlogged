@@ -1,11 +1,12 @@
 package com.metricalsky.backlogged.backend.library.repository;
 
-import com.metricalsky.backlogged.backend.library.entity.Title;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+
+import com.metricalsky.backlogged.backend.library.entity.Title;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

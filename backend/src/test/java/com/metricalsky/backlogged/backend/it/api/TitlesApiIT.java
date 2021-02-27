@@ -3,10 +3,6 @@ package com.metricalsky.backlogged.backend.it.api;
 import java.net.URI;
 import java.util.List;
 
-import com.metricalsky.backlogged.backend.library.dto.CopyData;
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
-import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
-import com.metricalsky.backlogged.test.extensions.AbortOnTestFailure;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -19,6 +15,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
+
+import com.metricalsky.backlogged.backend.library.dto.CopyData;
+import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
+import com.metricalsky.backlogged.test.extensions.AbortOnTestFailure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;

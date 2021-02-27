@@ -2,12 +2,6 @@ package com.metricalsky.backlogged.backend.it.api;
 
 import java.net.URI;
 
-import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
-import com.metricalsky.backlogged.backend.backlog.repository.BacklogRepository;
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
-import com.metricalsky.backlogged.backend.library.entity.Title;
-import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
-import com.metricalsky.backlogged.test.extensions.AbortOnTestFailure;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,6 +15,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
+
+import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
+import com.metricalsky.backlogged.backend.backlog.repository.BacklogRepository;
+import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.entity.Title;
+import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
+import com.metricalsky.backlogged.test.extensions.AbortOnTestFailure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;

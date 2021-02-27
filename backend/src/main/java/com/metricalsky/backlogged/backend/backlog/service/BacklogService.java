@@ -3,15 +3,16 @@ package com.metricalsky.backlogged.backend.backlog.service;
 import java.net.URI;
 import java.util.List;
 
-import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
-import com.metricalsky.backlogged.backend.backlog.entity.Backlog;
-import com.metricalsky.backlogged.backend.backlog.repository.BacklogRepository;
-import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
+import com.metricalsky.backlogged.backend.backlog.entity.Backlog;
+import com.metricalsky.backlogged.backend.backlog.repository.BacklogRepository;
+import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 
 import static java.util.stream.Collectors.toList;
 

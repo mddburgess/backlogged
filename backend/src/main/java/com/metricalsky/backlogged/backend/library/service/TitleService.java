@@ -2,11 +2,12 @@ package com.metricalsky.backlogged.backend.library.service;
 
 import java.util.List;
 
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
-import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.NOT_FOUND;

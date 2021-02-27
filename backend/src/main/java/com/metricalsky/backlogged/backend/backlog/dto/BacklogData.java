@@ -1,7 +1,8 @@
 package com.metricalsky.backlogged.backend.backlog.dto;
 
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
 import lombok.Data;
+
+import com.metricalsky.backlogged.backend.library.dto.TitleData;
 
 @Data
 public class BacklogData {
