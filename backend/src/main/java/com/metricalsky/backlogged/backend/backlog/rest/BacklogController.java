@@ -1,5 +1,6 @@
 package com.metricalsky.backlogged.backend.backlog.rest;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,13 @@ public class BacklogController {
 
     @PostMapping
     public ResponseEntity<BacklogData> create(@RequestBody BacklogData backlog) {
-        return backlogService.createBacklog(backlog);
+        var b = backlogService.findBacklogByTitleKey(backlog.getTitle().getKey());
+        if (b.isPresent()) {
+            return ResponseEntity.ok(b.get());
+        } else {
+            var newBacklog = backlogService.createBacklog(backlog);
+            return ResponseEntity.created(URI.create("/")).body(newBacklog);
+        }
     }
 
     @DeleteMapping("/{key}")

@@ -1,11 +1,10 @@
 package com.metricalsky.backlogged.backend.backlog.service;
 
-import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,19 +32,18 @@ public class BacklogService {
                 .collect(toList());
     }
 
-    public ResponseEntity<BacklogData> createBacklog(BacklogData backlog) {
+    public Optional<BacklogData> findBacklogByTitleKey(String titleKey) {
+        return repository.findByTitleId(Integer.valueOf(titleKey))
+                .map(mapper::fromEntity);
+    }
+
+    public BacklogData createBacklog(BacklogData backlog) {
         var title = titleRepository.findById(Integer.valueOf(backlog.getTitle().getKey()))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
-        var existingBacklog = repository.findByTitleId(title.getId());
-        if (existingBacklog.isPresent()) {
-            return ResponseEntity.ok(mapper.fromEntity(existingBacklog.get()));
-        }
-
         var newBacklog = Backlog.builder().title(title).build();
         repository.save(newBacklog);
-        return ResponseEntity.created(URI.create("/"))
-                .body(mapper.fromEntity(newBacklog));
+        return mapper.fromEntity(newBacklog);
     }
 
     public void deleteBacklog(Integer key) {
