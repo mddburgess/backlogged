@@ -1,10 +1,10 @@
 export interface Title {
-    key?: string;
-    name: string;
-    copies: Copy[];
+  key?: string;
+  name: string;
+  copies: Copy[];
 }
 
 interface Copy {
-    platform: string;
-    service: string;
+  platform: string;
+  service: string;
 }

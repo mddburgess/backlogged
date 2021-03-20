@@ -1,6 +1,32 @@
 {
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
   "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "react-app",
-    "react-app/jest"
+    "react-app/jest",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/no-floating-promises": "warn",
+    "@typescript-eslint/no-unnecessary-type-assertion": "warn",
+    "@typescript-eslint/restrict-template-expressions": "warn"
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.tsx"
+      ],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    }
   ]
 }
