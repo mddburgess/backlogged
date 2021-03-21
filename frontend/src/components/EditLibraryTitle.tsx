@@ -13,7 +13,7 @@ const EditLibraryItem = ({ updateTitle }: ReduxProps) => {
 
   const [title, setTitle] = useState<Title>({
     name: "",
-    copies: []
+    copies: [],
   });
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const EditLibraryItem = ({ updateTitle }: ReduxProps) => {
 };
 
 const mapDispatchToProps = {
-  updateTitle
+  updateTitle,
 };
 
 const connector = connect(undefined, mapDispatchToProps);

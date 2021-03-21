@@ -17,9 +17,9 @@ const AddLibraryTitle = ({ createTitle }: ReduxProps) => {
           copies: [
             {
               platform: "",
-              service: ""
-            }
-          ]
+              service: "",
+            },
+          ],
         }}
         onSubmit={(title) => {
           createTitle(title);
@@ -31,7 +31,7 @@ const AddLibraryTitle = ({ createTitle }: ReduxProps) => {
 };
 
 const mapDispatchToProps = {
-  createTitle
+  createTitle,
 };
 
 const connector = connect(undefined, mapDispatchToProps);

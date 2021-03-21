@@ -10,8 +10,8 @@ const listBacklogs = async (): Promise<Backlog[]> => {
 const createBacklog = async (title: Title): Promise<Backlog> => {
   const request = {
     title: {
-      key: title.key
-    }
+      key: title.key,
+    },
   };
   const response = await Axios.post<Backlog>("/api/backlogs", request);
   return response.data;
@@ -25,5 +25,5 @@ const deleteBacklog = async (backlog: Backlog): Promise<string | undefined> => {
 export const backlogs = {
   list: listBacklogs,
   create: createBacklog,
-  delete: deleteBacklog
+  delete: deleteBacklog,
 };

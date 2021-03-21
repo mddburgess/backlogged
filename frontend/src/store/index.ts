@@ -6,8 +6,8 @@ import backlog from "./backlog";
 const store = configureStore({
   reducer: combineReducers({
     library,
-    backlog
-  })
+    backlog,
+  }),
 });
 
 export type StoreState = ReturnType<typeof store.getState>;

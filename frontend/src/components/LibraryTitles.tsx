@@ -24,11 +24,11 @@ const LibraryTitles = ({ titles, listTitles }: ReduxProps) => {
 };
 
 const mapStateToProps = (state: StoreState) => ({
-  titles: state.library.data
+  titles: state.library.data,
 });
 
 const mapDispatchToProps = {
-  listTitles
+  listTitles,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

@@ -31,5 +31,5 @@ export const titles = {
   create: createTitle,
   retrieve: retrieveTitle,
   update: updateTitle,
-  delete: deleteTitle
+  delete: deleteTitle,
 };

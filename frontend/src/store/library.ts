@@ -27,7 +27,7 @@ interface LibraryState {
 }
 
 const initialState: LibraryState = {
-  data: []
+  data: [],
 };
 
 const librarySlice = createSlice({
@@ -49,7 +49,7 @@ const librarySlice = createSlice({
     builder.addCase(deleteTitle.fulfilled, (state, action) => {
       state.data = state.data.filter((title) => title.key !== action.payload);
     });
-  }
+  },
 });
 
 export default librarySlice.reducer;

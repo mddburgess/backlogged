@@ -20,10 +20,10 @@ const BacklogItemList = ({ backlogItems, listBacklog }: ReduxProps) => {
 };
 
 const mapStateToProps = (state: StoreState) => ({
-  backlogItems: state.backlog.data
+  backlogItems: state.backlog.data,
 });
 const mapDispatchToProps = {
-  listBacklog
+  listBacklog,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;

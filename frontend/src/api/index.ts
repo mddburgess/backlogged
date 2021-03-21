@@ -3,5 +3,5 @@ import { titles } from "./titles";
 
 export const api = {
   backlogs,
-  titles
+  titles,
 };

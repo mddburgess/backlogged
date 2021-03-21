@@ -27,10 +27,10 @@ const BacklogToggle = ({ title, backlog, createBacklog }: Props & ReduxProps) =>
 };
 
 const mapStateToProps = (state: StoreState) => ({
-  backlog: state.backlog.data
+  backlog: state.backlog.data,
 });
 const mapDispatchToProps = {
-  createBacklog
+  createBacklog,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;

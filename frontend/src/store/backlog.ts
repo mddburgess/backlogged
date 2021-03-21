@@ -23,7 +23,7 @@ interface BacklogState {
 }
 
 const initialState: BacklogState = {
-  data: []
+  data: [],
 };
 
 const backlogSlice = createSlice({
@@ -40,7 +40,7 @@ const backlogSlice = createSlice({
     builder.addCase(deleteBacklog.fulfilled, (state, action) => {
       state.data = state.data.filter((backlog) => backlog.key !== action.payload);
     });
-  }
+  },
 });
 
 export default backlogSlice.reducer;

@@ -36,7 +36,7 @@ interface Props {
 }
 
 const mapDispatchToProps = {
-  deleteBacklog
+  deleteBacklog,
 };
 const connector = connect(null, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
