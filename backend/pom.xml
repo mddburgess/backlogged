@@ -155,6 +155,7 @@
                 </executions>
                 <configuration>
                     <effort>Max</effort>
+                    <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
                     <failOnError>false</failOnError>
                     <includeTests>true</includeTests>
                     <threshold>Low</threshold>
