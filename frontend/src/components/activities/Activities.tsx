@@ -1,26 +1,34 @@
 import { Container, ListGroup } from "react-bootstrap";
 import ActivityItem from "./ActivityItem";
-import { Activity } from "../../types/Activity";
+import { StoreState } from "../../store";
+import { connect, ConnectedProps } from "react-redux";
+import React, { useEffect } from "react";
+import { listActivities } from "../../store/activities";
 
-const activity: Activity = {
-  type: "ADD_TO_BACKLOG",
-  date: "2021-03-23T18:39:31.000-07:00",
-  title: {
-    key: "42",
-    name: "The Legend of Zelda: Breath of the Wild",
-    copies: [],
-  },
+const mapStateToProps = (state: StoreState) => ({
+  activities: state.activities.data,
+});
+const mapDispatchToProps = {
+  listActivities,
+};
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type ReduxProps = ConnectedProps<typeof connector>;
+
+const Activities = ({ activities, listActivities }: ReduxProps) => {
+  useEffect(() => {
+    void listActivities();
+  }, [listActivities]);
+
+  return (
+    <Container>
+      <h2>Activity Log</h2>
+      <ListGroup>
+        {activities.map((activity) => (
+          <ActivityItem activity={activity} />
+        ))}
+      </ListGroup>
+    </Container>
+  );
 };
 
-const Activities = () => (
-  <Container>
-    <h2>Activity Log</h2>
-    <ListGroup>
-      <ActivityItem activity={activity} />
-      <ActivityItem activity={activity} />
-      <ActivityItem activity={activity} />
-    </ListGroup>
-  </Container>
-);
-
-export default Activities;
+export default connector(Activities);
