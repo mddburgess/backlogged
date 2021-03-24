@@ -15,6 +15,9 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "default-case": "error",
+    "default-case-last": "error",
+    "eqeqeq": "error",
     "@typescript-eslint/no-floating-promises": "warn",
     "@typescript-eslint/no-unnecessary-type-assertion": "warn",
     "@typescript-eslint/restrict-template-expressions": "warn"

@@ -1,11 +1,6 @@
 import React from "react";
-import Library from "../components/Library";
+import Activities from "../components/activities/Activities";
 
-const Home = () => (
-  <>
-    <h1>Home</h1>
-    <Library />
-  </>
-);
+const Home = () => <Activities />;
 
 export default Home;
