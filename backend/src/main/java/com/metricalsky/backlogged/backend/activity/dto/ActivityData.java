@@ -1,6 +1,6 @@
 package com.metricalsky.backlogged.backend.activity.dto;
 
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,8 @@ import com.metricalsky.backlogged.backend.library.dto.TitleData;
 @AllArgsConstructor
 public class ActivityData {
 
+    private String key;
     private String type;
-    private ZonedDateTime date;
+    private OffsetDateTime date;
     private TitleData title;
 }

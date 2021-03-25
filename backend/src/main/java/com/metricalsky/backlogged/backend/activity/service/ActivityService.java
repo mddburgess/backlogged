@@ -1,30 +1,40 @@
 package com.metricalsky.backlogged.backend.activity.service;
 
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
+import java.time.OffsetDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.metricalsky.backlogged.backend.activity.dto.ActivityData;
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.activity.entity.Activity;
+import com.metricalsky.backlogged.backend.activity.repository.ActivityRepository;
 import com.metricalsky.backlogged.backend.library.entity.Title;
+
+import static java.util.stream.Collectors.toList;
+import static org.springframework.data.domain.Sort.Order.desc;
+import static org.springframework.data.domain.Sort.by;
 
 @Service
 public class ActivityService {
 
-    private List<ActivityData> activities = new ArrayList<>();
+    @Autowired
+    private ActivityMapper activityMapper;
+    @Autowired
+    private ActivityRepository activityRepository;
 
     public List<ActivityData> listActivities() {
-        return activities;
+        return activityRepository.findAll(by(desc("activityDate")))
+                .stream()
+                .map(activityMapper::fromEntity)
+                .collect(toList());
     }
 
     public void createActivity(String type, Title title) {
-        var titleData = new TitleData();
-        titleData.setKey(title.getId().toString());
-        titleData.setName(title.getName());
-
-        var activityData = new ActivityData(type, ZonedDateTime.now(), titleData);
-        activities.add(activityData);
+        var activity = new Activity();
+        activity.setActivityType(type);
+        activity.setActivityDate(OffsetDateTime.now());
+        activity.setTitle(title);
+        activityRepository.save(activity);
     }
 }
