@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.metricalsky.backlogged.backend.activity.service.ActivityService;
 import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
 import com.metricalsky.backlogged.backend.backlog.entity.Backlog;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogRepository;
@@ -19,36 +21,42 @@ import static java.util.stream.Collectors.toList;
 public class BacklogService {
 
     @Autowired
-    private BacklogMapper mapper;
+    private ActivityService activityService;
     @Autowired
-    private BacklogRepository repository;
+    private BacklogMapper backlogMapper;
+    @Autowired
+    private BacklogRepository backlogRepository;
     @Autowired
     private TitleRepository titleRepository;
 
     public List<BacklogData> listBacklogs() {
-        return repository.findAll()
+        return backlogRepository.findAll()
                 .stream()
-                .map(mapper::fromEntity)
+                .map(backlogMapper::fromEntity)
                 .collect(toList());
     }
 
     public Optional<BacklogData> findBacklogByTitleKey(String titleKey) {
-        return repository.findByTitleId(Integer.valueOf(titleKey))
-                .map(mapper::fromEntity);
+        return backlogRepository.findByTitleId(Integer.valueOf(titleKey))
+                .map(backlogMapper::fromEntity);
     }
 
+    @Transactional
     public BacklogData createBacklog(BacklogData backlog) {
         var title = titleRepository.findById(Integer.valueOf(backlog.getTitle().getKey()))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
         var newBacklog = Backlog.builder().title(title).build();
-        repository.save(newBacklog);
-        return mapper.fromEntity(newBacklog);
+        backlogRepository.save(newBacklog);
+        activityService.createActivity("ADD_TO_BACKLOG", title);
+        return backlogMapper.fromEntity(newBacklog);
     }
 
+    @Transactional
     public void deleteBacklog(Integer key) {
-        var backlog = repository.findById(key)
+        var backlog = backlogRepository.findById(key)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        repository.delete(backlog);
+        backlogRepository.delete(backlog);
+        activityService.createActivity("REMOVE_FROM_BACKLOG", backlog.getTitle());
     }
 }

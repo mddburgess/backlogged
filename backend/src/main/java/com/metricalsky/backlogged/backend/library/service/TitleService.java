@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.metricalsky.backlogged.backend.activity.service.ActivityService;
 import com.metricalsky.backlogged.backend.library.dto.TitleData;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 
@@ -16,39 +18,43 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class TitleService {
 
     @Autowired
-    private TitleMapper mapper;
+    private ActivityService activityService;
     @Autowired
-    private TitleRepository repository;
+    private TitleMapper titleMapper;
+    @Autowired
+    private TitleRepository titleRepository;
 
     public List<TitleData> listTitles() {
-        return repository.findAll()
+        return titleRepository.findAll()
                 .stream()
-                .map(mapper::fromEntity)
+                .map(titleMapper::fromEntity)
                 .collect(toList());
     }
 
     public TitleData retrieveTitle(Integer key) {
-        return repository.findById(key)
-                .map(mapper::fromEntity)
+        return titleRepository.findById(key)
+                .map(titleMapper::fromEntity)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
     }
 
+    @Transactional
     public TitleData createTitle(TitleData title) {
-        var entity = mapper.toEntity(title);
-        repository.save(entity);
-        return mapper.fromEntity(entity);
+        var entity = titleMapper.toEntity(title);
+        titleRepository.save(entity);
+        activityService.createActivity("ADD_TO_LIBRARY", entity);
+        return titleMapper.fromEntity(entity);
     }
 
     public TitleData updateTitle(Integer key, TitleData title) {
-        var entity = repository.findById(key)
+        var entity = titleRepository.findById(key)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
-        mapper.patchEntity(entity, title);
-        repository.save(entity);
-        return mapper.fromEntity(entity);
+        titleMapper.patchEntity(entity, title);
+        titleRepository.save(entity);
+        return titleMapper.fromEntity(entity);
     }
 
     public void deleteTitle(Integer key) {
-        repository.findById(key)
-                .ifPresent(repository::delete);
+        titleRepository.findById(key)
+                .ifPresent(titleRepository::delete);
     }
 }
