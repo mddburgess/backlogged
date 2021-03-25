@@ -3,13 +3,13 @@ import ActivityItem from "./ActivityItem";
 import { StoreState } from "../../store";
 import { connect, ConnectedProps } from "react-redux";
 import React, { useEffect } from "react";
-import { listActivities } from "../../store/activities";
+import { actions } from "../../store/activities";
 
 const mapStateToProps = (state: StoreState) => ({
   activities: state.activities.data,
 });
 const mapDispatchToProps = {
-  listActivities,
+  listActivities: actions.list,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;

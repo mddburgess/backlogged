@@ -1,21 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { activities } from "../api/activities";
+import { api } from "../api";
 import { Activity } from "../types/Activity";
 
-export const listActivities = createAsyncThunk("activities/list", () => activities.list());
-
-interface ActivityState {
-  data: Activity[];
-}
-
-const initialState: ActivityState = { data: [] };
+export const actions = {
+  list: createAsyncThunk("activities/list", () => api.activities.list()),
+};
 
 const activitySlice = createSlice({
   name: "activities",
-  initialState,
+  initialState: {
+    data: [] as Activity[],
+  },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(listActivities.fulfilled, (state, action) => {
+    builder.addCase(actions.list.fulfilled, (state, action) => {
       state.data = action.payload;
     });
   },
