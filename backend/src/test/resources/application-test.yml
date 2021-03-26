@@ -1,6 +1,7 @@
 logging:
   level:
-    org.hibernate.type.descriptor.sql: trace
+    org.hibernate.type.descriptor.sql: debug
+    org.springframework.orm.jpa: debug
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/backlogged_test
