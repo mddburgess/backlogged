@@ -11,6 +11,7 @@ import com.metricalsky.backlogged.backend.activity.service.ActivityService;
 import com.metricalsky.backlogged.backend.library.dto.TitleData;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 
+import static com.metricalsky.backlogged.backend.activity.entity.ActivityType.ADD_TO_LIBRARY;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -41,7 +42,7 @@ public class TitleService {
     public TitleData createTitle(TitleData title) {
         var entity = titleMapper.toEntity(title);
         titleRepository.save(entity);
-        activityService.createActivity("ADD_TO_LIBRARY", entity);
+        activityService.createActivity(ADD_TO_LIBRARY, entity);
         return titleMapper.fromEntity(entity);
     }
 

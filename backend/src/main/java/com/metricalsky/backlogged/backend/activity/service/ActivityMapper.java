@@ -7,7 +7,7 @@ import com.metricalsky.backlogged.backend.activity.dto.ActivityData;
 import com.metricalsky.backlogged.backend.activity.entity.Activity;
 import com.metricalsky.backlogged.backend.library.service.TitleMapper;
 
-@Mapper(componentModel = "spring", uses = TitleMapper.class)
+@Mapper(uses = TitleMapper.class)
 public interface ActivityMapper {
 
     @Mapping(source = "id", target = "key")

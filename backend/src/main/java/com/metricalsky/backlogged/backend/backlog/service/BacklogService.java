@@ -15,6 +15,8 @@ import com.metricalsky.backlogged.backend.backlog.entity.Backlog;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogRepository;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 
+import static com.metricalsky.backlogged.backend.activity.entity.ActivityType.ADD_TO_BACKLOG;
+import static com.metricalsky.backlogged.backend.activity.entity.ActivityType.REMOVE_FROM_BACKLOG;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -48,7 +50,7 @@ public class BacklogService {
 
         var newBacklog = Backlog.builder().title(title).build();
         backlogRepository.save(newBacklog);
-        activityService.createActivity("ADD_TO_BACKLOG", title);
+        activityService.createActivity(ADD_TO_BACKLOG, title);
         return backlogMapper.fromEntity(newBacklog);
     }
 
@@ -57,6 +59,6 @@ public class BacklogService {
         var backlog = backlogRepository.findById(key)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         backlogRepository.delete(backlog);
-        activityService.createActivity("REMOVE_FROM_BACKLOG", backlog.getTitle());
+        activityService.createActivity(REMOVE_FROM_BACKLOG, backlog.getTitle());
     }
 }
