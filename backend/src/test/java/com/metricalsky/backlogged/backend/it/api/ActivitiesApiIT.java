@@ -12,7 +12,9 @@ import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 
 import static com.metricalsky.backlogged.backend.activity.test.ActivityFactory.createActivity;
 import static com.metricalsky.backlogged.backend.library.test.TitleFactory.createTitle;
+import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -46,8 +48,8 @@ class ActivitiesApiIT {
         assertThat(response.getBody()).isNotEmpty();
         assertThat(response.getBody()[0]).satisfies(activityData -> {
             assertThat(activityData.getKey()).isEqualTo(activity.getId().toString());
-            assertThat(activityData.getType()).isEqualTo(activity.getActivityType());
-            assertThat(activityData.getDate()).isNotNull();
+            assertThat(activityData.getType()).isEqualTo(activity.getType());
+            assertThat(activityData.getDate()).isCloseToUtcNow(within(1, SECONDS));
             assertThat(activityData.getTitle()).satisfies(titleData -> {
                 assertThat(titleData.getKey()).isEqualTo(title.getId().toString());
                 assertThat(titleData.getName()).isEqualTo(title.getName());

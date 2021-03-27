@@ -1,6 +1,7 @@
 package com.metricalsky.backlogged.backend.activity.entity;
 
 import java.time.OffsetDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -32,10 +33,12 @@ public class Activity {
     private Integer id;
 
     @Enumerated(STRING)
-    private ActivityType activityType;
+    @Column(name = "activity_type")
+    private ActivityType type;
 
     @Builder.Default
-    private OffsetDateTime activityDate = OffsetDateTime.now();
+    @Column(name = "activity_date")
+    private OffsetDateTime date = OffsetDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "title_id")

@@ -19,11 +19,11 @@ public final class ActivityFactory {
     }
 
     public static Activity createActivity(Integer id, ActivityType type, OffsetDateTime date, Title title) {
-        var activity = new Activity();
-        activity.setId(id);
-        activity.setActivityType(type);
-        activity.setActivityDate(date);
-        activity.setTitle(title);
-        return activity;
+        return Activity.builder()
+                .id(id)
+                .type(type)
+                .date(date)
+                .title(title)
+                .build();
     }
 }

@@ -29,7 +29,7 @@ public class ActivityService {
     }
 
     public List<ActivityData> listActivities() {
-        return activityRepository.findAll(Sort.by(DESC, "activityDate"))
+        return activityRepository.findAll(Sort.by(DESC, "date"))
                 .stream()
                 .map(activityMapper::fromEntity)
                 .collect(toList());
@@ -37,7 +37,7 @@ public class ActivityService {
 
     public void createActivity(ActivityType type, Title title) {
         activityRepository.save(Activity.builder()
-                .activityType(type)
+                .type(type)
                 .title(title)
                 .build());
     }

@@ -10,8 +10,6 @@ import com.metricalsky.backlogged.backend.library.service.TitleMapper;
 @Mapper(uses = TitleMapper.class)
 public interface ActivityMapper {
 
-    @Mapping(source = "id", target = "key")
-    @Mapping(source = "activityType", target = "type")
-    @Mapping(source = "activityDate", target = "date")
+    @Mapping(target = "key", source = "id")
     ActivityData fromEntity(Activity entity);
 }
