@@ -46,7 +46,10 @@
         <module name="FallThrough">
             <property name="checkLastCaseGroup" value="true"/>
         </module>
-        <module name="HiddenField"/>
+        <module name="HiddenField">
+            <property name="ignoreConstructorParameter" value="true"/>
+            <property name="ignoreSetter" value="true"/>
+        </module>
         <module name="InnerAssignment"/>
         <module name="MissingSwitchDefault"/>
         <module name="ModifiedControlVariable"/>
