@@ -2,6 +2,7 @@ package com.metricalsky.backlogged.backend.activity.service;
 
 import java.util.List;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,14 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 @Service
 public class ActivityService {
 
+    private final ActivityMapper activityMapper;
+    private final ActivityRepository activityRepository;
+
     @Autowired
-    private ActivityMapper activityMapper;
-    @Autowired
-    private ActivityRepository activityRepository;
+    public ActivityService(ActivityRepository activityRepository) {
+        this.activityMapper = Mappers.getMapper(ActivityMapper.class);
+        this.activityRepository = activityRepository;
+    }
 
     public List<ActivityData> listActivities() {
         return activityRepository.findAll(Sort.by(DESC, "activityDate"))

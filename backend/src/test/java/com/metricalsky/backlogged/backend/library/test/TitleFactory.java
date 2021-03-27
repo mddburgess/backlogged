@@ -9,8 +9,13 @@ public final class TitleFactory {
     }
 
     public static Title createTitle() {
+        return createTitle(null, "name");
+    }
+
+    public static Title createTitle(Integer id, String name) {
         var title = new Title();
-        title.setName("name");
+        title.setId(id);
+        title.setName(name);
         return title;
     }
 }
