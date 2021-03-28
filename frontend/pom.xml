@@ -55,7 +55,7 @@
                             <goal>yarn</goal>
                         </goals>
                         <configuration>
-                            <arguments>test --coverage --coverage-reporters=lcov --testResultsProcessor jest-sonar-reporter</arguments>
+                            <arguments>test --coverage-reporters=lcov --testResultsProcessor jest-sonar-reporter</arguments>
                             <environmentVariables>
                                 <CI>true</CI>
                             </environmentVariables>
