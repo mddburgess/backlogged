@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.metricalsky.backlogged.backend.activity.service.ActivityService;
-import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
+import com.metricalsky.backlogged.backend.backlog.dto.BacklogDto;
 import com.metricalsky.backlogged.backend.backlog.entity.Backlog;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogRepository;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
@@ -31,20 +31,20 @@ public class BacklogService {
     @Autowired
     private TitleRepository titleRepository;
 
-    public List<BacklogData> listBacklogs() {
+    public List<BacklogDto> listBacklogs() {
         return backlogRepository.findAll()
                 .stream()
                 .map(backlogMapper::fromEntity)
                 .collect(toList());
     }
 
-    public Optional<BacklogData> findBacklogByTitleKey(String titleKey) {
+    public Optional<BacklogDto> findBacklogByTitleKey(String titleKey) {
         return backlogRepository.findByTitleId(Integer.valueOf(titleKey))
                 .map(backlogMapper::fromEntity);
     }
 
     @Transactional
-    public BacklogData createBacklog(BacklogData backlog) {
+    public BacklogDto createBacklog(BacklogDto backlog) {
         var title = titleRepository.findById(Integer.valueOf(backlog.getTitle().getKey()))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 

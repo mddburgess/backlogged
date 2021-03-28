@@ -18,8 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 
 import com.metricalsky.backlogged.backend.activity.repository.ActivityRepository;
-import com.metricalsky.backlogged.backend.library.dto.CopyData;
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.dto.CopyDto;
+import com.metricalsky.backlogged.backend.library.dto.TitleDto;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 import com.metricalsky.backlogged.test.extensions.AbortOnTestFailure;
 
@@ -40,8 +40,8 @@ class TitlesApiIT {
     @Autowired
     private TitleRepository titleRepository;
 
-    private TitleData title;
-    private TitleData updatedTitle;
+    private TitleDto title;
+    private TitleDto updatedTitle;
 
     @BeforeAll
     void beforeAll() {
@@ -52,7 +52,7 @@ class TitlesApiIT {
     @Test
     @Order(1)
     void givenNoTitles_whenListTitles_thenExpectEmptyList() {
-        var response = restTemplate.getForEntity("/api/titles", TitleData[].class);
+        var response = restTemplate.getForEntity("/api/titles", TitleDto[].class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEmpty();
     }
@@ -62,7 +62,7 @@ class TitlesApiIT {
     void givenTitle_whenCreateTitles_thenExpectTitle() {
         var newTitle = buildTitle();
 
-        var response = restTemplate.postForEntity("/api/titles", newTitle, TitleData.class);
+        var response = restTemplate.postForEntity("/api/titles", newTitle, TitleDto.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody()).satisfies(body -> {
@@ -80,7 +80,7 @@ class TitlesApiIT {
     @Test
     @Order(3)
     void givenTitle_whenListTitles_thenExpectListWithTitle() {
-        var response = restTemplate.getForEntity("/api/titles", TitleData[].class);
+        var response = restTemplate.getForEntity("/api/titles", TitleDto[].class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).containsExactly(title);
     }
@@ -88,7 +88,7 @@ class TitlesApiIT {
     @Test
     @Order(4)
     void givenTitle_whenRetrieveTitle_thenExpectTitle() {
-        var response = restTemplate.getForEntity("/api/titles/{0}", TitleData.class, title.getKey());
+        var response = restTemplate.getForEntity("/api/titles/{0}", TitleDto.class, title.getKey());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(title);
     }
@@ -99,7 +99,7 @@ class TitlesApiIT {
         updatedTitle = buildTitle();
 
         var request = RequestEntity.put(URI.create("/api/titles/" + title.getKey())).body(updatedTitle);
-        var response = restTemplate.exchange(request, TitleData.class);
+        var response = restTemplate.exchange(request, TitleDto.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         updatedTitle = response.getBody();
@@ -108,7 +108,7 @@ class TitlesApiIT {
     @Test
     @Order(6)
     void givenUpdatedTitle_whenRetrieveTitle_thenExpectUpdatedTitle() {
-        var response = restTemplate.getForEntity("/api/titles/{0}", TitleData.class, title.getKey());
+        var response = restTemplate.getForEntity("/api/titles/{0}", TitleDto.class, title.getKey());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(updatedTitle);
     }
@@ -126,15 +126,15 @@ class TitlesApiIT {
     @Order(8)
     @Disabled
     void givenDeletedTitle_whenRetrieveTitle_thenExpectNotFoundStatus() {
-        var response = restTemplate.getForEntity("/api/titles/{0}", TitleData.class, title.getKey());
+        var response = restTemplate.getForEntity("/api/titles/{0}", TitleDto.class, title.getKey());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 
-    private TitleData buildTitle() {
-        var copy = new CopyData();
+    private TitleDto buildTitle() {
+        var copy = new CopyDto();
         copy.setPlatform(RandomStringUtils.randomAlphabetic(10));
         copy.setService(RandomStringUtils.randomAlphabetic(10));
-        var title = new TitleData();
+        var title = new TitleDto();
         title.setName(RandomStringUtils.randomAlphabetic(10));
         title.setCopies(List.of(copy));
         return title;

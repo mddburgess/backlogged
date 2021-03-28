@@ -16,9 +16,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 
-import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
+import com.metricalsky.backlogged.backend.backlog.dto.BacklogDto;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogRepository;
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.dto.TitleDto;
 import com.metricalsky.backlogged.backend.library.entity.Title;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 import com.metricalsky.backlogged.test.extensions.AbortOnTestFailure;
@@ -41,7 +41,7 @@ class BacklogsApiIT {
     private TitleRepository titleRepository;
 
     private Title title;
-    private BacklogData backlogData;
+    private BacklogDto backlogDto;
 
     @BeforeAll
     void beforeAll() {
@@ -61,7 +61,7 @@ class BacklogsApiIT {
     @Test
     @Order(1)
     void givenNoBacklogs_whenListBacklogs_thenExpectEmptyList() {
-        var response = restTemplate.getForEntity("/api/backlogs", BacklogData[].class);
+        var response = restTemplate.getForEntity("/api/backlogs", BacklogDto[].class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEmpty();
     }
@@ -71,7 +71,7 @@ class BacklogsApiIT {
     void givenTitle_whenCreateBacklog_thenExpectCreatedBacklog() {
         var backlog = buildBacklog();
 
-        var response = restTemplate.postForEntity("/api/backlogs", backlog, BacklogData.class);
+        var response = restTemplate.postForEntity("/api/backlogs", backlog, BacklogDto.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody()).satisfies(body -> {
@@ -80,7 +80,7 @@ class BacklogsApiIT {
         });
 
         assertThat(backlogRepository.count()).isEqualTo(1);
-        backlogData = response.getBody();
+        backlogDto = response.getBody();
     }
 
     @Test
@@ -88,10 +88,10 @@ class BacklogsApiIT {
     void givenBacklogTitle_whenCreateBacklog_thenExpectExistingBacklog() {
         var backlog = buildBacklog();
 
-        var response = restTemplate.postForEntity("/api/backlogs", backlog, BacklogData.class);
+        var response = restTemplate.postForEntity("/api/backlogs", backlog, BacklogDto.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getKey()).isEqualTo(backlogData.getKey());
+        assertThat(response.getBody().getKey()).isEqualTo(backlogDto.getKey());
 
         assertThat(backlogRepository.count()).isEqualTo(1);
     }
@@ -99,34 +99,34 @@ class BacklogsApiIT {
     @Test
     @Order(4)
     void givenBacklog_whenListBacklogs_thenExpectListWithBacklog() {
-        var response = restTemplate.getForEntity("/api/backlogs", BacklogData[].class);
+        var response = restTemplate.getForEntity("/api/backlogs", BacklogDto[].class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).containsExactly(backlogData);
+        assertThat(response.getBody()).containsExactly(backlogDto);
     }
 
     @Test
     @Order(5)
     void givenTitle_whenDeleteBacklog_thenExpectOkStatus() {
-        var request = RequestEntity.delete(URI.create("/api/backlogs/" + backlogData.getKey())).build();
+        var request = RequestEntity.delete(URI.create("/api/backlogs/" + backlogDto.getKey())).build();
         var response = restTemplate.exchange(request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        assertThat(backlogRepository.findById(Integer.valueOf(backlogData.getKey()))).isEmpty();
+        assertThat(backlogRepository.findById(Integer.valueOf(backlogDto.getKey()))).isEmpty();
     }
 
     @Test
     @Order(6)
     void givenDeletedTitle_whenDeleteBacklog_thenExpectNotFoundStatus() {
-        var request = RequestEntity.delete(URI.create("/api/backlogs/" + backlogData.getKey())).build();
+        var request = RequestEntity.delete(URI.create("/api/backlogs/" + backlogDto.getKey())).build();
         var response = restTemplate.exchange(request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 
-    private BacklogData buildBacklog() {
-        var titleData = new TitleData();
+    private BacklogDto buildBacklog() {
+        var titleData = new TitleDto();
         titleData.setKey(title.getId().toString());
 
-        var backlogData = new BacklogData();
+        var backlogData = new BacklogDto();
         backlogData.setTitle(titleData);
         return backlogData;
     }

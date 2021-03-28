@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metricalsky.backlogged.backend.activity.dto.ActivityData;
+import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
 import com.metricalsky.backlogged.backend.activity.service.ActivityService;
 
 @RestController
@@ -18,7 +18,7 @@ public class ActivityController {
     private ActivityService activityService;
 
     @GetMapping
-    public List<ActivityData> list() {
+    public List<ActivityDto> list() {
         return activityService.listActivities();
     }
 }

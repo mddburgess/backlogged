@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
+import com.metricalsky.backlogged.backend.backlog.dto.BacklogDto;
 import com.metricalsky.backlogged.backend.backlog.service.BacklogService;
 
 @RestController
@@ -24,12 +24,12 @@ public class BacklogController {
     private BacklogService backlogService;
 
     @GetMapping
-    public List<BacklogData> list() {
+    public List<BacklogDto> list() {
         return backlogService.listBacklogs();
     }
 
     @PostMapping
-    public ResponseEntity<BacklogData> create(@RequestBody BacklogData backlog) {
+    public ResponseEntity<BacklogDto> create(@RequestBody BacklogDto backlog) {
         var b = backlogService.findBacklogByTitleKey(backlog.getTitle().getKey());
         if (b.isPresent()) {
             return ResponseEntity.ok(b.get());
