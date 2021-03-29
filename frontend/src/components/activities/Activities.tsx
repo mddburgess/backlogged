@@ -1,4 +1,4 @@
-import { Container, ListGroup } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import ActivityItem from "./ActivityItem";
 import { StoreState } from "../../store";
 import { connect, ConnectedProps } from "react-redux";
@@ -20,14 +20,11 @@ const Activities = ({ activities, listActivities }: ReduxProps) => {
   }, [listActivities]);
 
   return (
-    <Container>
-      <h2>Activity Log</h2>
-      <ListGroup>
-        {activities.map((activity) => (
-          <ActivityItem activity={activity} />
-        ))}
-      </ListGroup>
-    </Container>
+    <ListGroup>
+      {activities.map((activity) => (
+        <ActivityItem activity={activity} />
+      ))}
+    </ListGroup>
   );
 };
 

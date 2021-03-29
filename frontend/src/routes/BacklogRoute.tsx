@@ -1,12 +1,12 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import BacklogItemList from "./BacklogItemList";
+import BacklogItemList from "../components/backlog/BacklogItemList";
 
-const Backlog = () => (
+const BacklogRoute = () => (
   <Container>
     <h2>Backlog</h2>
     <BacklogItemList />
   </Container>
 );
 
-export default Backlog;
+export default BacklogRoute;
