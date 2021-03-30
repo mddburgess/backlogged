@@ -3,7 +3,7 @@ import { api } from "../api";
 import { Activity } from "../types/Activity";
 
 export const actions = {
-  list: createAsyncThunk("activities/list", () => api.activities.list()),
+  list: createAsyncThunk("activities/list", api.activities.list),
 };
 
 const activitySlice = createSlice({

@@ -1,5 +1,5 @@
 import React from "react";
-import { createTitle } from "../store/library";
+import { actions } from "../store/library";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory } from "react-router-dom";
 import LibraryTitleForm from "./LibraryTitleForm";
@@ -22,7 +22,7 @@ const AddLibraryTitle = ({ createTitle }: ReduxProps) => {
           ],
         }}
         onSubmit={(title) => {
-          createTitle(title);
+          void createTitle(title);
           history.push("/");
         }}
       />
@@ -31,7 +31,7 @@ const AddLibraryTitle = ({ createTitle }: ReduxProps) => {
 };
 
 const mapDispatchToProps = {
-  createTitle,
+  createTitle: actions.create,
 };
 
 const connector = connect(undefined, mapDispatchToProps);

@@ -2,14 +2,14 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { JournalBookmarkFill, JournalX } from "react-bootstrap-icons";
 import React, { useState } from "react";
 import { Backlog } from "../../types/Backlog";
-import { deleteBacklog } from "../../store/backlog";
+import { actions } from "../../store/backlog";
 import { connect, ConnectedProps } from "react-redux";
 
 const RemoveFromBacklogButton = ({ backlog, deleteBacklog }: Props & ReduxProps) => {
   const [isHover, setHover] = useState(false);
 
   const removeFromBacklog = () => {
-    deleteBacklog(backlog);
+    void deleteBacklog(backlog);
   };
 
   return (
@@ -36,7 +36,7 @@ interface Props {
 }
 
 const mapDispatchToProps = {
-  deleteBacklog,
+  deleteBacklog: actions.delete,
 };
 const connector = connect(null, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;

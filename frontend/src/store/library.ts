@@ -2,51 +2,32 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Title } from "../types/Title";
 import { api } from "../api";
 
-export const listTitles = createAsyncThunk(
-  "library/listTitles",
-  async () => await api.titles.list()
-);
-
-export const createTitle = createAsyncThunk(
-  "library/createTitle",
-  async (title: Title) => await api.titles.create(title)
-);
-
-export const updateTitle = createAsyncThunk(
-  "library/updateTitle",
-  async (title: Title) => await api.titles.update(title)
-);
-
-export const deleteTitle = createAsyncThunk(
-  "library/deleteTitle",
-  async (title: Title) => await api.titles.delete(title)
-);
-
-interface LibraryState {
-  data: Title[];
-}
-
-const initialState: LibraryState = {
-  data: [],
+export const actions = {
+  list: createAsyncThunk("titles/list", api.titles.list),
+  create: createAsyncThunk("titles/create", api.titles.create),
+  update: createAsyncThunk("titles/update", api.titles.update),
+  delete: createAsyncThunk("titles/delete", api.titles.delete),
 };
 
 const librarySlice = createSlice({
   name: "library",
-  initialState,
+  initialState: {
+    data: [] as Title[],
+  },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(listTitles.fulfilled, (state, action) => {
+    builder.addCase(actions.list.fulfilled, (state, action) => {
       state.data = action.payload;
     });
-    builder.addCase(createTitle.fulfilled, (state, action) => {
+    builder.addCase(actions.create.fulfilled, (state, action) => {
       state.data.push(action.payload);
     });
-    builder.addCase(updateTitle.fulfilled, (state, action) => {
+    builder.addCase(actions.update.fulfilled, (state, action) => {
       state.data = state.data.map((title) =>
         title.key === action.payload.key ? action.payload : title
       );
     });
-    builder.addCase(deleteTitle.fulfilled, (state, action) => {
+    builder.addCase(actions.delete.fulfilled, (state, action) => {
       state.data = state.data.filter((title) => title.key !== action.payload);
     });
   },

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import TitleRow from "./TitleRow";
-import { listTitles } from "../../store/library";
+import { actions } from "../../store/library";
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { StoreState } from "../../store";
 
 const TitleList = ({ titles, listTitles }: ReduxProps) => {
   useEffect(() => {
-    listTitles();
+    void listTitles();
   }, [listTitles]);
 
   return (
@@ -28,7 +28,7 @@ const mapStateToProps = (state: StoreState) => ({
 });
 
 const mapDispatchToProps = {
-  listTitles,
+  listTitles: actions.list,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

@@ -20,8 +20,9 @@
     "default-case": "error",
     "default-case-last": "error",
     "eqeqeq": "error",
-    "@typescript-eslint/no-floating-promises": "warn",
-    "@typescript-eslint/no-unnecessary-type-assertion": "warn",
+    "no-return-await": "error",
+    "no-shadow": "error",
+    "require-await": "error",
     "@typescript-eslint/restrict-template-expressions": "warn",
     "jest/consistent-test-it": "warn",
     "jest/lowercase-name": [

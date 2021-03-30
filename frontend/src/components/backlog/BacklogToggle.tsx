@@ -3,7 +3,7 @@ import { Title } from "../../types/Title";
 import { JournalBookmark, JournalBookmarkFill } from "react-bootstrap-icons";
 import { StoreState } from "../../store";
 import { connect, ConnectedProps } from "react-redux";
-import { createBacklog } from "../../store/backlog";
+import { actions } from "../../store/backlog";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 
 const BacklogToggle = ({ title, backlog, createBacklog }: Props & ReduxProps) => {
   const addToBacklog = () => {
-    createBacklog(title);
+    void createBacklog(title);
   };
 
   return backlog.map((b) => b.title.key).includes(title.key) ? (
@@ -30,7 +30,7 @@ const mapStateToProps = (state: StoreState) => ({
   backlog: state.backlog.data,
 });
 const mapDispatchToProps = {
-  createBacklog,
+  createBacklog: actions.create,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { updateTitle } from "../store/library";
+import { actions } from "../store/library";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import LibraryTitleForm from "./LibraryTitleForm";
@@ -21,7 +21,7 @@ const EditLibraryItem = ({ updateTitle }: ReduxProps) => {
       const result = await api.titles.retrieve(params.key);
       setTitle(result);
     };
-    fetchTitle();
+    void fetchTitle();
   }, [params.key]);
 
   return (
@@ -30,7 +30,7 @@ const EditLibraryItem = ({ updateTitle }: ReduxProps) => {
       <LibraryTitleForm
         initialValues={title}
         onSubmit={(values) => {
-          updateTitle(values);
+          void updateTitle(values);
           history.push("/");
         }}
       />
@@ -39,7 +39,7 @@ const EditLibraryItem = ({ updateTitle }: ReduxProps) => {
 };
 
 const mapDispatchToProps = {
-  updateTitle,
+  updateTitle: actions.update,
 };
 
 const connector = connect(undefined, mapDispatchToProps);
