@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
-import LibraryTitle from "./LibraryTitle";
-import { listTitles } from "../store/library";
+import TitleRow from "./TitleRow";
+import { listTitles } from "../../store/library";
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import { StoreState } from "../store";
+import { StoreState } from "../../store";
 
-const LibraryTitles = ({ titles, listTitles }: ReduxProps) => {
+const TitleList = ({ titles, listTitles }: ReduxProps) => {
   useEffect(() => {
     listTitles();
   }, [listTitles]);
@@ -14,7 +14,7 @@ const LibraryTitles = ({ titles, listTitles }: ReduxProps) => {
   return (
     <ListGroup>
       {titles.map((title) => (
-        <LibraryTitle key={title.key} title={title} />
+        <TitleRow key={title.key} title={title} />
       ))}
       <ListGroupItem>
         <Link to="/new">Add item</Link>
@@ -35,4 +35,4 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type ReduxProps = ConnectedProps<typeof connector>;
 
-export default connector(LibraryTitles);
+export default connector(TitleList);

@@ -1,5 +1,5 @@
 import { ListGroup } from "react-bootstrap";
-import ActivityItem from "./ActivityItem";
+import ActivityRow from "./ActivityRow";
 import { StoreState } from "../../store";
 import { connect, ConnectedProps } from "react-redux";
 import React, { useEffect } from "react";
@@ -14,7 +14,7 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
 
-const Activities = ({ activities, listActivities }: ReduxProps) => {
+const ActivityList = ({ activities, listActivities }: ReduxProps) => {
   useEffect(() => {
     void listActivities();
   }, [listActivities]);
@@ -22,10 +22,10 @@ const Activities = ({ activities, listActivities }: ReduxProps) => {
   return (
     <ListGroup>
       {activities.map((activity) => (
-        <ActivityItem activity={activity} />
+        <ActivityRow activity={activity} />
       ))}
     </ListGroup>
   );
 };
 
-export default connector(Activities);
+export default connector(ActivityList);

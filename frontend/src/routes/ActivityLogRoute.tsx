@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import Activities from "../components/activities/Activities";
+import Activities from "../components/activities/ActivityList";
 
 const ActivityLogRoute = () => (
   <Container>

@@ -15,7 +15,7 @@ const icons = new Map<string, Icon>([
   ["REMOVE_FROM_BACKLOG", JournalMinus],
 ]);
 
-const ActivityItem = ({ activity }: Props) => {
+const ActivityRow = ({ activity }: Props) => {
   const IconElement = icons.get(activity.type) ?? QuestionCircle;
   return (
     <ListGroupItem className="px-2 py-1">
@@ -32,4 +32,4 @@ const ActivityItem = ({ activity }: Props) => {
   );
 };
 
-export default ActivityItem;
+export default ActivityRow;
