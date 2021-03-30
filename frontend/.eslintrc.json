@@ -29,12 +29,7 @@
     "import/order": ["warn", { "alphabetize": { "order": "asc" }, "newlines-between": "always" }],
 
     "jest/consistent-test-it": "warn",
-    "jest/lowercase-name": [
-      "warn",
-      {
-        "ignoreTopLevelDescribe": true
-      }
-    ],
+    "jest/lowercase-name": ["warn", { "ignoreTopLevelDescribe": true }],
     "jest/no-duplicate-hooks": "error",
     "jest/no-if": "error",
     "jest/no-large-snapshots": "warn",
