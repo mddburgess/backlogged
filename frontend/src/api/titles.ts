@@ -1,4 +1,5 @@
 import Axios from "axios";
+
 import { Title } from "../types/Title";
 
 const titles = {

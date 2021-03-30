@@ -1,5 +1,7 @@
 import { ListGroupItem } from "react-bootstrap";
+
 import { Backlog } from "../../types/Backlog";
+
 import RemoveFromBacklogButton from "./RemoveFromBacklogButton";
 
 const BacklogRow = ({ backlog }: Props) => (

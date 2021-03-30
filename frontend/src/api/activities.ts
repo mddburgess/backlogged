@@ -1,5 +1,6 @@
-import { Activity } from "../types/Activity";
 import Axios from "axios";
+
+import { Activity } from "../types/Activity";
 
 const activities = {
   list: async (): Promise<Activity[]> => {

@@ -1,9 +1,10 @@
-import { Title } from "../../types/Title";
-import { JournalBookmark, JournalBookmarkFill } from "react-bootstrap-icons";
-import { StoreState } from "../../store";
-import { connect, ConnectedProps } from "react-redux";
-import { actions } from "../../store/backlog";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { JournalBookmark, JournalBookmarkFill } from "react-bootstrap-icons";
+import { connect, ConnectedProps } from "react-redux";
+
+import { StoreState } from "../../store";
+import { actions } from "../../store/backlog";
+import { Title } from "../../types/Title";
 
 interface Props {
   title: Title;

@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { JournalBookmarkFill, JournalX } from "react-bootstrap-icons";
-import { useState } from "react";
-import { Backlog } from "../../types/Backlog";
-import { actions } from "../../store/backlog";
 import { connect, ConnectedProps } from "react-redux";
+
+import { actions } from "../../store/backlog";
+import { Backlog } from "../../types/Backlog";
 
 const RemoveFromBacklogButton = ({ backlog, deleteBacklog }: Props & ReduxProps) => {
   const [isHover, setHover] = useState(false);

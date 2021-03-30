@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { connect, ConnectedProps } from "react-redux";
 import { ListGroup } from "react-bootstrap";
+import { connect, ConnectedProps } from "react-redux";
+
 import { StoreState } from "../../store";
 import { actions } from "../../store/backlog";
+
 import BacklogRow from "./BacklogRow";
 
 const BacklogList = ({ backlogItems, listBacklog }: ReduxProps) => {

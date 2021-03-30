@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { actions } from "../store/library";
+import { Container } from "react-bootstrap";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import LibraryTitleForm from "./LibraryTitleForm";
-import { Container } from "react-bootstrap";
+
 import { api } from "../api";
+import { actions } from "../store/library";
 import { Title } from "../types/Title";
+
+import LibraryTitleForm from "./LibraryTitleForm";
 
 const EditLibraryItem = ({ updateTitle }: ReduxProps) => {
   const history = useHistory();

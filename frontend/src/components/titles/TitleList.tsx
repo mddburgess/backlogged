@@ -1,10 +1,12 @@
 import { useEffect } from "react";
-import { connect, ConnectedProps } from "react-redux";
-import TitleRow from "./TitleRow";
-import { actions } from "../../store/library";
-import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { connect, ConnectedProps } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { StoreState } from "../../store";
+import { actions } from "../../store/library";
+
+import TitleRow from "./TitleRow";
 
 const TitleList = ({ titles, listTitles }: ReduxProps) => {
   useEffect(() => {

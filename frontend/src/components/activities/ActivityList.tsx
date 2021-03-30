@@ -1,9 +1,11 @@
-import { ListGroup } from "react-bootstrap";
-import ActivityRow from "./ActivityRow";
-import { StoreState } from "../../store";
-import { connect, ConnectedProps } from "react-redux";
 import { useEffect } from "react";
+import { ListGroup } from "react-bootstrap";
+import { connect, ConnectedProps } from "react-redux";
+
+import { StoreState } from "../../store";
 import { actions } from "../../store/activities";
+
+import ActivityRow from "./ActivityRow";
 
 const mapStateToProps = (state: StoreState) => ({
   activities: state.activities.data,

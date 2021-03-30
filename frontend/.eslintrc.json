@@ -23,7 +23,11 @@
     "no-return-await": "error",
     "no-shadow": "error",
     "require-await": "error",
+
     "@typescript-eslint/restrict-template-expressions": "warn",
+
+    "import/order": ["warn", { "alphabetize": { "order": "asc" }, "newlines-between": "always" }],
+
     "jest/consistent-test-it": "warn",
     "jest/lowercase-name": [
       "warn",
@@ -44,17 +48,13 @@
   },
   "overrides": [
     {
-      "files": [
-        "*.tsx"
-      ],
+      "files": ["*.tsx"],
       "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off"
       }
     },
     {
-      "files": [
-        "setupTests.ts"
-      ],
+      "files": ["setupTests.ts"],
       "rules": {
         "jest/require-top-level-describe": "off"
       }

@@ -1,7 +1,9 @@
+import { DateTime } from "luxon";
 import { ListGroupItem } from "react-bootstrap";
 import { Icon, JournalMinus, JournalPlus, PlusSquare, QuestionCircle } from "react-bootstrap-icons";
+
 import { Activity } from "../../types/Activity";
-import { DateTime } from "luxon";
+
 import ActivityDetail from "./ActivityDetail";
 
 interface Props {

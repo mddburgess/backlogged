@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Title } from "../types/Title";
+
 import { api } from "../api";
+import { Title } from "../types/Title";
 
 export const actions = {
   list: createAsyncThunk("titles/list", api.titles.list),

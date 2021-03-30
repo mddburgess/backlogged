@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import library from "./library";
-import backlog from "./backlog";
+
 import activities from "./activities";
+import backlog from "./backlog";
+import library from "./library";
 
 const store = configureStore({
   reducer: combineReducers({
