@@ -1,4 +1,3 @@
-import React from "react";
 import { Title } from "../../types/Title";
 import { JournalBookmark, JournalBookmarkFill } from "react-bootstrap-icons";
 import { StoreState } from "../../store";

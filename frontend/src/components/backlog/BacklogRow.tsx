@@ -1,4 +1,3 @@
-import React from "react";
 import { ListGroupItem } from "react-bootstrap";
 import { Backlog } from "../../types/Backlog";
 import RemoveFromBacklogButton from "./RemoveFromBacklogButton";

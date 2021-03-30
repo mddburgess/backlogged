@@ -2,7 +2,7 @@ import { ListGroup } from "react-bootstrap";
 import ActivityRow from "./ActivityRow";
 import { StoreState } from "../../store";
 import { connect, ConnectedProps } from "react-redux";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { actions } from "../../store/activities";
 
 const mapStateToProps = (state: StoreState) => ({

@@ -1,4 +1,3 @@
-import React from "react";
 import { ListGroupItem } from "react-bootstrap";
 import { Icon, JournalMinus, JournalPlus, PlusSquare, QuestionCircle } from "react-bootstrap-icons";
 import { Activity } from "../../types/Activity";

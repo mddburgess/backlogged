@@ -1,6 +1,6 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { JournalBookmarkFill, JournalX } from "react-bootstrap-icons";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Backlog } from "../../types/Backlog";
 import { actions } from "../../store/backlog";
 import { connect, ConnectedProps } from "react-redux";
