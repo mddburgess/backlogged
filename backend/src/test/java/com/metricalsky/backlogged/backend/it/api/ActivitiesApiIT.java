@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 
-import com.metricalsky.backlogged.backend.activity.dto.ActivityData;
+import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
 import com.metricalsky.backlogged.backend.activity.repository.ActivityRepository;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 
@@ -31,7 +31,7 @@ class ActivitiesApiIT {
     void givenNoActivities_whenList_thenListIsEmpty() {
         activityRepository.deleteAll();
 
-        var response = restTemplate.getForEntity("/api/activities", ActivityData[].class);
+        var response = restTemplate.getForEntity("/api/activities", ActivityDto[].class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEmpty();
@@ -42,7 +42,7 @@ class ActivitiesApiIT {
         var title = titleRepository.save(createTitle());
         var activity = activityRepository.save(createActivity(title));
 
-        var response = restTemplate.getForEntity("/api/activities", ActivityData[].class);
+        var response = restTemplate.getForEntity("/api/activities", ActivityDto[].class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotEmpty();

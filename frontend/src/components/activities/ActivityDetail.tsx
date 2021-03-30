@@ -1,6 +1,6 @@
-import { Activity } from "../../types/Activity";
 import { Link } from "react-router-dom";
-import React from "react";
+
+import { Activity } from "../../types/Activity";
 
 interface Props {
   activity: Activity;

@@ -23,6 +23,8 @@
                     <filesets>
                         <fileset>
                             <directory>${basedir}/build</directory>
+                        </fileset>
+                        <fileset>
                             <directory>${basedir}/coverage</directory>
                         </fileset>
                     </filesets>
@@ -35,12 +37,14 @@
                 <executions>
                     <execution>
                         <id>install-node-and-yarn</id>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>install-node-and-yarn</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>yarn-install</id>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>yarn</goal>
                         </goals>
@@ -55,7 +59,7 @@
                             <goal>yarn</goal>
                         </goals>
                         <configuration>
-                            <arguments>test --coverage --coverage-reporters=lcov --testResultsProcessor jest-sonar-reporter</arguments>
+                            <arguments>test --coverage-reporters=lcov --testResultsProcessor jest-sonar-reporter</arguments>
                             <environmentVariables>
                                 <CI>true</CI>
                             </environmentVariables>
@@ -131,4 +135,36 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <property>
+                    <name>env.CI</name>
+                    <value>!true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>yarn-format</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>format</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.metricalsky.backlogged.backend.activity.dto.ActivityData;
+import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
 import com.metricalsky.backlogged.backend.activity.entity.Activity;
 import com.metricalsky.backlogged.backend.activity.entity.ActivityType;
 import com.metricalsky.backlogged.backend.activity.repository.ActivityRepository;
@@ -28,7 +28,7 @@ public class ActivityService {
         this.activityRepository = activityRepository;
     }
 
-    public List<ActivityData> listActivities() {
+    public List<ActivityDto> listActivities() {
         return activityRepository.findAll(Sort.by(DESC, "date"))
                 .stream()
                 .map(activityMapper::fromEntity)

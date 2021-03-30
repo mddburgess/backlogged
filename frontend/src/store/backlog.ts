@@ -1,43 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Backlog } from "../types/Backlog";
+
 import { api } from "../api";
-import { Title } from "../types/Title";
+import { Backlog } from "../types/Backlog";
 
-export const listBacklog = createAsyncThunk(
-  "backlog/listEntries",
-  async () => await api.backlogs.list()
-);
-
-export const createBacklog = createAsyncThunk(
-  "backlog/createEntry",
-  async (title: Title) => await api.backlogs.create(title)
-);
-
-export const deleteBacklog = createAsyncThunk(
-  "backlog/deleteEntry",
-  async (backlog: Backlog) => await api.backlogs.delete(backlog)
-);
-
-interface BacklogState {
-  data: Backlog[];
-}
-
-const initialState: BacklogState = {
-  data: [],
+export const actions = {
+  list: createAsyncThunk("backlog/list", api.backlogs.list),
+  create: createAsyncThunk("backlog/create", api.backlogs.create),
+  delete: createAsyncThunk("backlog/delete", api.backlogs.delete),
 };
 
 const backlogSlice = createSlice({
   name: "backlog",
-  initialState,
+  initialState: {
+    data: [] as Backlog[],
+  },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(listBacklog.fulfilled, (state, action) => {
+    builder.addCase(actions.list.fulfilled, (state, action) => {
       state.data = action.payload;
     });
-    builder.addCase(createBacklog.fulfilled, (state, action) => {
+    builder.addCase(actions.create.fulfilled, (state, action) => {
       state.data.push(action.payload);
     });
-    builder.addCase(deleteBacklog.fulfilled, (state, action) => {
+    builder.addCase(actions.delete.fulfilled, (state, action) => {
       state.data = state.data.filter((backlog) => backlog.key !== action.payload);
     });
   },

@@ -1,12 +1,12 @@
-import React from "react";
-import LibraryItems from "./LibraryTitles";
 import { Container } from "react-bootstrap";
 
-const Library = () => (
+import LibraryItems from "../components/titles/TitleList";
+
+const LibraryRoute = () => (
   <Container>
     <h2>Library</h2>
     <LibraryItems />
   </Container>
 );
 
-export default Library;
+export default LibraryRoute;

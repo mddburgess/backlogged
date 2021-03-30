@@ -1,20 +1,22 @@
-import React, { useEffect } from "react";
-import { connect, ConnectedProps } from "react-redux";
-import LibraryTitle from "./LibraryTitle";
-import { listTitles } from "../store/library";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import { StoreState } from "../store";
+import { connect, ConnectedProps } from "react-redux";
+import { Link } from "react-router-dom";
 
-const LibraryTitles = ({ titles, listTitles }: ReduxProps) => {
+import { StoreState } from "../../store";
+import { actions } from "../../store/library";
+
+import TitleRow from "./TitleRow";
+
+const TitleList = ({ titles, listTitles }: ReduxProps) => {
   useEffect(() => {
-    listTitles();
+    void listTitles();
   }, [listTitles]);
 
   return (
     <ListGroup>
       {titles.map((title) => (
-        <LibraryTitle key={title.key} title={title} />
+        <TitleRow key={title.key} title={title} />
       ))}
       <ListGroupItem>
         <Link to="/new">Add item</Link>
@@ -28,11 +30,11 @@ const mapStateToProps = (state: StoreState) => ({
 });
 
 const mapDispatchToProps = {
-  listTitles,
+  listTitles: actions.list,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type ReduxProps = ConnectedProps<typeof connector>;
 
-export default connector(LibraryTitles);
+export default connector(TitleList);

@@ -190,6 +190,7 @@
                         <directory>${project.build.sourceDirectory}</directory>
                     </compileSourceRoots>
                     <failOnViolation>false</failOnViolation>
+                    <includeTests>true</includeTests>
                     <linkXRef>false</linkXRef>
                     <rulesets>
                         <ruleset>pmd.xml</ruleset>

@@ -3,7 +3,7 @@ package com.metricalsky.backlogged.backend.backlog.service;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.metricalsky.backlogged.backend.backlog.dto.BacklogData;
+import com.metricalsky.backlogged.backend.backlog.dto.BacklogDto;
 import com.metricalsky.backlogged.backend.backlog.entity.Backlog;
 import com.metricalsky.backlogged.backend.library.service.TitleMapper;
 
@@ -11,5 +11,5 @@ import com.metricalsky.backlogged.backend.library.service.TitleMapper;
 public interface BacklogMapper {
 
     @Mapping(source = "id", target = "key")
-    BacklogData fromEntity(Backlog entity);
+    BacklogDto fromEntity(Backlog entity);
 }

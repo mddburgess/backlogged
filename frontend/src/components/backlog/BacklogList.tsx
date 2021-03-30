@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
-import { connect, ConnectedProps } from "react-redux";
+import { useEffect } from "react";
 import { ListGroup } from "react-bootstrap";
-import { StoreState } from "../../store";
-import { listBacklog } from "../../store/backlog";
-import BacklogItem from "./BacklogItem";
+import { connect, ConnectedProps } from "react-redux";
 
-const BacklogItemList = ({ backlogItems, listBacklog }: ReduxProps) => {
+import { StoreState } from "../../store";
+import { actions } from "../../store/backlog";
+
+import BacklogRow from "./BacklogRow";
+
+const BacklogList = ({ backlogItems, listBacklog }: ReduxProps) => {
   useEffect(() => {
-    listBacklog();
+    void listBacklog();
   }, [listBacklog]);
 
   return (
     <ListGroup>
       {backlogItems.map((item) => (
-        <BacklogItem key={item.key} backlog={item} />
+        <BacklogRow key={item.key} backlog={item} />
       ))}
     </ListGroup>
   );
@@ -23,8 +25,8 @@ const mapStateToProps = (state: StoreState) => ({
   backlogItems: state.backlog.data,
 });
 const mapDispatchToProps = {
-  listBacklog,
+  listBacklog: actions.list,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
-export default connector(BacklogItemList);
+export default connector(BacklogList);

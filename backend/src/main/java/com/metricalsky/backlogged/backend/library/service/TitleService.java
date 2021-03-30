@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.metricalsky.backlogged.backend.activity.service.ActivityService;
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.dto.TitleDto;
 import com.metricalsky.backlogged.backend.library.repository.TitleRepository;
 
 import static com.metricalsky.backlogged.backend.activity.entity.ActivityType.ADD_TO_LIBRARY;
@@ -25,28 +25,28 @@ public class TitleService {
     @Autowired
     private TitleRepository titleRepository;
 
-    public List<TitleData> listTitles() {
+    public List<TitleDto> listTitles() {
         return titleRepository.findAll()
                 .stream()
                 .map(titleMapper::fromEntity)
                 .collect(toList());
     }
 
-    public TitleData retrieveTitle(Integer key) {
+    public TitleDto retrieveTitle(Integer key) {
         return titleRepository.findById(key)
                 .map(titleMapper::fromEntity)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
     }
 
     @Transactional
-    public TitleData createTitle(TitleData title) {
+    public TitleDto createTitle(TitleDto title) {
         var entity = titleMapper.toEntity(title);
         titleRepository.save(entity);
         activityService.createActivity(ADD_TO_LIBRARY, entity);
         return titleMapper.fromEntity(entity);
     }
 
-    public TitleData updateTitle(Integer key, TitleData title) {
+    public TitleDto updateTitle(Integer key, TitleDto title) {
         var entity = titleRepository.findById(key)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
         titleMapper.patchEntity(entity, title);

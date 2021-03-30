@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { ListGroupItem } from "react-bootstrap";
-import { Title } from "../types/Title";
-import BacklogToggle from "./backlog/BacklogToggle";
+import { Link } from "react-router-dom";
+
+import { Title } from "../../types/Title";
+import BacklogToggle from "../backlog/BacklogToggle";
 
 interface Props {
   title: Title;
 }
 
-const LibraryTitle = ({ title }: Props) => (
+const TitleRow = ({ title }: Props) => (
   <ListGroupItem className="px-2 py-1">
     <div className="d-flex justify-content-between">
       <Link to={`/edit/${title.key}`}>{title.name}</Link>
@@ -28,4 +28,4 @@ const LibraryTitle = ({ title }: Props) => (
   </ListGroupItem>
 );
 
-export default LibraryTitle;
+export default TitleRow;

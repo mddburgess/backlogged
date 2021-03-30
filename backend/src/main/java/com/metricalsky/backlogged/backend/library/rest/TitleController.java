@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metricalsky.backlogged.backend.library.dto.TitleData;
+import com.metricalsky.backlogged.backend.library.dto.TitleDto;
 import com.metricalsky.backlogged.backend.library.service.TitleService;
 
 @RestController
@@ -23,22 +23,22 @@ public class TitleController {
     private TitleService titleService;
 
     @GetMapping
-    public List<TitleData> list() {
+    public List<TitleDto> list() {
         return titleService.listTitles();
     }
 
     @PostMapping
-    public TitleData create(@RequestBody TitleData title) {
+    public TitleDto create(@RequestBody TitleDto title) {
         return titleService.createTitle(title);
     }
 
     @GetMapping("/{key}")
-    public TitleData retrieve(@PathVariable Integer key) {
+    public TitleDto retrieve(@PathVariable Integer key) {
         return titleService.retrieveTitle(key);
     }
 
     @PutMapping("/{key}")
-    public TitleData update(@PathVariable Integer key, @RequestBody TitleData title) {
+    public TitleDto update(@PathVariable Integer key, @RequestBody TitleDto title) {
         return titleService.updateTitle(key, title);
     }
 
