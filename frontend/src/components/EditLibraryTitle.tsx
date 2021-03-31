@@ -9,7 +9,14 @@ import { Title } from "../types/Title";
 
 import LibraryTitleForm from "./LibraryTitleForm";
 
-const EditLibraryItem = ({ updateTitle }: ReduxProps) => {
+const mapDispatchToProps = {
+  updateTitle: actions.update,
+};
+const connector = connect(undefined, mapDispatchToProps);
+
+type Props = ConnectedProps<typeof connector>;
+
+const EditLibraryItem = ({ updateTitle }: Props) => {
   const history = useHistory();
   const params = useParams<{ key: string }>();
 
@@ -39,13 +46,5 @@ const EditLibraryItem = ({ updateTitle }: ReduxProps) => {
     </Container>
   );
 };
-
-const mapDispatchToProps = {
-  updateTitle: actions.update,
-};
-
-const connector = connect(undefined, mapDispatchToProps);
-
-type ReduxProps = ConnectedProps<typeof connector>;
 
 export default connector(EditLibraryItem);

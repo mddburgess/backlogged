@@ -5,3 +5,7 @@ export interface Activity {
   date: string;
   title: Title;
 }
+
+export interface ActivityProps {
+  activity: Activity;
+}

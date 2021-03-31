@@ -14,9 +14,10 @@ const mapDispatchToProps = {
   listActivities: actions.list,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
-type ReduxProps = ConnectedProps<typeof connector>;
 
-const ActivityList = ({ activities, listActivities }: ReduxProps) => {
+type Props = ConnectedProps<typeof connector>;
+
+const ActivityList = ({ activities, listActivities }: Props) => {
   useEffect(() => {
     void listActivities();
   }, [listActivities]);

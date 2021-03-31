@@ -7,7 +7,17 @@ import { actions } from "../../store/backlog";
 
 import BacklogRow from "./BacklogRow";
 
-const BacklogList = ({ backlogItems, listBacklog }: ReduxProps) => {
+const mapStateToProps = (state: StoreState) => ({
+  backlogItems: state.backlog.data,
+});
+const mapDispatchToProps = {
+  listBacklog: actions.list,
+};
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type Props = ConnectedProps<typeof connector>;
+
+const BacklogList = ({ backlogItems, listBacklog }: Props) => {
   useEffect(() => {
     void listBacklog();
   }, [listBacklog]);
@@ -21,12 +31,4 @@ const BacklogList = ({ backlogItems, listBacklog }: ReduxProps) => {
   );
 };
 
-const mapStateToProps = (state: StoreState) => ({
-  backlogItems: state.backlog.data,
-});
-const mapDispatchToProps = {
-  listBacklog: actions.list,
-};
-const connector = connect(mapStateToProps, mapDispatchToProps);
-type ReduxProps = ConnectedProps<typeof connector>;
 export default connector(BacklogList);

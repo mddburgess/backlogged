@@ -4,13 +4,19 @@ import { connect, ConnectedProps } from "react-redux";
 
 import { StoreState } from "../../store";
 import { actions } from "../../store/backlog";
-import { Title } from "../../types/Title";
+import { TitleProps } from "../../types/Title";
 
-interface Props {
-  title: Title;
-}
+const mapStateToProps = (state: StoreState) => ({
+  backlog: state.backlog.data,
+});
+const mapDispatchToProps = {
+  createBacklog: actions.create,
+};
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
-const BacklogToggle = ({ title, backlog, createBacklog }: Props & ReduxProps) => {
+type Props = ConnectedProps<typeof connector> & TitleProps;
+
+const BacklogToggle = ({ title, backlog, createBacklog }: Props) => {
   const addToBacklog = () => {
     void createBacklog(title);
   };
@@ -26,12 +32,4 @@ const BacklogToggle = ({ title, backlog, createBacklog }: Props & ReduxProps) =>
   );
 };
 
-const mapStateToProps = (state: StoreState) => ({
-  backlog: state.backlog.data,
-});
-const mapDispatchToProps = {
-  createBacklog: actions.create,
-};
-const connector = connect(mapStateToProps, mapDispatchToProps);
-type ReduxProps = ConnectedProps<typeof connector>;
 export default connector(BacklogToggle);

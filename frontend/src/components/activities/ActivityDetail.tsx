@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { Activity } from "../../types/Activity";
+import { ActivityProps } from "../../types/Activity";
 
-interface Props {
-  activity: Activity;
-}
-
-const ActivityDetail = ({ activity }: Props) => {
+const ActivityDetail = ({ activity }: ActivityProps) => {
   switch (activity.type) {
     case "ADD_TO_BACKLOG":
       return (

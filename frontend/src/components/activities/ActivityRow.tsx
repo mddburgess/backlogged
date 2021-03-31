@@ -2,13 +2,9 @@ import { DateTime } from "luxon";
 import { ListGroupItem } from "react-bootstrap";
 import { Icon, JournalMinus, JournalPlus, PlusSquare, QuestionCircle } from "react-bootstrap-icons";
 
-import { Activity } from "../../types/Activity";
+import { ActivityProps } from "../../types/Activity";
 
 import ActivityDetail from "./ActivityDetail";
-
-interface Props {
-  activity: Activity;
-}
 
 const icons = new Map<string, Icon>([
   ["ADD_TO_BACKLOG", JournalPlus],
@@ -16,7 +12,7 @@ const icons = new Map<string, Icon>([
   ["REMOVE_FROM_BACKLOG", JournalMinus],
 ]);
 
-const ActivityRow = ({ activity }: Props) => {
+const ActivityRow = ({ activity }: ActivityProps) => {
   const IconElement = icons.get(activity.type) ?? QuestionCircle;
   return (
     <ListGroupItem className="px-2 py-1">

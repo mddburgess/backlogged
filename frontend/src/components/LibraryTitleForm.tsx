@@ -3,10 +3,10 @@ import { Button, Col, Form } from "react-bootstrap";
 
 import { Title } from "../types/Title";
 
-interface Props {
+type Props = {
   initialValues: Title;
   onSubmit: (title: Title) => void;
-}
+};
 
 const LibraryTitleForm = ({ initialValues, onSubmit }: Props) => (
   <Formik enableReinitialize={true} initialValues={initialValues} onSubmit={onSubmit}>

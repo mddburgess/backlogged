@@ -4,9 +4,16 @@ import { JournalBookmarkFill, JournalX } from "react-bootstrap-icons";
 import { connect, ConnectedProps } from "react-redux";
 
 import { actions } from "../../store/backlog";
-import { Backlog } from "../../types/Backlog";
+import { BacklogProps } from "../../types/Backlog";
 
-const RemoveFromBacklogButton = ({ backlog, deleteBacklog }: Props & ReduxProps) => {
+const mapDispatchToProps = {
+  deleteBacklog: actions.delete,
+};
+const connector = connect(null, mapDispatchToProps);
+
+type Props = ConnectedProps<typeof connector> & BacklogProps;
+
+const RemoveFromBacklogButton = ({ backlog, deleteBacklog }: Props) => {
   const [isHover, setHover] = useState(false);
 
   const removeFromBacklog = () => {
@@ -32,13 +39,4 @@ const RemoveFromBacklogButton = ({ backlog, deleteBacklog }: Props & ReduxProps)
   );
 };
 
-interface Props {
-  backlog: Backlog;
-}
-
-const mapDispatchToProps = {
-  deleteBacklog: actions.delete,
-};
-const connector = connect(null, mapDispatchToProps);
-type ReduxProps = ConnectedProps<typeof connector>;
 export default connector(RemoveFromBacklogButton);

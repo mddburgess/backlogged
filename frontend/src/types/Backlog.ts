@@ -4,3 +4,7 @@ export interface Backlog {
   key?: string;
   title: Title;
 }
+
+export interface BacklogProps {
+  backlog: Backlog;
+}

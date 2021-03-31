@@ -1,10 +1,10 @@
 import { ListGroupItem } from "react-bootstrap";
 
-import { Backlog } from "../../types/Backlog";
+import { BacklogProps } from "../../types/Backlog";
 
 import RemoveFromBacklogButton from "./RemoveFromBacklogButton";
 
-const BacklogRow = ({ backlog }: Props) => (
+const BacklogRow = ({ backlog }: BacklogProps) => (
   <ListGroupItem className="px-2 py-1">
     <div className="d-flex justify-content-between">
       {backlog.title.name}
@@ -14,9 +14,5 @@ const BacklogRow = ({ backlog }: Props) => (
     </div>
   </ListGroupItem>
 );
-
-interface Props {
-  backlog: Backlog;
-}
 
 export default BacklogRow;

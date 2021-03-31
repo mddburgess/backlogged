@@ -8,3 +8,7 @@ interface Copy {
   platform: string;
   service: string;
 }
+
+export interface TitleProps {
+  title: Title;
+}

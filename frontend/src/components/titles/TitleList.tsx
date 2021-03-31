@@ -8,7 +8,17 @@ import { actions } from "../../store/library";
 
 import TitleRow from "./TitleRow";
 
-const TitleList = ({ titles, listTitles }: ReduxProps) => {
+const mapStateToProps = (state: StoreState) => ({
+  titles: state.library.data,
+});
+const mapDispatchToProps = {
+  listTitles: actions.list,
+};
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type Props = ConnectedProps<typeof connector>;
+
+const TitleList = ({ titles, listTitles }: Props) => {
   useEffect(() => {
     void listTitles();
   }, [listTitles]);
@@ -24,17 +34,5 @@ const TitleList = ({ titles, listTitles }: ReduxProps) => {
     </ListGroup>
   );
 };
-
-const mapStateToProps = (state: StoreState) => ({
-  titles: state.library.data,
-});
-
-const mapDispatchToProps = {
-  listTitles: actions.list,
-};
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type ReduxProps = ConnectedProps<typeof connector>;
 
 export default connector(TitleList);

@@ -6,7 +6,14 @@ import { actions } from "../store/library";
 
 import LibraryTitleForm from "./LibraryTitleForm";
 
-const AddLibraryTitle = ({ createTitle }: ReduxProps) => {
+const mapDispatchToProps = {
+  createTitle: actions.create,
+};
+const connector = connect(undefined, mapDispatchToProps);
+
+type Props = ConnectedProps<typeof connector>;
+
+const AddLibraryTitle = ({ createTitle }: Props) => {
   const history = useHistory();
 
   return (
@@ -30,13 +37,5 @@ const AddLibraryTitle = ({ createTitle }: ReduxProps) => {
     </Container>
   );
 };
-
-const mapDispatchToProps = {
-  createTitle: actions.create,
-};
-
-const connector = connect(undefined, mapDispatchToProps);
-
-type ReduxProps = ConnectedProps<typeof connector>;
 
 export default connector(AddLibraryTitle);
