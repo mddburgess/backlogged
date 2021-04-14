@@ -4,7 +4,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
 import { api } from "../api";
-import { actions } from "../store/library";
+import { actions } from "../store/titles";
 import { Title } from "../types/Title";
 
 import LibraryTitleForm from "./LibraryTitleForm";

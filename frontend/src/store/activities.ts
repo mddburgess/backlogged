@@ -7,7 +7,7 @@ export const actions = {
   list: createAsyncThunk("activities/list", api.activities.list),
 };
 
-const activitySlice = createSlice({
+const activitiesSlice = createSlice({
   name: "activities",
   initialState: {
     data: [] as Activity[],
@@ -20,4 +20,4 @@ const activitySlice = createSlice({
   },
 });
 
-export default activitySlice.reducer;
+export default activitiesSlice.reducer;

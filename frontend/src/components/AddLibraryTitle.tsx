@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { actions } from "../store/library";
+import { actions } from "../store/titles";
 
 import LibraryTitleForm from "./LibraryTitleForm";
 

@@ -1,11 +1,11 @@
 import { Container } from "react-bootstrap";
 
-import BacklogItemList from "../components/backlog/BacklogList";
+import BacklogList from "../components/backlog/BacklogList";
 
 const BacklogRoute = () => (
   <Container>
     <h2>Backlog</h2>
-    <BacklogItemList />
+    <BacklogList />
   </Container>
 );
 

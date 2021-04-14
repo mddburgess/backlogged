@@ -1,16 +1,15 @@
 import { ListGroupItem } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 import { TitleProps } from "../../types/Title";
 import BacklogToggle from "../backlog/BacklogToggle";
 
+import TitleDetailsLink from "./TitleDetailsLink";
+
 const TitleRow = ({ title }: TitleProps) => (
   <ListGroupItem className="px-2 py-1">
     <div className="d-flex justify-content-between">
-      <Link to={`/edit/${title.key}`}>{title.name}</Link>
-      <div>
-        <BacklogToggle title={title} />
-      </div>
+      <TitleDetailsLink title={title} />
+      <BacklogToggle title={title} />
     </div>
     <ul className="mb-0">
       {title.copies.map((copy) => (

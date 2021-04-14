@@ -4,12 +4,12 @@ import { connect, ConnectedProps } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { StoreState } from "../../store";
-import { actions } from "../../store/library";
+import { actions } from "../../store/titles";
 
 import TitleRow from "./TitleRow";
 
 const mapStateToProps = (state: StoreState) => ({
-  titles: state.library.data,
+  titles: state.titles.list,
 });
 const mapDispatchToProps = {
   listTitles: actions.list,

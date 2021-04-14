@@ -1,28 +1,24 @@
-import { Link } from "react-router-dom";
-
 import { ActivityProps } from "../../types/Activity";
+import TitleDetailsLink from "../titles/TitleDetailsLink";
 
 const ActivityDetail = ({ activity }: ActivityProps) => {
   switch (activity.type) {
     case "ADD_TO_BACKLOG":
       return (
         <>
-          You added <Link to={`/title/${activity.title.key}`}>{activity.title.name}</Link> to your
-          backlog.
+          You added <TitleDetailsLink title={activity.title} /> to your backlog.
         </>
       );
     case "ADD_TO_LIBRARY":
       return (
         <>
-          You added <Link to={`/title/${activity.title.key}`}>{activity.title.name}</Link> to your
-          library.
+          You added <TitleDetailsLink title={activity.title} /> to your library.
         </>
       );
     case "REMOVE_FROM_BACKLOG":
       return (
         <>
-          You removed <Link to={`/title/${activity.title.key}`}>{activity.title.name}</Link> from
-          your backlog.
+          You removed <TitleDetailsLink title={activity.title} /> from your backlog.
         </>
       );
     default:

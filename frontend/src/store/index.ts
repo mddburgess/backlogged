@@ -3,13 +3,13 @@ import { combineReducers } from "redux";
 
 import activities from "./activities";
 import backlog from "./backlog";
-import library from "./library";
+import titles from "./titles";
 
 const store = configureStore({
   reducer: combineReducers({
     activities,
     backlog,
-    library,
+    titles,
   }),
 });
 
