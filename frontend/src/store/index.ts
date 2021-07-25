@@ -1,11 +1,11 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import backlog from "store/backlog";
+import {configureStore} from "@reduxjs/toolkit";
+import API from "api";
 
 const store = configureStore({
-    reducer: combineReducers({
-        backlog
-    })
-});
+    reducer: {
+        [API.reducerPath]: API.reducer
+    },
+    middleware: (getDefaultMiddleware => getDefaultMiddleware().concat(API.middleware))
+})
 
 export default store;
-export type StoreState = ReturnType<typeof store.getState>;
