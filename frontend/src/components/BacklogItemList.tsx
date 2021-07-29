@@ -1,20 +1,25 @@
-import {Button, ListGroup, ListGroupItem} from "react-bootstrap";
+import {ListGroup} from "react-bootstrap";
 import API from "api";
 import NewBacklogItem from "components/NewBacklogItem";
+import {useState} from "react";
+import {EditBacklogItemModal} from "components/backlog/EditBacklogItemModal";
+import {BacklogItem} from "types/BacklogItem";
 
 const BacklogItemList = () => {
     const {data} = API.useListBacklogQuery();
-    const [deleteBacklogItem] = API.useDeleteBacklogItemMutation();
+
+    const [backlogItem, setBacklogItem] = useState<BacklogItem>();
 
     return (
         <ListGroup>
             {data?.map(item => (
-                <ListGroupItem key={item.id} className="d-flex justify-content-between">
+                <ListGroup.Item key={item.id} action className="d-flex justify-content-between"
+                    onClick={() => setBacklogItem(item)}>
                     {item.name}
-                    <Button onClick={() => deleteBacklogItem(item.id ?? 0)}>Delete</Button>
-                </ListGroupItem>
+                </ListGroup.Item>
             ))}
             <NewBacklogItem />
+            <EditBacklogItemModal backlogItem={backlogItem} setBacklogItem={setBacklogItem} />
         </ListGroup>
     );
 };
