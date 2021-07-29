@@ -22,6 +22,11 @@ public class BacklogItemService {
         return repository.save(backlogItem);
     }
 
+    public BacklogItem update(Integer id, BacklogItem backlogItem) {
+        backlogItem.setId(id);
+        return repository.save(backlogItem);
+    }
+
     public void delete(Integer id) {
         repository.deleteById(id);
     }

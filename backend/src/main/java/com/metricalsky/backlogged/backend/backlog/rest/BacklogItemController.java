@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,13 @@ public class BacklogItemController {
     public BacklogItemDto create(@RequestBody BacklogItemDto backlogItemDto) {
         var entity = mapper.toEntity(backlogItemDto);
         entity = service.create(entity);
+        return mapper.toDto(entity);
+    }
+
+    @PutMapping(path = "/{id}")
+    public BacklogItemDto update(@PathVariable("id") Integer id, @RequestBody BacklogItemDto backlogItemDto) {
+        var entity = mapper.toEntity(backlogItemDto);
+        entity = service.update(id, entity);
         return mapper.toDto(entity);
     }
 
