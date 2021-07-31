@@ -1,0 +1,2 @@
+ALTER TABLE backlog_items
+    ADD COLUMN status VARCHAR NOT NULL DEFAULT 'NEW';

@@ -1,4 +1,5 @@
 export interface BacklogItem {
     id?: number,
-    name: string
+    name: string,
+    status: string
 }

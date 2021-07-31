@@ -1,6 +1,8 @@
 package com.metricalsky.backlogged.backend.backlog.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,9 @@ public class BacklogItem {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private BacklogItemStatus status;
+
     public Integer getId() {
         return id;
     }
@@ -30,5 +35,13 @@ public class BacklogItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public BacklogItemStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BacklogItemStatus status) {
+        this.status = status;
     }
 }

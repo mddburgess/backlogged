@@ -8,7 +8,7 @@ type Props = {
     setBacklogItem: (value?: BacklogItem) => void;
 }
 
-export const EditBacklogItemModal = ({backlogItem, setBacklogItem}: Props) => {
+const EditBacklogItemModal = ({backlogItem, setBacklogItem}: Props) => {
     const [updateBacklogItem] = API.useUpdateBacklogItemMutation();
     const [deleteBacklogItem] = API.useDeleteBacklogItemMutation();
 
@@ -35,6 +35,15 @@ export const EditBacklogItemModal = ({backlogItem, setBacklogItem}: Props) => {
                                     <Form.Label>Name</Form.Label>
                                     <Field name="name" type="text" as={Form.Control}/>
                                 </Form.Group>
+                                <Form.Group controlId="status">
+                                    <Form.Label>Status</Form.Label>
+                                    <Field name="status" type="text" as={Form.Select}>
+                                        <option>NEW</option>
+                                        <option>ACTIVE</option>
+                                        <option>DORMANT</option>
+                                        <option>DONE</option>
+                                    </Field>
+                                </Form.Group>
                             </Modal.Body>
                             <Modal.Footer className="justify-content-between">
                                 <Button type="submit">Save</Button>
@@ -47,3 +56,5 @@ export const EditBacklogItemModal = ({backlogItem, setBacklogItem}: Props) => {
             : <></>
     );
 }
+
+export default EditBacklogItemModal;

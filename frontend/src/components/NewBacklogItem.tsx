@@ -8,7 +8,7 @@ const NewBacklogItem = () => {
 
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        createBacklogItem({name});
+        createBacklogItem({name, status: "NEW"});
     }
 
     return (
