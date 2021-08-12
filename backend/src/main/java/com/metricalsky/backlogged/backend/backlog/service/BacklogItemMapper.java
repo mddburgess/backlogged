@@ -14,6 +14,7 @@ public class BacklogItemMapper implements EntityMapper<BacklogItem, BacklogItemD
         var entity = new BacklogItem();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
+        entity.setType(dto.getType());
         entity.setStatus(dto.getStatus());
         return entity;
     }
@@ -23,6 +24,7 @@ public class BacklogItemMapper implements EntityMapper<BacklogItem, BacklogItemD
         var dto = new BacklogItemDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
+        dto.setType(entity.getType());
         dto.setStatus(entity.getStatus());
         return dto;
     }

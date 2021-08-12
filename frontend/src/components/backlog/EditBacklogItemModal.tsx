@@ -35,6 +35,13 @@ const EditBacklogItemModal = ({backlogItem, setBacklogItem}: Props) => {
                                     <Form.Label>Name</Form.Label>
                                     <Field name="name" type="text" as={Form.Control}/>
                                 </Form.Group>
+                                <Form.Group controlId="type">
+                                    <Form.Label>Type</Form.Label>
+                                    <Field name="type" type="text" as={Form.Select}>
+                                        <option>MOVIE</option>
+                                        <option>VIDEO_GAME</option>
+                                    </Field>
+                                </Form.Group>
                                 <Form.Group controlId="status">
                                     <Form.Label>Status</Form.Label>
                                     <Field name="status" type="text" as={Form.Select}>

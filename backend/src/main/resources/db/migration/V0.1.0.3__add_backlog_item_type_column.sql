@@ -1,0 +1,6 @@
+ALTER TABLE backlog_items
+    ADD COLUMN type VARCHAR NOT NULL DEFAULT 'VIDEO_GAME';
+
+ALTER TABLE backlog_items
+    ALTER COLUMN type DROP DEFAULT;
+
