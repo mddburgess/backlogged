@@ -27,14 +27,14 @@ const API = createApi({
                 method: "PUT",
                 body: backlogItem
             }),
-            invalidatesTags: (result, error, {id}) => [{type: "backlog", id: id}]
+            invalidatesTags: (result, error, {id}) => [{type: "backlog", id}]
         }),
-        deleteBacklogItem: builder.mutation<void, number>({
-            query: (id) => ({
-                url: `backlog/${id}`,
+        deleteBacklogItem: builder.mutation<void, BacklogItem>({
+            query: (backlogItem) => ({
+                url: `backlog/${backlogItem.id}`,
                 method: "DELETE"
             }),
-            invalidatesTags: (result, error, id) => [{type: "backlog", id}]
+            invalidatesTags: (result, error, {id}) => [{type: "backlog", id}]
         })
     })
 })

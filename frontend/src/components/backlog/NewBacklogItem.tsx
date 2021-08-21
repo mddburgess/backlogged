@@ -12,6 +12,7 @@ const NewBacklogItem = () => {
         <ListGroupItem action onClick={() => setBacklogItem({})}>
             Add new item...
             <BacklogItemModal
+                title="New Backlog Item"
                 backlogItem={backlogItem}
                 setBacklogItem={setBacklogItem}
                 onSave={createBacklogItem}
