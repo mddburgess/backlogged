@@ -1,25 +1,21 @@
-import {Form, ListGroupItem} from "react-bootstrap";
+import {ListGroupItem} from "react-bootstrap";
+import {useState} from "react";
+import {BacklogItem} from "types/BacklogItem";
+import BacklogItemModal from "components/backlog/BacklogItemModal";
 import API from "api";
-import {FormEvent, useState} from "react";
 
 const NewBacklogItem = () => {
-    const [name, setName] = useState("");
+    const [backlogItem, setBacklogItem] = useState<Partial<BacklogItem>>();
     const [createBacklogItem] = API.useCreateBacklogItemMutation();
 
-    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        createBacklogItem({
-            name,
-            type: "VIDEO_GAME",
-            status: "NEW"
-        });
-    }
-
     return (
-        <ListGroupItem>
-            <Form onSubmit={onSubmit}>
-                <Form.Control onChange={event => setName(event.target.value)} />
-            </Form>
+        <ListGroupItem action onClick={() => setBacklogItem({})}>
+            Add new item...
+            <BacklogItemModal
+                backlogItem={backlogItem}
+                setBacklogItem={setBacklogItem}
+                onSave={createBacklogItem}
+            />
         </ListGroupItem>
     );
 };

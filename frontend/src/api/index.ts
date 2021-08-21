@@ -13,7 +13,7 @@ const API = createApi({
                 ...(result?.map(({id}) => ({type: "backlog" as const, id})) ?? [])
             ]
         }),
-        createBacklogItem: builder.mutation<BacklogItem, BacklogItem>({
+        createBacklogItem: builder.mutation<BacklogItem, Partial<BacklogItem>>({
             query: (backlogItem) => ({
                 url: "backlog",
                 method: "POST",
