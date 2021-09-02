@@ -1,11 +1,14 @@
 package com.metricalsky.backlogged.backend.backlog.entity;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.metricalsky.backlogged.backend.activity.entity.Activity;
 import com.metricalsky.backlogged.backend.common.entity.IdentifiableEntity;
 
 @Entity
@@ -21,6 +24,9 @@ public class BacklogItem extends IdentifiableEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private BacklogItemStatus status;
+
+    @OneToMany(mappedBy = "backlogItem")
+    private List<Activity> activities;
 
     public String getName() {
         return name;
@@ -44,5 +50,13 @@ public class BacklogItem extends IdentifiableEntity {
 
     public void setStatus(BacklogItemStatus status) {
         this.status = status;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
 }

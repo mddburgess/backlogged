@@ -22,6 +22,10 @@ public class BacklogItemService {
         return repository.findAll();
     }
 
+    public BacklogItem getById(Integer id) {
+        return repository.findById(id).orElseThrow();
+    }
+
     @Transactional
     public BacklogItem create(BacklogItem backlogItem) {
         var savedBacklogItem = repository.save(backlogItem);

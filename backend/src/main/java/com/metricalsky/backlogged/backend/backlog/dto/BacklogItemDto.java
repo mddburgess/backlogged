@@ -1,5 +1,7 @@
 package com.metricalsky.backlogged.backend.backlog.dto;
 
+import java.time.Duration;
+
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemStatus;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemType;
 
@@ -9,6 +11,7 @@ public class BacklogItemDto {
     private String name;
     private BacklogItemType type;
     private BacklogItemStatus status;
+    private Duration activityTime;
 
     public Integer getId() {
         return id;
@@ -40,5 +43,13 @@ public class BacklogItemDto {
 
     public void setStatus(BacklogItemStatus status) {
         this.status = status;
+    }
+
+    public Duration getActivityTime() {
+        return activityTime;
+    }
+
+    public void setActivityTime(Duration activityTime) {
+        this.activityTime = activityTime;
     }
 }
