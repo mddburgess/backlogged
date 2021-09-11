@@ -2,6 +2,7 @@ package com.metricalsky.backlogged.backend.backlog.rest;
 
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,7 @@ import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemReposito
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+@Disabled
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public class BacklogItemControllerTest {
 
