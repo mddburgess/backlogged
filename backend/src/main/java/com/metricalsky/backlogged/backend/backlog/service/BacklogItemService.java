@@ -6,41 +6,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.metricalsky.backlogged.backend.activity.service.StatusActivityService;
-import com.metricalsky.backlogged.backend.backlog.entity.BacklogItem;
+import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemRepository;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class BacklogItemService {
 
     @Autowired
     private BacklogItemRepository repository;
-    @Autowired
-    private StatusActivityService statusActivityService;
 
-    public List<BacklogItem> list() {
-        return repository.findAll();
+    private final BacklogItemMapper mapper;
+
+    public BacklogItemService() {
+        mapper = new BacklogItemMapper();
     }
 
-    public BacklogItem getById(Integer id) {
-        return repository.findById(id).orElseThrow();
-    }
-
-    @Transactional
-    public BacklogItem create(BacklogItem backlogItem) {
-        var savedBacklogItem = repository.save(backlogItem);
-        statusActivityService.create(savedBacklogItem, null);
-        return savedBacklogItem;
+    public List<BacklogItemDto> list() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::toDto)
+                .collect(toList());
     }
 
     @Transactional
-    public BacklogItem update(Integer id, BacklogItem backlogItem) {
-        var existingBacklogItem = repository.findById(id);
-        var fromStatus = existingBacklogItem.map(BacklogItem::getStatus).orElse(null);
-        backlogItem.setId(id);
-        var savedBacklogItem = repository.save(backlogItem);
-        statusActivityService.create(savedBacklogItem, fromStatus);
-        return savedBacklogItem;
+    public BacklogItemDto create(BacklogItemDto dto) {
+        var backlogItem = mapper.toEntity(dto);
+        repository.save(backlogItem);
+        return mapper.toDto(backlogItem);
+    }
+
+    @Transactional
+    public BacklogItemDto update(Integer id, BacklogItemDto dto) {
+        var backlogItem = repository.findById(id).orElseThrow();
+        mapper.patchEntity(backlogItem, dto);
+        return mapper.toDto(backlogItem);
     }
 
     public void delete(Integer id) {

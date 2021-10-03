@@ -10,6 +10,10 @@
 
     <artifactId>backend</artifactId>
 
+    <properties>
+        <assertj.version>3.20.2</assertj.version>
+    </properties>
+
     <dependencies>
         <!-- Spring dependencies -->
         <dependency>
@@ -65,6 +69,38 @@
                     <systemPropertyVariables>
                         <spring.profiles.active>test</spring.profiles.active>
                     </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <id>jacoco</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                            <goal>report</goal>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <rules>
+                        <rule>
+                            <element>CLASS</element>
+                            <limits>
+                                <limit>
+                                    <counter>METHOD</counter>
+                                    <value>MISSEDCOUNT</value>
+                                    <maximum>0</maximum>
+                                </limit>
+                            </limits>
+                            <excludes>
+                                <exclude>*BackendApplication</exclude>
+                            </excludes>
+                        </rule>
+                    </rules>
                 </configuration>
             </plugin>
         </plugins>
