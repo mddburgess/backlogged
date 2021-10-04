@@ -1,59 +1,60 @@
 package com.metricalsky.backlogged.backend.backlog.rest;
 
+import java.time.Duration;
+import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
-import com.metricalsky.backlogged.backend.backlog.entity.BacklogItem;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemStatus;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemType;
-import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemRepository;
+import com.metricalsky.backlogged.backend.backlog.service.BacklogItemService;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@WebMvcTest(BacklogItemController.class)
 public class BacklogItemControllerTest {
 
     @Autowired
-    private TestRestTemplate rest;
-    @Autowired
-    private BacklogItemRepository backlogItemRepository;
+    private MockMvc mvc;
+    @MockBean
+    private BacklogItemService service;
 
-    private BacklogItem backlogItem;
-
-    @BeforeEach
-    void beforeEach() {
-        backlogItem = new BacklogItem();
-        backlogItem.setName("name");
-        backlogItem.setType(BacklogItemType.VIDEO_GAME);
-        backlogItem.setStatus(BacklogItemStatus.NEW);
-        backlogItemRepository.save(backlogItem);
+    @Test
+    void givenNoBacklogItems_whenGetBacklog_thenReturnEmptyList() throws Exception {
+        mvc.perform(get("/api/backlog"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").isEmpty());
     }
 
     @Test
-    void givenBacklogItem_whenPut_thenUpdateBacklogItem() {
+    void givenBacklogItem_whenGetBacklog_thenReturnListOfBacklogItem() throws Exception {
         var dto = new BacklogItemDto();
-        dto.setName("new name");
-        dto.setType(BacklogItemType.MOVIE);
-        dto.setStatus(BacklogItemStatus.ACTIVE);
+        dto.setId(1);
+        dto.setName("Name");
+        dto.setType(BacklogItemType.VIDEO_GAME);
+        dto.setStatus(BacklogItemStatus.NEW);
+        dto.setActivityTime(Duration.ofHours(1));
 
-        var request = RequestEntity.put("/api/backlog/{0}", backlogItem.getId()).body(dto);
-        var response = rest.exchange(request, BacklogItemDto.class);
+        when(service.list())
+                .thenReturn(List.of(dto));
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody())
-                .hasFieldOrPropertyWithValue("id", backlogItem.getId())
-                .hasFieldOrPropertyWithValue("name", "new name")
-                .hasFieldOrPropertyWithValue("type", BacklogItemType.MOVIE)
-                .hasFieldOrPropertyWithValue("status", BacklogItemStatus.ACTIVE);
+        mvc.perform(get("/api/backlog"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").isNotEmpty())
+                .andExpect(jsonPath("$[0].id").value(dto.getId()))
+                .andExpect(jsonPath("$[0].name").value(dto.getName()))
+                .andExpect(jsonPath("$[0].type").value(dto.getType().name()))
+                .andExpect(jsonPath("$[0].status").value(dto.getStatus().name()))
+                .andExpect(jsonPath("$[0].activityTime").value(dto.getActivityTime().toString()));
     }
 }
