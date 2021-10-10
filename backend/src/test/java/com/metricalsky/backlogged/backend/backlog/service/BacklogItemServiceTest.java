@@ -19,6 +19,7 @@ import com.metricalsky.backlogged.backend.common.entity.IdentifiableEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -71,7 +72,7 @@ public class BacklogItemServiceTest {
     }
 
     @Test
-    void givenEntityExists_whenUpdate() {
+    void givenEntityExists_whenUpdate_thenReturnUpdatedItem() {
         var entity = new BacklogItem();
         entity.setId(1);
         entity.setName("Name");
@@ -92,6 +93,12 @@ public class BacklogItemServiceTest {
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(dto);
+    }
+
+    @Test
+    void givenId_whenUpdate_thenDeleteFromRepository() {
+        service.delete(1);
+        verify(repository).deleteById(1);
     }
 
     private static Answer<Void> setEntityId(Integer id) {
