@@ -8,26 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
-import com.metricalsky.backlogged.backend.activity.repository.ActivityRepository;
-import com.metricalsky.backlogged.backend.activity.service.TimeActivityMapper;
-import com.metricalsky.backlogged.backend.backlog.service.BacklogItemService;
+import com.metricalsky.backlogged.backend.activity.service.TimeActivityService;
 
 @RestController
 @RequestMapping("/api/backlog/{id}/activities")
 public class ActivityController {
 
     @Autowired
-    private TimeActivityMapper mapper;
-    @Autowired
-    private BacklogItemService backlogItemService;
-    @Autowired
-    private ActivityRepository activityRepository;
+    private TimeActivityService timeActivityService;
 
     @PostMapping
     public void create(@PathVariable("id") Integer backlogItemId, @RequestBody ActivityDto activityDto) {
-        var backlogItem = backlogItemService.getById(backlogItemId);
-        var entity = mapper.toEntity(activityDto);
-        entity.setBacklogItem(backlogItem);
-        activityRepository.save(entity);
+        timeActivityService.create(backlogItemId, activityDto);
     }
 }

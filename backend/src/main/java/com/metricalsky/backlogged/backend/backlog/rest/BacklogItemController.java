@@ -1,7 +1,6 @@
 package com.metricalsky.backlogged.backend.backlog.rest;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
-import com.metricalsky.backlogged.backend.backlog.service.BacklogItemMapper;
 import com.metricalsky.backlogged.backend.backlog.service.BacklogItemService;
 
 @RestController
@@ -23,29 +21,20 @@ public class BacklogItemController {
 
     @Autowired
     private BacklogItemService service;
-    @Autowired
-    private BacklogItemMapper mapper;
 
     @GetMapping
     public List<BacklogItemDto> list() {
-        return service.list()
-                .stream()
-                .map(mapper::toDto)
-                .collect(Collectors.toList());
+        return service.list();
     }
 
     @PostMapping
     public BacklogItemDto create(@RequestBody BacklogItemDto backlogItemDto) {
-        var entity = mapper.toEntity(backlogItemDto);
-        entity = service.create(entity);
-        return mapper.toDto(entity);
+        return service.create(backlogItemDto);
     }
 
     @PutMapping(path = "/{id}")
     public BacklogItemDto update(@PathVariable("id") Integer id, @RequestBody BacklogItemDto backlogItemDto) {
-        var entity = mapper.toEntity(backlogItemDto);
-        entity = service.update(id, entity);
-        return mapper.toDto(entity);
+        return service.update(id, backlogItemDto);
     }
 
     @DeleteMapping(path = "/{id}")

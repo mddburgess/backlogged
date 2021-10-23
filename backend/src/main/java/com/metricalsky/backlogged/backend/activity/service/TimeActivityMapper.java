@@ -2,13 +2,10 @@ package com.metricalsky.backlogged.backend.activity.service;
 
 import java.time.ZonedDateTime;
 
-import org.springframework.stereotype.Service;
-
 import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
 import com.metricalsky.backlogged.backend.activity.entity.TimeActivity;
 import com.metricalsky.backlogged.backend.common.service.EntityMapper;
 
-@Service
 public class TimeActivityMapper implements EntityMapper<TimeActivity, ActivityDto> {
 
     @Override
