@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @DataJpaTest
-public class ActivityTest {
+class ActivityTest {
 
     @Autowired
     private TestEntityManager entityManager;

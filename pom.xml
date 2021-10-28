@@ -32,6 +32,7 @@
         <module>backend</module>
         <module>frontend</module>
         <module>package</module>
+        <module>quality</module>
     </modules>
 
     <scm>

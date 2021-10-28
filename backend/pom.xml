@@ -72,6 +72,42 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.15.0</version>
+                <executions>
+                    <execution>
+                        <id>pmd-check</id>
+                        <phase>process-test-classes</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm</artifactId>
+                        <version>9.2</version>
+                        <!-- TODO: https://github.com/pmd/pmd/issues/3502 -->
+                        <!-- TODO: remove when upgrading maven-pmd-plugin to 3.16.0 -->
+                    </dependency>
+                    <dependency>
+                        <groupId>com.metricalsky.backlogged</groupId>
+                        <artifactId>quality</artifactId>
+                        <version>0.1.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <rulesets>
+                        <ruleset>rulesets/pmd.xml</ruleset>
+                    </rulesets>
+                    <includeTests>true</includeTests>
+                    <linkXRef>false</linkXRef>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.7</version>

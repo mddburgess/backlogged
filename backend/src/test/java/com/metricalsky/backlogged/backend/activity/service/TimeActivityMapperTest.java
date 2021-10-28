@@ -9,7 +9,7 @@ import com.metricalsky.backlogged.backend.activity.entity.TimeActivity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TimeActivityMapperTest {
+class TimeActivityMapperTest {
 
     private final TimeActivityMapper mapper = new TimeActivityMapper();
 

@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @DataJpaTest
-public class BacklogItemTest {
+class BacklogItemTest {
 
     @Autowired
     private TestEntityManager entityManager;

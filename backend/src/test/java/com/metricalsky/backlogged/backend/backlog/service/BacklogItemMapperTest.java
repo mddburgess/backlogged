@@ -13,7 +13,7 @@ import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BacklogItemMapperTest {
+class BacklogItemMapperTest {
 
     private final BacklogItemMapper mapper = new BacklogItemMapper();
 

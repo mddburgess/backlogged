@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(BacklogItemController.class)
-public class BacklogItemControllerTest {
+class BacklogItemControllerTest {
 
     @Autowired
     private MockMvc mvc;
