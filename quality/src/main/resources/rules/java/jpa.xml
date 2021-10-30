@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<ruleset name="Java Persistence"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>Java Persistence</description>
+
+    <rule language="java"
+          name="EntityShouldBePersistable"
+          message="Entity class should implement Persistable"
+          class="com.metricalsky.quality.pmd.jpa.EntityShouldBePersistable">
+        <priority>3</priority>
+    </rule>
+</ruleset>

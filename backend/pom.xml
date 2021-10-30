@@ -93,6 +93,16 @@
                         <!-- TODO: remove when upgrading maven-pmd-plugin to 3.16.0 -->
                     </dependency>
                     <dependency>
+                        <groupId>net.sourceforge.pmd</groupId>
+                        <artifactId>pmd-core</artifactId>
+                        <version>${pmd.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>net.sourceforge.pmd</groupId>
+                        <artifactId>pmd-java</artifactId>
+                        <version>${pmd.version}</version>
+                    </dependency>
+                    <dependency>
                         <groupId>com.metricalsky.backlogged</groupId>
                         <artifactId>quality</artifactId>
                         <version>0.1.0-SNAPSHOT</version>

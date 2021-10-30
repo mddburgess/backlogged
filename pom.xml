@@ -51,6 +51,8 @@
 
     <properties>
         <java.version>16</java.version>
+
+        <pmd.version>6.39.0</pmd.version>
     </properties>
 
     <build>

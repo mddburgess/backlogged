@@ -14,6 +14,7 @@ public class IdentifiableEntity implements Persistable<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Override
     public Integer getId() {
         return id;
     }
