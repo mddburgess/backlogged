@@ -34,8 +34,10 @@ class ActivityTest {
 
     @Test
     void givenEmptyEntity_whenPersist_thenPersistenceExceptionIsThrown() {
+        var activity = new Activity();
+
         assertThatExceptionOfType(PersistenceException.class)
-                .isThrownBy(() -> entityManager.persistFlushFind(new Activity()));
+                .isThrownBy(() -> entityManager.persistFlushFind(activity));
     }
 
     @Test

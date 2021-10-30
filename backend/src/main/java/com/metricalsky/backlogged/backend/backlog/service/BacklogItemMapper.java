@@ -28,8 +28,8 @@ public class BacklogItemMapper implements EntityMapper<BacklogItem, BacklogItemD
         dto.setStatus(entity.getStatus());
         if (entity.getActivities() != null) {
             dto.setActivityTime(entity.getActivities().stream()
-                    .filter(activity -> activity instanceof TimeActivity)
-                    .map(activity -> (TimeActivity) activity)
+                    .filter(TimeActivity.class::isInstance)
+                    .map(TimeActivity.class::cast)
                     .map(TimeActivity::getDuration)
                     .reduce(Duration::plus)
                     .orElse(null));

@@ -18,8 +18,10 @@ class BacklogItemTest {
 
     @Test
     void givenEmptyEntity_whenPersist_thenPersistenceExceptionIsThrown() {
+        var backlogItem = new BacklogItem();
+
         assertThatExceptionOfType(PersistenceException.class)
-                .isThrownBy(() -> entityManager.persistFlushFind(new BacklogItem()));
+                .isThrownBy(() -> entityManager.persistFlushFind(backlogItem));
     }
 
     @Test
