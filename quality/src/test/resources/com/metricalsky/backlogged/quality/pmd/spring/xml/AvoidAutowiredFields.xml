@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests">
+    <test-code>
+        <description>Component with autowired field</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>7</expected-linenumbers>
+        <expected-messages>
+            <message>Spring components should use constructor injection</message>
+        </expected-messages>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Test {
+
+    @Autowired
+    private OtherService service;
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Controller with autowired field</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>7</expected-linenumbers>
+        <expected-messages>
+            <message>Spring components should use constructor injection</message>
+        </expected-messages>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class Test {
+
+    @Autowired
+    private OtherService service;
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Repository with autowired field</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>7</expected-linenumbers>
+        <expected-messages>
+            <message>Spring components should use constructor injection</message>
+        </expected-messages>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class Repository {
+
+    @Autowired
+    private OtherService service;
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Service with autowired field</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>7</expected-linenumbers>
+        <expected-messages>
+            <message>Spring components should use constructor injection</message>
+        </expected-messages>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class Test {
+
+    @Autowired
+    private OtherService service;
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>RestController with autowired field</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>7</expected-linenumbers>
+        <expected-messages>
+            <message>Spring components should use constructor injection</message>
+        </expected-messages>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class Test {
+
+    @Autowired
+    private OtherService service;
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Component with autowired constructor</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Test {
+
+    private final OtherService service;
+
+    @Autowired
+    public TestService(OtherService service) {
+        this.service = service;
+    }
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Controller with autowired constructor</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class Test {
+
+    private final OtherService service;
+
+    @Autowired
+    public TestService(OtherService service) {
+        this.service = service;
+    }
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Repository with autowired constructor</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class Test {
+
+    private final OtherService service;
+
+    @Autowired
+    public TestService(OtherService service) {
+        this.service = service;
+    }
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Service with autowired constructor</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class Test {
+
+    private final OtherService service;
+
+    @Autowired
+    public TestService(OtherService service) {
+        this.service = service;
+    }
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>RestController with autowired constructor</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class Test {
+
+    private final OtherService service;
+
+    @Autowired
+    public TestService(OtherService service) {
+        this.service = service;
+    }
+}
+        ]]></code>
+    </test-code>
+</test-data>

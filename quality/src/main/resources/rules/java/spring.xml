@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<ruleset name="Spring"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>Spring</description>
+
+    <rule language="java"
+          name="AvoidAutowiredFields"
+          message="Spring components should use constructor injection"
+          class="net.sourceforge.pmd.lang.rule.XPathRule"
+          typeResolution="true">
+        <priority>3</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//TypeDeclaration
+    [//Annotation/*/Name[
+        pmd-java:typeIs("org.springframework.stereotype.Component")
+        or pmd-java:typeIs("org.springframework.stereotype.Controller")
+        or pmd-java:typeIs("org.springframework.stereotype.Repository")
+        or pmd-java:typeIs("org.springframework.stereotype.Service")
+        or pmd-java:typeIs("org.springframework.web.bind.annotation.RestController")
+    ]]
+//Annotation
+    [*/Name[pmd-java:typeIs("org.springframework.beans.factory.annotation.Autowired")]]
+    [following-sibling::FieldDeclaration]
+                ]]></value>
+            </property>
+        </properties>
+    </rule>
+</ruleset>

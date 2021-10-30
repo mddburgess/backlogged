@@ -72,7 +72,7 @@ public class Test implements Persistable<Integer> {
         <expected-problems>0</expected-problems>
         <code><![CDATA[
 import javax.persistence.Entity;
-import com.metricalsky.testdata.pmd.jpa.AbstractEntity;
+import com.metricalsky.backlogged.quality.testdata.jpa.AbstractEntity;
 
 @Entity
 public class Test extends AbstractEntity {

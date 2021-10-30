@@ -10,4 +10,5 @@
     <rule ref="category/java/bestpractices.xml/MissingOverride"/>
 
     <rule ref="rules/java/jpa.xml"/>
+    <rule ref="rules/java/spring.xml"/>
 </ruleset>

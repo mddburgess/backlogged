@@ -9,14 +9,14 @@
     <rule language="java"
           name="AvoidImplicitTableName"
           message="Entity class should explicitly define a table name"
-          class="com.metricalsky.quality.pmd.jpa.AvoidImplicitTableNameRule">
+          class="com.metricalsky.backlogged.quality.pmd.jpa.AvoidImplicitTableNameRule">
         <priority>4</priority>
     </rule>
 
     <rule language="java"
           name="EntityShouldBePersistable"
           message="Entity class should implement Persistable"
-          class="com.metricalsky.quality.pmd.jpa.EntityShouldBePersistableRule">
+          class="com.metricalsky.backlogged.quality.pmd.jpa.EntityShouldBePersistableRule">
         <priority>3</priority>
     </rule>
 </ruleset>
