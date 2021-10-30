@@ -1,7 +1,10 @@
 package com.metricalsky.testdata.pmd.jpa;
 
-import org.springframework.data.domain.Persistable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-public abstract class BaseEntity implements Persistable<Integer> {
+@Entity
+@Table(name = "table")
+public class BaseEntity {
 
 }

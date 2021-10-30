@@ -5,9 +5,9 @@ import net.sourceforge.pmd.lang.java.rule.AbstractJavaRule;
 import net.sourceforge.pmd.lang.java.types.TypeTestUtil;
 import org.springframework.data.domain.Persistable;
 
-public class EntityShouldBePersistable extends AbstractJavaRule {
+public class EntityShouldBePersistableRule extends AbstractJavaRule {
 
-    public EntityShouldBePersistable() {
+    public EntityShouldBePersistableRule() {
         addRuleChainVisit(ASTClassOrInterfaceDeclaration.class);
     }
 

@@ -9,5 +9,5 @@
     <rule ref="category/java/bestpractices.xml/JUnit5TestShouldBePackagePrivate"/>
     <rule ref="category/java/bestpractices.xml/MissingOverride"/>
 
-    <rule ref="rules/java/jpa.xml/EntityShouldBePersistable"/>
+    <rule ref="rules/java/jpa.xml"/>
 </ruleset>

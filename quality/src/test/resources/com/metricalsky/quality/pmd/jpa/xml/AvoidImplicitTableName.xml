@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests">
+    <test-code>
+        <description>Entity class is missing Table annotation</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>4</expected-linenumbers>
+        <expected-messages>
+            <message>Entity class should explicitly define a table name</message>
+        </expected-messages>
+        <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Test {
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Entity extends another entity without a Table annotation</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>5</expected-linenumbers>
+        <expected-messages>
+            <message>Entity class should explicitly define a table name</message>
+        </expected-messages>
+        <code><![CDATA[
+import javax.persistence.Entity;
+import com.metricalsky.testdata.pmd.jpa.AbstractEntity;
+
+@Entity
+public class Test extends AbstractEntity {
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Table annotation is missing parameters</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>6</expected-linenumbers>
+        <expected-messages>
+            <message>Entity class should explicitly define a table name</message>
+        </expected-messages>
+        <code><![CDATA[
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table
+public class Test {
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Table annotation is missing a name parameter</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>6</expected-linenumbers>
+        <expected-messages>
+            <message>Entity class should explicitly define a table name</message>
+        </expected-messages>
+        <code><![CDATA[
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(schema = "schema")
+public class Test {
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Non-entity class</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Test {
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Table annotation has a name parameter</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "table")
+public class Test {
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Entity inherits Table annotation</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import javax.persistence.Entity;
+import com.metricalsky.testdata.pmd.jpa.BaseEntity;
+
+@Entity
+public class Test extends BaseEntity {
+}
+        ]]></code>
+    </test-code>
+</test-data>

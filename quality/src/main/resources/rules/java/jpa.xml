@@ -7,9 +7,16 @@
     <description>Java Persistence</description>
 
     <rule language="java"
+          name="AvoidImplicitTableName"
+          message="Entity class should explicitly define a table name"
+          class="com.metricalsky.quality.pmd.jpa.AvoidImplicitTableNameRule">
+        <priority>4</priority>
+    </rule>
+
+    <rule language="java"
           name="EntityShouldBePersistable"
           message="Entity class should implement Persistable"
-          class="com.metricalsky.quality.pmd.jpa.EntityShouldBePersistable">
+          class="com.metricalsky.quality.pmd.jpa.EntityShouldBePersistableRule">
         <priority>3</priority>
     </rule>
 </ruleset>
