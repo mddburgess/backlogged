@@ -8,14 +8,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItem;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemStatus;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemType;
+import com.metricalsky.backlogged.backend.backlog.event.BacklogItemEventPublisher;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemRepository;
-import com.metricalsky.backlogged.backend.common.entity.IdentifiableEntity;
+import com.metricalsky.backlogged.backend.test.Answers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +27,9 @@ class BacklogItemServiceTest {
 
     @InjectMocks
     private BacklogItemService service;
+
+    @Mock
+    private BacklogItemEventPublisher eventPublisher;
     @Mock
     private BacklogItemRepository repository;
 
@@ -62,7 +65,7 @@ class BacklogItemServiceTest {
         dto.setStatus(BacklogItemStatus.NEW);
 
         when(repository.save(any(BacklogItem.class)))
-                .thenAnswer(setEntityId(1));
+                .thenAnswer(Answers.setEntityId(1));
 
         assertThat(service.create(dto))
                 .hasFieldOrPropertyWithValue("id", 1)
@@ -93,19 +96,14 @@ class BacklogItemServiceTest {
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(dto);
+
+        verify(eventPublisher)
+                .publishUpdateEvent(entity);
     }
 
     @Test
     void givenId_whenUpdate_thenDeleteFromRepository() {
         service.delete(1);
         verify(repository).deleteById(1);
-    }
-
-    private static Answer<Void> setEntityId(Integer id) {
-        return invocation -> {
-            var entity = invocation.getArgument(0, IdentifiableEntity.class);
-            entity.setId(id);
-            return null;
-        };
     }
 }

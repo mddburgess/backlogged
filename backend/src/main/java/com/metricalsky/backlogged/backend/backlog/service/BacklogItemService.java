@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
+import com.metricalsky.backlogged.backend.backlog.event.BacklogItemEventPublisher;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemRepository;
 
 import static java.util.stream.Collectors.toList;
@@ -14,6 +15,8 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class BacklogItemService {
 
+    @Autowired
+    private BacklogItemEventPublisher eventPublisher;
     @Autowired
     private BacklogItemRepository repository;
 
@@ -40,6 +43,7 @@ public class BacklogItemService {
     @Transactional
     public BacklogItemDto update(Integer id, BacklogItemDto dto) {
         var backlogItem = repository.findById(id).orElseThrow();
+        eventPublisher.publishUpdateEvent(backlogItem);
         mapper.patchEntity(backlogItem, dto);
         return mapper.toDto(backlogItem);
     }
