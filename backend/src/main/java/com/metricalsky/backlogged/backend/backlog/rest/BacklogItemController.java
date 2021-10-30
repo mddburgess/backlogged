@@ -2,7 +2,6 @@ package com.metricalsky.backlogged.backend.backlog.rest;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +18,11 @@ import com.metricalsky.backlogged.backend.backlog.service.BacklogItemService;
 @RequestMapping("/api/backlog")
 public class BacklogItemController {
 
-    @Autowired
-    private BacklogItemService service;
+    private final BacklogItemService service;
+
+    public BacklogItemController(BacklogItemService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public List<BacklogItemDto> list() {

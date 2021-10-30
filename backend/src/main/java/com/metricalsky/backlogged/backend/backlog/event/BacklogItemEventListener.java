@@ -2,7 +2,6 @@ package com.metricalsky.backlogged.backend.backlog.event;
 
 import java.time.ZonedDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -13,8 +12,11 @@ import com.metricalsky.backlogged.backend.activity.repository.ActivityRepository
 @Component
 public class BacklogItemEventListener {
 
-    @Autowired
-    private ActivityRepository activityRepository;
+    private final ActivityRepository activityRepository;
+
+    public BacklogItemEventListener(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
+    }
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void onUpdate(BacklogItemUpdatedEvent event) {

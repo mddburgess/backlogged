@@ -1,6 +1,5 @@
 package com.metricalsky.backlogged.backend.activity.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +13,11 @@ import com.metricalsky.backlogged.backend.activity.service.TimeActivityService;
 @RequestMapping("/api/backlog/{id}/activities")
 public class ActivityController {
 
-    @Autowired
-    private TimeActivityService timeActivityService;
+    private final TimeActivityService timeActivityService;
+
+    public ActivityController(TimeActivityService timeActivityService) {
+        this.timeActivityService = timeActivityService;
+    }
 
     @PostMapping
     public void create(@PathVariable("id") Integer backlogItemId, @RequestBody ActivityDto activityDto) {

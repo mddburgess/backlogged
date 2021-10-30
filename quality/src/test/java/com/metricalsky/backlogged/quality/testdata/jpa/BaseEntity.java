@@ -1,4 +1,4 @@
-package com.metricalsky.testdata.pmd.jpa;
+package com.metricalsky.backlogged.quality.testdata.jpa;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

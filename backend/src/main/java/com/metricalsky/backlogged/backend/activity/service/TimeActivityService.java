@@ -1,6 +1,5 @@
 package com.metricalsky.backlogged.backend.activity.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +10,15 @@ import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemReposito
 @Service
 public class TimeActivityService {
 
-    @Autowired
-    private ActivityRepository activityRepository;
-    @Autowired
-    private BacklogItemRepository backlogItemRepository;
-
+    private final ActivityRepository activityRepository;
+    private final BacklogItemRepository backlogItemRepository;
     private final TimeActivityMapper mapper = new TimeActivityMapper();
+
+    public TimeActivityService(ActivityRepository activityRepository,
+            BacklogItemRepository backlogItemRepository) {
+        this.activityRepository = activityRepository;
+        this.backlogItemRepository = backlogItemRepository;
+    }
 
     @Transactional
     public void create(Integer backlogItemId, ActivityDto activityDto) {
