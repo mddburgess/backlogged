@@ -2,7 +2,6 @@ package com.metricalsky.backlogged.backend.backlog.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,27 +9,24 @@ import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
 import com.metricalsky.backlogged.backend.backlog.event.BacklogItemEventPublisher;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemRepository;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class BacklogItemService {
 
-    @Autowired
-    private BacklogItemEventPublisher eventPublisher;
-    @Autowired
-    private BacklogItemRepository repository;
+    private final BacklogItemEventPublisher eventPublisher;
+    private final BacklogItemRepository repository;
+    private final BacklogItemMapper mapper = new BacklogItemMapper();
 
-    private final BacklogItemMapper mapper;
-
-    public BacklogItemService() {
-        mapper = new BacklogItemMapper();
+    public BacklogItemService(BacklogItemEventPublisher eventPublisher,
+            BacklogItemRepository repository) {
+        this.eventPublisher = eventPublisher;
+        this.repository = repository;
     }
 
     public List<BacklogItemDto> list() {
         return repository.findAll()
                 .stream()
                 .map(mapper::toDto)
-                .collect(toList());
+                .toList();
     }
 
     @Transactional
