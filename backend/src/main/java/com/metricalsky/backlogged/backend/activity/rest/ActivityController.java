@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
+import com.metricalsky.backlogged.backend.activity.dto.TimeActivityDto;
 import com.metricalsky.backlogged.backend.activity.service.TimeActivityService;
 
 @RestController
@@ -20,7 +20,10 @@ public class ActivityController {
     }
 
     @PostMapping
-    public void create(@PathVariable("id") Integer backlogItemId, @RequestBody ActivityDto activityDto) {
+    public void create(
+            @PathVariable("id") Integer backlogItemId,
+            @RequestBody TimeActivityDto activityDto
+    ) {
         timeActivityService.create(backlogItemId, activityDto);
     }
 }

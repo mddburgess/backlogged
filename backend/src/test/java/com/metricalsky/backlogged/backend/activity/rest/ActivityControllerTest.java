@@ -10,7 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
+import com.metricalsky.backlogged.backend.activity.dto.TimeActivityDto;
 import com.metricalsky.backlogged.backend.activity.service.TimeActivityService;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,7 +33,7 @@ class ActivityControllerTest {
 
     @Test
     void givenActivityDto_whenPost_thenCreateTimeActivity() throws Exception {
-        var dto = new ActivityDto();
+        var dto = new TimeActivityDto();
         dto.setDuration(Duration.ofHours(1));
 
         var request = post("/api/backlog/1/activities")
@@ -44,6 +44,6 @@ class ActivityControllerTest {
                 .andExpect(content().string(""));
 
         verify(timeActivityService)
-                .create(eq(1), any(ActivityDto.class));
+                .create(eq(1), any(TimeActivityDto.class));
     }
 }

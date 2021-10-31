@@ -4,7 +4,7 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
 
-import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
+import com.metricalsky.backlogged.backend.activity.dto.TimeActivityDto;
 import com.metricalsky.backlogged.backend.activity.entity.TimeActivity;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,13 +15,13 @@ class TimeActivityMapperTest {
 
     @Test
     void givenEmptyDto_whenToEntity_thenReturnEmptyEntity() {
-        assertThat(mapper.toEntity(new ActivityDto()))
+        assertThat(mapper.toEntity(new TimeActivityDto()))
                 .hasAllNullFieldsOrPropertiesExcept("activityDate");
     }
 
     @Test
     void givenDto_whenToEntity_thenReturnEquivalentEntity() {
-        var dto = new ActivityDto();
+        var dto = new TimeActivityDto();
         dto.setDuration(Duration.ofHours(1));
 
         var entity = mapper.toEntity(dto);

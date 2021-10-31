@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
+import com.metricalsky.backlogged.backend.activity.dto.TimeActivityDto;
 import com.metricalsky.backlogged.backend.activity.entity.TimeActivity;
 import com.metricalsky.backlogged.backend.activity.repository.ActivityRepository;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItem;
@@ -32,7 +32,7 @@ class TimeActivityServiceTest {
     @Test
     void givenActivityDto_whenCreate_thenSaveTimeActivity() {
         var backlogItem = new BacklogItem();
-        var activityDto = new ActivityDto();
+        var activityDto = new TimeActivityDto();
 
         when(backlogItemRepository.findById(1))
                 .thenReturn(Optional.of(backlogItem));
