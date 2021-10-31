@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
 import com.metricalsky.backlogged.backend.backlog.event.BacklogItemEventPublisher;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemRepository;
+import com.metricalsky.backlogged.backend.common.exception.ResourceNotFoundException;
 
 @Service
 public class BacklogItemService {
@@ -38,13 +39,17 @@ public class BacklogItemService {
 
     @Transactional
     public BacklogItemDto update(Integer id, BacklogItemDto dto) {
-        var backlogItem = repository.findById(id).orElseThrow();
+        var backlogItem = repository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new);
         eventPublisher.publishUpdateEvent(backlogItem);
         mapper.patchEntity(backlogItem, dto);
         return mapper.toDto(backlogItem);
     }
 
+    @Transactional
     public void delete(Integer id) {
-        repository.deleteById(id);
+        var entity = repository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new);
+        repository.delete(entity);
     }
 }

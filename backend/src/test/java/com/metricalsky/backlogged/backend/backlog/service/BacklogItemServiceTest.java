@@ -15,11 +15,15 @@ import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemStatus;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemType;
 import com.metricalsky.backlogged.backend.backlog.event.BacklogItemEventPublisher;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemRepository;
+import com.metricalsky.backlogged.backend.common.exception.ResourceNotFoundException;
 import com.metricalsky.backlogged.backend.test.Answers;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,6 +41,7 @@ class BacklogItemServiceTest {
     void givenNoBacklogItems_whenList_thenReturnEmptyList() {
         when(repository.findAll())
                 .thenReturn(List.of());
+
         assertThat(service.list())
                 .isEmpty();
     }
@@ -75,7 +80,7 @@ class BacklogItemServiceTest {
     }
 
     @Test
-    void givenEntityExists_whenUpdate_thenReturnUpdatedItem() {
+    void givenExists_whenUpdate_thenReturnUpdatedItem() {
         var entity = new BacklogItem();
         entity.setId(1);
         entity.setName("Name");
@@ -102,8 +107,35 @@ class BacklogItemServiceTest {
     }
 
     @Test
-    void givenId_whenUpdate_thenDeleteFromRepository() {
+    void givenNotExists_whenUpdate_thenThrowResourceNotFoundException() {
+        var dto = new BacklogItemDto();
+
+        assertThatExceptionOfType(ResourceNotFoundException.class)
+                .isThrownBy(() -> service.update(1, dto));
+
+        verifyNoInteractions(eventPublisher);
+    }
+
+    @Test
+    void givenExists_whenDelete_thenDeleteFromRepository() {
+        var entity = new BacklogItem();
+
+        when(repository.findById(1))
+                .thenReturn(Optional.of(entity));
+
         service.delete(1);
-        verify(repository).deleteById(1);
+
+        verify(repository)
+                .delete(entity);
+    }
+
+    @Test
+    void givenNotExists_whenDelete_thenThrowResourceNotFoundException() {
+        assertThatExceptionOfType(ResourceNotFoundException.class)
+                .isThrownBy(() -> service.delete(1));
+
+        verify(repository)
+                .findById(1);
+        verifyNoMoreInteractions(repository);
     }
 }
