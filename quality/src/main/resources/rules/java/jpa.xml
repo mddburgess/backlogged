@@ -16,7 +16,18 @@
     <rule language="java"
           name="EntityShouldBePersistable"
           message="Entity class should implement Persistable"
-          class="com.metricalsky.backlogged.quality.pmd.jpa.EntityShouldBePersistableRule">
-        <priority>3</priority>
+          class="net.sourceforge.pmd.lang.rule.XPathRule">
+        <priority>4</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//TypeDeclaration
+    [//Annotation//Name[pmd-java:typeIs("javax.persistence.Entity")]]
+//ClassOrInterfaceDeclaration
+    [not(pmd-java:typeIs("org.springframework.data.domain.Persistable"))]
+                ]]></value>
+            </property>
+        </properties>
     </rule>
 </ruleset>
