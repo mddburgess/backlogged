@@ -3,7 +3,7 @@ package com.metricalsky.backlogged.backend.activity.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
+import com.metricalsky.backlogged.backend.activity.dto.TimeActivityDto;
 import com.metricalsky.backlogged.backend.activity.repository.ActivityRepository;
 import com.metricalsky.backlogged.backend.backlog.repository.BacklogItemRepository;
 
@@ -21,7 +21,7 @@ public class TimeActivityService {
     }
 
     @Transactional
-    public void create(Integer backlogItemId, ActivityDto activityDto) {
+    public void create(Integer backlogItemId, TimeActivityDto activityDto) {
         var backlogItem = backlogItemRepository.findById(backlogItemId)
                 .orElseThrow();
         var entity = mapper.toEntity(activityDto);

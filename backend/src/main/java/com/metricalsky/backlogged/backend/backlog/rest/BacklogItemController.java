@@ -34,8 +34,16 @@ public class BacklogItemController {
         return service.create(backlogItemDto);
     }
 
+    @GetMapping(path = "/{id}")
+    public BacklogItemDto retrieve(@PathVariable("id") Integer id) {
+        return service.retrieve(id);
+    }
+
     @PutMapping(path = "/{id}")
-    public BacklogItemDto update(@PathVariable("id") Integer id, @RequestBody BacklogItemDto backlogItemDto) {
+    public BacklogItemDto update(
+            @PathVariable("id") Integer id,
+            @RequestBody BacklogItemDto backlogItemDto
+    ) {
         return service.update(id, backlogItemDto);
     }
 

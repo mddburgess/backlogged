@@ -1,10 +1,12 @@
 package com.metricalsky.backlogged.backend.backlog.service;
 
 import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.metricalsky.backlogged.backend.activity.entity.StatusActivity;
 import com.metricalsky.backlogged.backend.activity.entity.TimeActivity;
 import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItem;
@@ -60,11 +62,39 @@ class BacklogItemMapperTest {
         var dto = mapper.toDto(entity);
 
         assertThat(dto)
+                .hasNoNullFieldsOrPropertiesExcept("activities")
+                .hasFieldOrPropertyWithValue("activityTime", Duration.ofHours(1))
+                .usingRecursiveComparison()
+                .ignoringFields("activities", "activityTime")
+                .isEqualTo(entity);
+    }
+
+    @Test
+    void givenEntity_whenToDetailedDto_thenReturnEquivalentDto() {
+        var statusActivity = new StatusActivity();
+        statusActivity.setId(2);
+        statusActivity.setActivityDate(ZonedDateTime.now());
+        statusActivity.setFromStatus(BacklogItemStatus.NEW);
+        statusActivity.setToStatus(BacklogItemStatus.ACTIVE);
+
+        var timeActivity = new TimeActivity();
+        timeActivity.setId(3);
+        timeActivity.setActivityDate(ZonedDateTime.now());
+        timeActivity.setDuration(Duration.ofHours(1));
+
+        var backlogItem = new BacklogItem();
+        backlogItem.setId(1);
+        backlogItem.setName("Name");
+        backlogItem.setType(BacklogItemType.VIDEO_GAME);
+        backlogItem.setStatus(BacklogItemStatus.ACTIVE);
+        backlogItem.setActivities(List.of(statusActivity, timeActivity));
+
+        var backlogItemDto = mapper.toDetailedDto(backlogItem);
+
+        assertThat(backlogItemDto)
                 .usingRecursiveComparison()
                 .ignoringFields("activityTime")
-                .isEqualTo(entity);
-        assertThat(dto)
-                .hasFieldOrPropertyWithValue("activityTime", Duration.ofHours(1));
+                .isEqualTo(backlogItem);
     }
 
     @Test
