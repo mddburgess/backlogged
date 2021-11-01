@@ -37,6 +37,12 @@ public class BacklogItemService {
         return mapper.toDto(backlogItem);
     }
 
+    public BacklogItemDto retrieve(Integer id) {
+        return repository.findDetailedById(id)
+                .map(mapper::toDetailedDto)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
+
     @Transactional
     public BacklogItemDto update(Integer id, BacklogItemDto dto) {
         var backlogItem = repository.findById(id)

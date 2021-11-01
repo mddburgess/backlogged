@@ -80,6 +80,32 @@ class BacklogItemServiceTest {
     }
 
     @Test
+    void givenExists_whenRetrieve_thenReturnBacklogItem() {
+        var entity = new BacklogItem();
+        entity.setId(1);
+        entity.setName("Name");
+        entity.setType(BacklogItemType.VIDEO_GAME);
+        entity.setStatus(BacklogItemStatus.NEW);
+
+        when(repository.findDetailedById(1))
+                .thenReturn(Optional.of(entity));
+
+        assertThat(service.retrieve(1))
+                .usingRecursiveComparison()
+                .ignoringFields("activityTime")
+                .isEqualTo(entity);
+    }
+
+    @Test
+    void givenNotExists_whenRetrieve_thenThrowResourceNotFoundException() {
+        assertThatExceptionOfType(ResourceNotFoundException.class)
+                .isThrownBy(() -> service.retrieve(1));
+
+        verify(repository)
+                .findDetailedById(1);
+    }
+
+    @Test
     void givenExists_whenUpdate_thenReturnUpdatedItem() {
         var entity = new BacklogItem();
         entity.setId(1);
