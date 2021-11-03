@@ -148,7 +148,8 @@
                                 </limit>
                             </limits>
                             <excludes>
-                                <exclude>*.BackendApplication</exclude>
+                                <exclude>*.backend.BackendApplication</exclude>
+                                <exclude>*.backend.common.web.FrontendController</exclude>
                             </excludes>
                         </rule>
                     </rules>

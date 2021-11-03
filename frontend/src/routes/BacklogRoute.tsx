@@ -1,6 +1,6 @@
 import BacklogItemList from "components/backlog/BacklogItemList";
 
-export const BacklogPage = () => (
+export const BacklogRoute = () => (
     <div>
         <BacklogItemList />
     </div>
