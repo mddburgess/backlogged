@@ -3,7 +3,7 @@ import {BacklogItem} from "types/BacklogItem";
 
 const API = createApi({
     reducerPath: "API",
-    baseQuery: fetchBaseQuery({baseUrl: "api"}),
+    baseQuery: fetchBaseQuery({baseUrl: "/api"}),
     tagTypes: ["backlog"],
     endpoints: (builder) => ({
         listBacklog: builder.query<BacklogItem[], void>({
@@ -11,6 +11,12 @@ const API = createApi({
             providesTags: (result) => [
                 {type: "backlog", id: "list"},
                 ...(result?.map(({id}) => ({type: "backlog" as const, id})) ?? [])
+            ]
+        }),
+        retrieveBacklogItem: builder.query<BacklogItem, number>({
+            query: (id) => `backlog/${id}`,
+            providesTags: (result, error, id) => [
+                {type: "backlog", id}
             ]
         }),
         createBacklogItem: builder.mutation<BacklogItem, Partial<BacklogItem>>({
