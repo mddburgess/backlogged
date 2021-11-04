@@ -123,6 +123,39 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>checkstyle-check</id>
+                        <phase>process-test-classes</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>9.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.metricalsky.backlogged</groupId>
+                        <artifactId>quality</artifactId>
+                        <version>0.1.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>rulesets/checkstyle.xml</configLocation>
+                    <failOnViolation>false</failOnViolation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <linkXRef>false</linkXRef>
+                    <violationSeverity>warning</violationSeverity>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.7</version>
