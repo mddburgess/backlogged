@@ -30,4 +30,22 @@
             </property>
         </properties>
     </rule>
+
+    <rule language="java"
+          name="UseJpaRepository"
+          message="Repository interface ''{0}'' should extend JpaRepository"
+          class="net.sourceforge.pmd.lang.rule.XPathRule">
+        <priority>4</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//ClassOrInterfaceDeclaration
+    [@Interface=true()]
+    [pmd-java:typeIs("org.springframework.data.repository.CrudRepository")]
+    [not(pmd-java:typeIs("org.springframework.data.jpa.repository.JpaRepository"))]
+                ]]></value>
+            </property>
+        </properties>
+    </rule>
 </ruleset>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests http://pmd.sourceforge.net/rule-tests_1_0_0.xsd">
+   <test-code>
+      <description>Repository interface extends CrudRepository</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>3</expected-linenumbers>
+      <expected-messages>
+         <message>Repository interface 'Repository' should extend JpaRepository</message>
+      </expected-messages>
+      <code><![CDATA[
+import org.springframework.data.repository.CrudRepository;
+
+public interface Repository extends CrudRepository<Entity, Long> {
+
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Repository interface extends PagingAndSortingRepository</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>3</expected-linenumbers>
+      <expected-messages>
+         <message>Repository interface 'Repository' should extend JpaRepository</message>
+      </expected-messages>
+      <code><![CDATA[
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface Repository extends PagingAndSortingRepository<Entity, Long> {
+
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Repository interface extends JpaRepository</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface Repository extends JpaRepository<Entity, Long> {
+
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Non-repository interface</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public interface NotRepository {
+
+}
+        ]]></code>
+   </test-code>
+
+</test-data>
