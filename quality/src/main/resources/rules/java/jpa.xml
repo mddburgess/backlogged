@@ -96,6 +96,56 @@
     </rule>
 
     <rule language="java"
+          name="FinalEntityField"
+          message="Persistent instance variable ''{0}'' on entity class should not be final"
+          class="net.sourceforge.pmd.lang.rule.XPathRule">
+        <priority>2</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//ClassOrInterfaceDeclaration
+    [preceding-sibling::Annotation//Name[
+        pmd-java:typeIs("javax.persistence.Entity")
+        or pmd-java:typeIs("jakarta.persistence.Entity")
+    ]]
+/ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/FieldDeclaration
+    [@Static = false()]
+    [@Final = true()]
+    [@Transient = false()]
+    [not(preceding-sibling::Annotation//Name[
+        pmd-java:typeIs("javax.persistence.Transient")
+        or pmd-java:typeIs("jakarta.persistence.Transient")
+    ])]
+//VariableDeclaratorId
+                ]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule language="java"
+          name="FinalEntityMethod"
+          message="Method ''{0}'' on entity class should not be final"
+          class="net.sourceforge.pmd.lang.rule.XPathRule">
+        <priority>2</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//ClassOrInterfaceDeclaration
+    [preceding-sibling::Annotation//Name[
+        pmd-java:typeIs("javax.persistence.Entity")
+        or pmd-java:typeIs("jakarta.persistence.Entity")
+    ]]
+/ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/MethodDeclaration
+    [@Final = true()]
+/MethodDeclarator
+                ]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule language="java"
           name="NestedEntity"
           message="Entity class ''{0}'' must be a top-level class"
           class="net.sourceforge.pmd.lang.rule.XPathRule">

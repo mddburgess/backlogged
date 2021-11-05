@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests http://pmd.sourceforge.net/rule-tests_1_0_0.xsd">
+   <test-code>
+      <description>Javax @Entity with final instance variable</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>5</expected-linenumbers>
+      <expected-messages>
+         <message>Persistent instance variable 'field' on entity class should not be final</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+    private final String field;
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with final instance variable</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>5</expected-linenumbers>
+      <expected-messages>
+         <message>Persistent instance variable 'field' on entity class should not be final</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+    private final String field;
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with final transient instance variable</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+    private transient final String field;
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with final transient instance variable</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+    private transient final String field;
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with final @Transient instance variable</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
+@Entity
+public class Sample {
+    @Transient
+    private final String field;
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with final @Transient instance variable</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
+@Entity
+public class Sample {
+    @Transient
+    private final String field;
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with final class variable</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+    private static final String field;
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with final class variable</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+    private static final String field;
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with final instance variable</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+    private final String field;
+}
+        ]]></code>
+   </test-code>
+</test-data>

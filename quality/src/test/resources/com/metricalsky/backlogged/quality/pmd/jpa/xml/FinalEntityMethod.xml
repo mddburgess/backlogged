@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests http://pmd.sourceforge.net/rule-tests_1_0_0.xsd">
+   <test-code>
+      <description>Javax @Entity class with final method</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>5</expected-linenumbers>
+      <expected-messages>
+         <message>Method 'method' on entity class should not be final</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+    public final void method() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity class with final method</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>5</expected-linenumbers>
+      <expected-messages>
+         <message>Method 'method' on entity class should not be final</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+    public final void method() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity class with non-final method</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+    public void method() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity class with non-final method</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+    public void method() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with final method</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+    public final void method() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with non-final method</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+    public void method() {}
+}
+        ]]></code>
+   </test-code>
+</test-data>
