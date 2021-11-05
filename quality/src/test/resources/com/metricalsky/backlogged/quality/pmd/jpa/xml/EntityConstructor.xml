@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests http://pmd.sourceforge.net/rule-tests_1_0_0.xsd">
+   <test-code>
+      <description>Javax @Entity with default constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with default constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with default constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with public no-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    public Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with public no-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    public Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with public no-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+
+    public Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with protected no-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    protected Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with protected no-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    protected Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with protected no-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+
+    protected Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with package-private no-arg constructor</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' must have a public or protected no-arg constructor</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with package-private no-arg constructor</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' must have a public or protected no-arg constructor</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with package-private no-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+
+    Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with private no-arg constructor</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' must have a public or protected no-arg constructor</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    private Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with private no-arg constructor</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' must have a public or protected no-arg constructor</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    private Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with private no-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+
+    private Sample() {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with public 1-arg constructor</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' must have a public or protected no-arg constructor</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    public Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with public 1-arg constructor</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' must have a public or protected no-arg constructor</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    public Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with public 1-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+
+    public Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with protected 1-arg constructor</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' must have a public or protected no-arg constructor</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    protected Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with protected 1-arg constructor</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' must have a public or protected no-arg constructor</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    protected Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with protected 1-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+
+    protected Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity with public no-arg and 1-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    public Sample() {}
+    public Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity with public no-arg and 1-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+
+    public Sample() {}
+    public Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with public no-arg and 1-arg constructor</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+
+    public Sample() {}
+    public Sample(Object arg) {}
+}
+        ]]></code>
+   </test-code>
+</test-data>

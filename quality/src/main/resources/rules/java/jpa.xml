@@ -14,6 +14,31 @@
     </rule>
 
     <rule language="java"
+          name="EntityConstructor"
+          message="Entity class ''{0}'' must have a public or protected no-arg constructor"
+          class="net.sourceforge.pmd.lang.rule.XPathRule">
+        <priority>1</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//TypeDeclaration
+    [Annotation//Name[
+        pmd-java:typeIs("javax.persistence.Entity")
+        or pmd-java:typeIs("jakarta.persistence.Entity")
+    ]]
+//ClassOrInterfaceDeclaration
+    [count(ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/ConstructorDeclaration) > 0]
+    [count(ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/ConstructorDeclaration
+        [@Public = true() or @Protected = true()]
+        [@Arity = 0]
+    ) = 0]
+                ]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule language="java"
           name="EntityShouldBePersistable"
           message="Entity class should implement Persistable"
           class="net.sourceforge.pmd.lang.rule.XPathRule">
