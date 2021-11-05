@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests http://pmd.sourceforge.net/rule-tests_1_0_0.xsd">
+   <test-code>
+      <description>Javax @Entity annotation on final class</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' should not be final</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public final class Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on final class</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' should not be final</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public final class Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity annotation on non-final class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on non-final class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO final class</description>
+      <expected-problems>0</expected-problems>
+      <code>public final class Sample {}</code>
+   </test-code>
+
+   <test-code>
+      <description>POJO non-final class</description>
+      <expected-problems>0</expected-problems>
+      <code>public class Sample {}</code>
+   </test-code>
+</test-data>
