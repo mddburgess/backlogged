@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests">
+    <test-code>
+        <description>Javax @Entity class does not implement Persistable</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>4</expected-linenumbers>
+        <expected-messages>
+            <message>Entity class 'Test' should implement Persistable</message>
+        </expected-messages>
+        <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Test {}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Jakarta @Entity class does not implement Persistable</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>4</expected-linenumbers>
+        <expected-messages>
+            <message>Entity class 'Test' should implement Persistable</message>
+        </expected-messages>
+        <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Test {}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Javax @Entity class implements different Persistable type</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>5</expected-linenumbers>
+        <expected-messages>
+            <message>Entity class 'Test' should implement Persistable</message>
+        </expected-messages>
+        <code><![CDATA[
+import javax.persistence.Entity;
+import other.Persistable;
+
+@Entity
+public class Test implements Persistable<Integer> {}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Jakarta @Entity class implements different Persistable type</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>5</expected-linenumbers>
+        <expected-messages>
+            <message>Entity class 'Test' should implement Persistable</message>
+        </expected-messages>
+        <code><![CDATA[
+import jakarta.persistence.Entity;
+import other.Persistable;
+
+@Entity
+public class Test implements Persistable<Integer> {}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Non-entity class</description>
+        <expected-problems>0</expected-problems>
+        <code>public class Test {}</code>
+    </test-code>
+
+    <test-code>
+        <description>Non-JPA @Entity annotation</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import other.Entity;
+
+@Entity
+public class Test {}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Javax @Entity class implements Persistable</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import javax.persistence.Entity;
+import org.springframework.data.domain.Persistable;
+
+@Entity
+public class Test implements Persistable<Integer> {}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Jakarta @Entity class implements Persistable</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import jakarta.persistence.Entity;
+import org.springframework.data.domain.Persistable;
+
+@Entity
+public class Test implements Persistable<Integer> {}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Javax @Entity class inherits Persistable</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import javax.persistence.Entity;
+import com.metricalsky.backlogged.quality.testdata.jpa.AbstractEntity;
+
+@Entity
+public class Test extends AbstractEntity {}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Jakarta @Entity class inherits Persistable</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+import jakarta.persistence.Entity;
+import com.metricalsky.backlogged.quality.testdata.jpa.AbstractEntity;
+
+@Entity
+public class Test extends AbstractEntity {}
+        ]]></code>
+    </test-code>
+</test-data>

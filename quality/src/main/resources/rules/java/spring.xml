@@ -32,6 +32,26 @@
     </rule>
 
     <rule language="java"
+          name="EntityShouldBePersistable"
+          message="Entity class ''{0}'' should implement Persistable"
+          class="net.sourceforge.pmd.lang.rule.XPathRule">
+        <priority>4</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//ClassOrInterfaceDeclaration
+    [preceding-sibling::Annotation//Name[
+        pmd-java:typeIs("javax.persistence.Entity")
+        or pmd-java:typeIs("jakarta.persistence.Entity")
+    ]]
+    [not(pmd-java:typeIs("org.springframework.data.domain.Persistable"))]
+                ]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule language="java"
           name="UseJpaRepository"
           message="Repository interface ''{0}'' should extend JpaRepository"
           class="net.sourceforge.pmd.lang.rule.XPathRule">
