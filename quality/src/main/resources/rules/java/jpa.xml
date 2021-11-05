@@ -74,4 +74,24 @@
             </property>
         </properties>
     </rule>
+
+    <rule language="java"
+          name="NestedEntity"
+          message="Entity class ''{0}'' must be a top-level class"
+          class="net.sourceforge.pmd.lang.rule.XPathRule">
+        <priority>1</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//ClassOrInterfaceBodyDeclaration
+    [Annotation//Name[
+        pmd-java:typeIs("javax.persistence.Entity")
+        or pmd-java:typeIs("jakarta.persistence.Entity")
+    ]]
+/ClassOrInterfaceDeclaration
+                ]]></value>
+            </property>
+        </properties>
+    </rule>
 </ruleset>

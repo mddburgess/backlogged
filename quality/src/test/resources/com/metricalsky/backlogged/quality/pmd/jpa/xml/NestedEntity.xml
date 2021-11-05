@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests http://pmd.sourceforge.net/rule-tests_1_0_0.xsd">
+   <test-code>
+      <description>Javax @Entity annotation on top-level class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {
+    public static class Nested {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on top-level class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {
+    public static class Nested {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity annotation on nested class</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>5</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Nested' must be a top-level class</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+public class Sample {
+    @Entity
+    public static class Nested {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on nested class</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>5</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Nested' must be a top-level class</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+public class Sample {
+    @Entity
+    public static class Nested {}
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity annotation on deeply nested class</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>6</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'DeeplyNested' must be a top-level class</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+public class Sample {
+    public static class Nested {
+        @Entity
+        public static class DeeplyNested {}
+    }
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on deeply nested class</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>6</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'DeeplyNested' must be a top-level class</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+public class Sample {
+    public static class Nested {
+        @Entity
+        public static class DeeplyNested {}
+    }
+}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO with nested class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+public class Sample {
+    public static class Nested {}
+}
+        ]]></code>
+   </test-code>
+</test-data>
