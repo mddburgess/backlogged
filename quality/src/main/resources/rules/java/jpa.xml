@@ -39,6 +39,25 @@
     </rule>
 
     <rule language="java"
+          name="EntityMustBeClass"
+          message="Entity class ''{0}'' cannot be an interface or enum"
+          class="net.sourceforge.pmd.lang.rule.XPathRule">
+        <priority>1</priority>
+        <properties>
+            <property name="version" value="2.0"/>
+            <property name="xpath">
+                <value><![CDATA[
+//(ClassOrInterfaceDeclaration[@Interface = true()] | EnumDeclaration)
+    [preceding-sibling::Annotation//Name[
+        pmd-java:typeIs("javax.persistence.Entity")
+        or pmd-java:typeIs("jakarta.persistence.Entity")
+    ]]
+                ]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule language="java"
           name="EntityShouldBePersistable"
           message="Entity class should implement Persistable"
           class="net.sourceforge.pmd.lang.rule.XPathRule">

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests http://pmd.sourceforge.net/rule-tests_1_0_0.xsd">
+   <test-code>
+      <description>Javax @Entity annotation on class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public class Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO class</description>
+      <expected-problems>0</expected-problems>
+      <code>public class Sample {}</code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity annotation on abstract class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public abstract class Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on abstract class</description>
+      <expected-problems>0</expected-problems>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public abstract class Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO on abstract class</description>
+      <expected-problems>0</expected-problems>
+      <code>public abstract class Sample {}</code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity annotation on interface</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' cannot be an interface or enum</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public interface Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on interface</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' cannot be an interface or enum</message>
+      </expected-messages>
+      <code><![CDATA[
+import jakarta.persistence.Entity;
+
+@Entity
+public interface Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO interface</description>
+      <expected-problems>0</expected-problems>
+      <code>public interface Sample {}</code>
+   </test-code>
+
+   <test-code>
+      <description>Javax @Entity annotation on enum</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' cannot be an interface or enum</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public enum Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>Jakarta @Entity annotation on enum</description>
+      <expected-problems>1</expected-problems>
+      <expected-linenumbers>4</expected-linenumbers>
+      <expected-messages>
+         <message>Entity class 'Sample' cannot be an interface or enum</message>
+      </expected-messages>
+      <code><![CDATA[
+import javax.persistence.Entity;
+
+@Entity
+public enum Sample {}
+        ]]></code>
+   </test-code>
+
+   <test-code>
+      <description>POJO enum</description>
+      <expected-problems>0</expected-problems>
+      <code>public enum Sample {}</code>
+   </test-code>
+</test-data>
