@@ -7,19 +7,11 @@ export interface BacklogItem {
     activities?: Activity[]
 }
 
-export type Activity = StatusActivity | TimeActivity;
-
-export interface StatusActivity {
-    type: "STATUS",
+export interface Activity {
+    type: string,
     id: number,
     activityDate: string,
     fromStatus: string,
-    toStatus: string
-}
-
-export interface TimeActivity {
-    type: "TIME",
-    id: number,
-    activityDate: string,
+    toStatus: string,
     duration: string
 }
