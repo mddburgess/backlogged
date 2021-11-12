@@ -19,6 +19,8 @@ public class BacklogItemMapper implements EntityMapper<BacklogItem, BacklogItemD
         entity.setName(dto.getName());
         entity.setType(dto.getType());
         entity.setStatus(dto.getStatus());
+        entity.setResolution(dto.getResolution());
+        entity.setDuration(dto.getDuration());
         return entity;
     }
 
@@ -29,6 +31,8 @@ public class BacklogItemMapper implements EntityMapper<BacklogItem, BacklogItemD
         dto.setName(entity.getName());
         dto.setType(entity.getType());
         dto.setStatus(entity.getStatus());
+        dto.setResolution(entity.getResolution());
+        dto.setDuration(entity.getDuration());
         if (entity.getActivities() != null) {
             dto.setActivityTime(entity.getActivities().stream()
                     .filter(TimeActivity.class::isInstance)
@@ -46,6 +50,8 @@ public class BacklogItemMapper implements EntityMapper<BacklogItem, BacklogItemD
         dto.setName(entity.getName());
         dto.setType(entity.getType());
         dto.setStatus(entity.getStatus());
+        dto.setResolution(entity.getResolution());
+        dto.setDuration(entity.getDuration());
         if (entity.getActivities() != null) {
             dto.setActivities(entity.getActivities()
                     .stream()
@@ -59,5 +65,7 @@ public class BacklogItemMapper implements EntityMapper<BacklogItem, BacklogItemD
         entity.setName(dto.getName());
         entity.setType(dto.getType());
         entity.setStatus(dto.getStatus());
+        entity.setResolution(dto.getResolution());
+        entity.setDuration(dto.getDuration());
     }
 }

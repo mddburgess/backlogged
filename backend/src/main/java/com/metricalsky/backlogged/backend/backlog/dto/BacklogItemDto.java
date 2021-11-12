@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import com.metricalsky.backlogged.backend.activity.dto.ActivityDto;
+import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemResolution;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemStatus;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemType;
 
@@ -18,6 +19,8 @@ public class BacklogItemDto {
     private String name;
     private BacklogItemType type;
     private BacklogItemStatus status;
+    private BacklogItemResolution resolution;
+    private Duration duration;
     private Duration activityTime;
     private List<ActivityDto> activities;
 }

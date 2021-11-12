@@ -10,6 +10,7 @@ import com.metricalsky.backlogged.backend.activity.entity.StatusActivity;
 import com.metricalsky.backlogged.backend.activity.entity.TimeActivity;
 import com.metricalsky.backlogged.backend.backlog.dto.BacklogItemDto;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItem;
+import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemResolution;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemStatus;
 import com.metricalsky.backlogged.backend.backlog.entity.BacklogItemType;
 
@@ -31,11 +32,14 @@ class BacklogItemMapperTest {
         dto.setId(1);
         dto.setName("Name");
         dto.setType(BacklogItemType.VIDEO_GAME);
-        dto.setStatus(BacklogItemStatus.NEW);
+        dto.setStatus(BacklogItemStatus.DONE);
+        dto.setResolution(BacklogItemResolution.COMPLETED);
+        dto.setDuration(Duration.ofHours(20));
 
         var entity = mapper.toEntity(dto);
 
         assertThat(entity)
+                .hasNoNullFieldsOrPropertiesExcept("activities")
                 .usingRecursiveComparison()
                 .ignoringFields("activities")
                 .isEqualTo(dto);
@@ -53,7 +57,9 @@ class BacklogItemMapperTest {
         entity.setId(1);
         entity.setName("Name");
         entity.setType(BacklogItemType.VIDEO_GAME);
-        entity.setStatus(BacklogItemStatus.NEW);
+        entity.setStatus(BacklogItemStatus.DONE);
+        entity.setResolution(BacklogItemResolution.COMPLETED);
+        entity.setDuration(Duration.ofHours(20));
 
         var activity = new TimeActivity();
         activity.setDuration(Duration.ofHours(1));
@@ -86,7 +92,9 @@ class BacklogItemMapperTest {
         backlogItem.setId(1);
         backlogItem.setName("Name");
         backlogItem.setType(BacklogItemType.VIDEO_GAME);
-        backlogItem.setStatus(BacklogItemStatus.ACTIVE);
+        backlogItem.setStatus(BacklogItemStatus.DONE);
+        backlogItem.setResolution(BacklogItemResolution.COMPLETED);
+        backlogItem.setDuration(Duration.ofHours(20));
         backlogItem.setActivities(List.of(statusActivity, timeActivity));
 
         var backlogItemDto = mapper.toDetailedDto(backlogItem);
@@ -110,6 +118,8 @@ class BacklogItemMapperTest {
         dto.setName("DTO Name");
         dto.setType(BacklogItemType.MOVIE);
         dto.setStatus(BacklogItemStatus.DONE);
+        dto.setResolution(BacklogItemResolution.COMPLETED);
+        dto.setDuration(Duration.ofHours(20));
 
         mapper.patchEntity(entity, dto);
 
